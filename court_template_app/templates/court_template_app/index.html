@@ -1,0 +1,458 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="{% static 'court_template_app/css/hint.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'court_template_app/css/main.css' %}" rel="stylesheet" type="text/css">
+    <title>Шаги</title>
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <h1>Lorem ipsum dolor sit amet to</h1>
+            <h2>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed dianonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</h2>
+        </div>
+    </header>
+    
+    <main class="main">
+        <div class="container">
+            <!-- МЕНЮ -->
+            <div class="steps clearfix hidden_xs">
+                <div class="steps__item"><a href="#step1" class="step1_bt">Шаг 1</a></div>
+                <div class="steps__item"><a href="#step2" class="step2_bt">Шаг 2</a></div>
+                <div class="steps__item"><a href="#step3" class="step3_bt">Шаг 3</a></div>
+                <div class="steps__item"><a href="#step4" class="step4_bt">Шаг 4</a></div>
+                <div class="steps__item"><a href="#step5" class="step5_bt">Шаг 5</a></div>
+            </div>
+
+            <!-- АДАПТИВНОЕ МЕНЮ -->
+            <div class="steps steps_mob clearfix hidden_lg">
+                <div class="steps__item"><a href="#step1" class="step1_bt active">Шаг 1</a></div>
+                <div class="steps__item"><a href="#step2" class="step2_bt">Шаг 2</a></div>
+                <div class="steps__item"><a href="#step3" class="step3_bt">Шаг 3</a></div>
+                <div class="steps__item"><a href="#step4" class="step4_bt">Шаг 4</a></div>
+                <div class="steps__item"><a href="#step5" class="step5_bt">Шаг 5</a></div>
+            </div>
+
+            <!-- ШАГ 1 -->
+            <div class="step step1" id="step1">
+                <div class="step_box">
+                    <form class="step1_center">
+                        <p>Укажите ИНН Застройщика</p>
+                        <input type="text" class="number">
+                        <p class="text_bt">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore.</p>
+                        <a class="step_center step2bt_status" href="#step2" >Дальше</a>
+                    </form>
+
+                    <!-- PROGRESS BAR -->
+                    <div class="overlay_js">
+                      <div class="progress-out">
+                          <div class="progress">
+                                <progress max="100" value="0" id="progressbar"></progress>
+                                <div class="progress-bg"><div class="progress-bar"></div></div>
+                           </div>
+                           <div class="progress_text">Загрузка...</div>
+                       </div>
+                    </div>
+
+                </div>
+            </div>
+        
+            <!-- ШАГ 2 -->
+            <div class="step step2" id="step2">
+                <div class="step_box clearfix">
+
+                    <!-- Левая часть колонки -->
+                    <div class="step_left clearfix">
+                        <label for="fio">Укажите полные ФИО истца
+                        <input type="text" id="fio">
+                                
+                        <label for="adress">Укажите адрес истца 
+                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                                <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
+                                <span class="left_bd"></span>
+                                <span class="right_bd"></span>
+                            </p>
+                        </label>
+                        <input type="text" id="adress">
+
+                        <label for="nickname">Укажите название застройщика
+                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                                <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
+                                <span class="left_bd"></span>
+                                <span class="right_bd"></span>
+                            </p>
+                        </label>
+                        <input type="text" id="nickname">
+
+                        <label for="adress2">Укажите юридический адрес застройщика
+                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                                <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
+                                <span class="left_bd"></span>
+                                <span class="right_bd"></span>
+                            </p>
+                        </label>
+                        <input type="text" id="adress2">
+
+                        <label for="sud">Наименование суда
+                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                                <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
+                                <span class="left_bd"></span>
+                                <span class="right_bd"></span>
+                            </p>
+                        </label>
+                        <input type="text" id="sud">
+                        
+                        <!-- Radio button -->
+                        <div class="radio_bt_container">
+                            <input type="radio" id="step2_rb1" name="step2_rb" value="По юридическому адресу застройщика">
+                            <label for="step2_rb1">По юридическому адресу застройщика</label>
+                        </div>
+
+                        <div class="radio_bt_container">
+                            <input type="radio" id="step2_rb2" id="" name="step2_rb" value="По месту жительства истца">
+                            <label for="step2_rb2">По месту жительства истца</label>
+                        </div>
+
+                        <div class="radio_bt_container">
+                            <input type="radio" id="step2_rb3" id="" name="step2_rb" value="Договорная подсудность">
+                            <label for="step2_rb3">Договорная подсудность</label>
+                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                                <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
+                                <span class="left_bd"></span>
+                                <span class="right_bd"></span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Правая часть колонки -->
+                    <div class="step_right clearfix">
+                        <label for="textarea">Выписка из ЕГРЮЛ</label>
+                        <textarea name="Выписка из ЕГРЮЛ" id="textarea"></textarea>
+                    </div>
+                </div>
+
+                <!-- Кнопки "НАЗАД" и "ДАЛЕЕ" -->
+                <div class="step_buttons">
+                    <a class="step_back step1bt" href="#step1">Назад</a>
+                    <a class="step_go step3bt" href="#step3">Дальше</a>
+                </div>
+            </div>
+
+            <!-- ШАГ 3 -->
+            <div class="step step3 clearfix" id="step3">
+                <div class="step_box clearfix">
+                     <div class="step_left clearfix">
+                        <label>Как у вас возникло право на квартиру?</label>
+                        <div class="radio_bt_container">
+                            <input type="radio" id="step3_rb1" name="step3_rb" value="Я заключил ДДУ с застройщиком">
+                            <label for="step3_rb1">Я заключил ДДУ с застройщиком</label>
+                        </div>
+
+                        <div class="radio_bt_container">
+                            <input type="radio" id="step3_rb2" name="step3_rb" value="Я приобрел право на квартиру по переуступке">
+                            <label for="step3_rb2">Я приобрел право на квартиру по переуступке</label>
+                        </div>
+
+                        <div class="treaty_date">
+                                Укажите дату и номер договора долевого участия <br>(если был договор уступки, то и его тоже )
+                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                                <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
+                                <span class="left_bd"></span>
+                                <span class="right_bd"></span>
+                            </p>             
+                        </div>           
+                        <input type="text" id="date1_1" placeholder="Укажите дату" maxlength="10">
+                        <input type="text" class="number" id="date1_2" placeholder="Укажите номер договора">
+
+                        <label class="date3_2">Договор уступки:</label>     
+                        <input type="text" id="date2_1" placeholder="Укажите дату" maxlength="10">
+                        <input type="text" class="number" id="date2_2" placeholder="Укажите номер договора">
+
+                        <label class="date3_3">Характеристики квартиры</label>
+                        <div class="radio_box">
+                            <div>
+                                <input type="radio" id="step3_appart1" name="step3_appart" value="Студия">
+                                <label for="step3_appart1">Студия</label>
+                            </div>
+                                <input type="radio" id="step3_appart2" name="step3_appart" value="1к.кв.">
+                                <label for="step3_appart2">1к.кв.</label>
+                            <div>
+                                <input type="radio" id="step3_appart3" name="step3_appart" value="2к.кв.">
+                                <label for="step3_appart3">2к.кв.</label>
+                            </div>
+                                <input type="radio" id="step3_appart4" name="step3_appart" value="3к.кв.">
+                                <label for="step3_appart4">3к.кв.</label>
+                            <div>
+                                <input type="radio" id="step3_appart5" name="step3_appart" value="4к.кв.">
+                                <label for="step3_appart5">4к.кв.</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="step3_appart6" name="step3_appart" value="Свой вариант">
+                                <label for="step3_appart6">Свой вариант</label>
+                                <input type="text" id="step3_appart7" disabled />
+                            </div>
+                       </div>
+                        
+                        <label for="appart_number">Строительный (проектный) номер квартиры</label>     
+                        <input type="text" id="appart_number">
+
+                        <label for="area">Общая площадь квартиры кв.м.</label>     
+                        <input type="text" id="area" class="number">
+                    </div>
+
+                     <div class="step_right clearfix">
+                        <label for="step3_price">Стоимость квартиры по договору </label>     
+                        <input type="text" id="step3_price" class="number">
+
+
+                        <label>Передана ли вам квартира по акту приема-передачи?</label>
+                        <div class="radio_bt_container radio_bt_input">
+                            <input type="radio" id="step3_rb3" name="step3_rb2" value="Да (Передана ли вам квартира по акту приема-передачи?)">
+                            <label for="step3_rb3">Да</label>
+                            <input type="text" id="act_date" placeholder="Укажите дату подписания акта" maxlength="10" disabled />
+                        </div>
+
+                        <div class="radio_bt_container">
+                            <input type="radio" id="step3_rb4" name="step3_rb2" value="Нет (Передана ли вам квартира по акту приема-передачи?)">
+                            <label for="step3_rb4">Нет</label>
+                        </div>
+
+                        <label for="step3_total_price">Конечная стоимость квартиры <br> (если производилась доплата/возврат денежных средств) </label>     
+                        <input type="text" class="number" id="step3_total_price">
+
+                    </div>
+                </div>
+
+                <div class="step_buttons">
+                    <a class="step_back step2bt" href="#step2">Назад</a>
+                    <a class="step_go step4bt" href="#step4">Дальше</a>
+                </div>
+            </div>
+
+            <!-- ШАГ 4 -->
+            <div class="step step4" id="step4">
+                <div class="step_box clearfix">
+                    <div class="step_left clearfix">
+                        <label for="step4_1">Укажите дату, до которой квартира должна была быть <br> вам передана по условиям договора:
+                        <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                            <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
+                            <span class="left_bd"></span>
+                            <span class="right_bd"></span>
+                        </p>   
+                        </label>     
+                        <input type="text" id="step4_1" maxlength="10">
+
+                        <label>Выберите документы подтверждающие оплату <br> по договору ДДУ и их реквизиты:</label>
+                        <div class="radio_bt_container">
+                            <input type="checkbox" id="step4_rb1" value="Платежное поручение">
+                            <label for="step4_rb1">Платежное поручение</label>
+                        </div>
+                        <div class="input_xs step4_rb1_inputs clearfix">
+                            <div>№</div>
+                            <input type="text" class="number" maxlength="8" disabled />
+                            <div>от</div>
+                            <input type="text" id="step4_rb1_input2" disabled />
+                        </div>
+                        
+
+                        <div class="radio_bt_container">
+                            <input type="checkbox" id="step4_rb2" value="Квитанция к приходному кассовому ордеру">
+                            <label for="step4_rb2">Квитанция к приходному кассовому ордеру</label>
+                        </div>
+                        <div class="input_xs step4_rb2_inputs clearfix">
+                            <div>№</div>
+                            <input type="text" class="number" maxlength="8" disabled />
+                            <div>от</div>
+                            <input type="text" id="step4_rb2_input2" disabled />
+                        </div>
+
+
+                        <div class="radio_bt_container ">
+                            <input type="checkbox" id="step4_rb3" value="Акт сверки взаимных расчетов">
+                            <label for="step4_rb3">Акт сверки взаимных расчетов</label>
+                        </div>
+                        <div class="input_lg step4_rb3_inputs clearfix">
+                            <div>за период с</div>
+                            <input type="text" id="step4_rb3_input1" class="number input_lw" maxlength="2" disabled />
+                            <input type="text" id="step4_rb3_input2" class="number input_big" maxlength="2" disabled />
+                            <input type="text" id="step4_rb3_input3" class="number input_md" maxlength="4" disabled />
+                            <div>г. по</div>
+                            <input type="text" id="step4_rb3_input4" class="number input_lw" maxlength="2" disabled />
+                            <input type="text" id="step4_rb3_input5" class="number input_big" maxlength="2" disabled />
+                            <input type="text" id="step4_rb3_input6" class="number input_md" maxlength="4" disabled />
+                            <div>г.</div>
+                        </div>
+
+                        
+                        <div class="radio_bt_container">
+                            <input type="checkbox" id="step4_rb4" value="Свой вариант">
+                            <label for="step4_rb4">Свой вариант</label>
+                        </div>
+                        <input type="text" id="step4_rb5_input" disabled />
+                            
+                        <!-- внутри этого блока появляются формы после клика на add_bt__item -->
+                        <div class="new_inputs">
+                            
+                        </div>
+
+                        <div class="radio_bt_container add_bt">
+                            <img src="{% static 'court_template_app/img/add.png' %}" alt="" class="add_bt__item">
+                            <label class="add_bt__item">Добавить</label>
+                        </div>
+
+                        
+                        <label>Что вы планируете взыскать с застройщика? </label>
+
+                        <div class="radio_bt_container">
+                            <input type="checkbox" id="step4_rb5" value="Неустойку">
+                            <label for="step4_rb5">Неустойку</label>
+                        </div>
+
+                        <div class="radio_bt_container">
+                            <input type="checkbox" id="step4_rb6" value="Убытки по аренде квартиры">
+                            <label for="step4_rb6">Убытки по аренде квартиры</label>
+                        </div>
+
+                        <div class="radio_bt_container">
+                            <input type="checkbox" id="step4_rb7" value="Моральный вред ">
+                            <label for="step4_rb7">Моральный вред </label>
+                        </div>
+
+                        <div class="radio_bt_container">
+                            <input type="checkbox" id="step4_rb8" value="Штраф по закону о защите прав потребителей(если направлялось претензия-требование об уплате неустойки)">
+                            <label for="step4_rb8">Штраф по закону о защите прав потребителей <br> (если направлялось претензия-требование об уплате неустойки)</label>
+                        </div>
+
+                        <label id="docourt">Досудебная претензия:</label>     
+
+                        <div class="radio_bt_container">
+                        
+                            <input type="checkbox" id="step4_rb9" value="Я направлял досудебную претензию застройщику по почте" disabled>
+                            <label for="step4_rb9">Я направлял досудебную претензию застройщику по почте</label>
+                        </div>
+                        <input type="text" id="step4_rb6_input" class="step4_date" placeholder="Дата направления" disabled />
+
+
+                        <div class="radio_bt_container">
+                            <input type="checkbox" id="step4_rb10" value="Я вручил досудебную претензию застройщику в офисе" disabled>
+                            <label for="step4_rb10">Я вручил досудебную претензию застройщику в офисе</label>
+                        </div>
+                        <input type="text" id="step4_rb7_input" class="step4_date" placeholder="Дата вручения" disabled />
+
+                    </div>
+
+                    <div class="step_right clearfix">
+                        <b>Моральный вред:</b>
+
+                        <label for="step4_2">Укажите сумму компенсации морального вреда, <br> которую вы хотите взыскать
+                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                                <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
+                                <span class="left_bd"></span>
+                                <span class="right_bd"></span>
+                            </p>   
+                        </label>
+                        <input type="text" id="step4_2">
+
+                        <label for="step4_3">Перечислить в чем именно заключался моральный вред 
+                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                                <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
+                                <span class="left_bd"></span>
+                                <span class="right_bd"></span>
+                            </p> 
+                        </label>
+                        <input type="text" id="step4_3">
+
+                        <b class="second_caption">Убытки по аренде квартире:</b>
+
+                        <label>Наименование договора, на основании которого вы арендовали квартиру:</label>
+                        <div class="radio_bt_container">
+                            <input type="radio" id="step4_rb11" name="step4_rb_arenda" value="Аренда"><label for="step4_rb11">Аренда</label>
+                            <input type="radio" id="step4_rb12" name="step4_rb_arenda" value="Найм"><label for="step4_rb12">Найм</label>
+                        </div>
+
+
+                        <label for="step4_4">Дата заключения договора </label>
+                        <input type="text" id="step4_4">
+
+                        <label for="step4_5">Размер арендной платы в месяц </label>
+                        <input type="text" id="step4_5">
+
+                        <label for="step4_6">Общая сумма вынужденной переплаты </label>
+                        <input type="text" id="step4_6">
+
+                        <b>Цена иска:</b>
+                        <input type="text" id="total_isc">
+                    </div>
+                </div>
+
+                <!-- Кнопки "НАЗАД" и "ДАЛЕЕ" -->
+                <div class="step_buttons">
+                    <a class="step_back step3bt" href="#step3">Назад</a>
+                    <a class="step_go step5bt" href="#step5">Дальше</a>
+                </div>
+            </div>
+
+            <!-- ШАГ 5 -->
+            <div class="step step5" id="step5">
+                <div class="step_box clearfix">
+                    <div class="step_left">
+                        <a href="#" class="download_bt">Скачать</a>
+                        <a href="#" class="print_bt">Печатать</a>
+                        <a href="#" class="email_bt">Отправить на E-mail</a>
+                    </div>
+                    <div class="step_right">
+                        <textarea rows="520"></textarea>
+                    </div>
+                </div>
+
+                <!-- Кнопки "НАЗАД" и "ДАЛЕЕ" -->
+                <div class="step_buttons">
+                    <a class="step_back step4bt" href="#step4">Назад</a>
+                </div>
+
+                <!--  POP-up окно -->
+                <div class="overlay js-overlay-campaign">
+                    <div class="feedback_form">
+                        <form>
+                            <input type="email" name="E-mail" placeholder="E-mail" required>
+                            <button type="submit">Отправить</button>
+                            <label>Я согласен на обработку <a href="#">персональных данных</a></label>
+                        </form>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="js-close-campaign" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512"><g><g><path d="M505.943 6.058c-8.077-8.077-21.172-8.077-29.249 0L6.058 476.693c-8.077 8.077-8.077 21.172 0 29.249C10.096 509.982 15.39 512 20.683 512c5.293 0 10.586-2.019 14.625-6.059L505.943 35.306C514.019 27.23 514.019 14.135 505.943 6.058z"/></g></g><g><g><path d="M505.942 476.694L35.306 6.059c-8.076-8.077-21.172-8.077-29.248 0 -8.077 8.076-8.077 21.171 0 29.248l470.636 470.636c4.038 4.039 9.332 6.058 14.625 6.058 5.293 0 10.587-2.019 14.624-6.057C514.018 497.866 514.018 484.771 505.942 476.694z"/></g></g><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer__item contact">
+                <img src="{% static 'court_template_app/img/tel.png' %}" alt="">
+                <a href="+78123808423">8 (812) 380-84-23</a>
+                <a href="+78123808423">8 (812) 380-84-23</a>
+            </div>
+            <div class="footer__item">
+                <img src="{% static 'court_template_app/img/home.png' %}" alt="">
+                г. Санкт-Петербург, Балканская пл.,д.5, лит. "Д", 6 этаж, офис 865
+            </div>
+            <div class="footer__item">
+                <img src="{% static 'court_template_app/img/vk.png' %}" alt="">
+                <a href="vk.com/lorem_club">vk.com/lorem_club</a>
+            </div>
+            <div class="footer__item">
+                © 2006 - 2017 ООО ЮЦ "Партнеръ"
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script defer src="{% static 'court_template_app/js/jquery.maskedinput.min.js' %}"></script>
+    <script defer src="{% static 'court_template_app/js/scripts.js' %}"></script>
+</body>
+</html>
