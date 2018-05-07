@@ -1,6 +1,8 @@
-$(document).ready(function() {	
+$(document).ready(function() {
+    var additional_fields = 0;
+    var total_ask = 0;
 
-	//Pop-up 
+	//Pop-up
     $('.email_bt').click(function(event) {
     	$('.step5 .overlay').fadeIn();
     	$('.step5 .feedback_form').fadeIn();
@@ -19,7 +21,7 @@ $(document).ready(function() {
 		    max = 100,
 
 		    // Указываем время в секундах
-		    time = (1000/max)* 10,	
+		    time = (1000/max)* 10,
 
 		    value = progressbar.val();
 
@@ -46,8 +48,194 @@ $(document).ready(function() {
 
 		var fadeStatusBar = function() {
 			$('.overlay_js').fadeOut();
-		}		
+		}
     });
+
+
+    var collectData = function() {
+        var data = {
+            'inn': $("#inn").val(),
+            'fio': $("#fio").val(),
+            'address': $("#address").val(),
+            'company': $("#nickname").val(),
+            'company_address': $("#address2").val(),
+            'court_name': $("#sud").val(),
+            'court_place': parseInt($("input:radio[name=court_place]:checked").val()),
+            'property_source': parseInt($("input:radio[name=property_source]:checked").val()),
+            'appartment_type': parseInt($("input:radio[name=step3_appart]:checked").val()),
+            'appartment_num': parseInt($("#appart_number").val()),
+            'total_area': parseFloat($("#area").val().replace(',', '.')),
+            'deal_price': parseFloat($("#step3_price").val().replace(',', '.')),
+            'transferred': parseInt($("input:radio[name=appartment_given]:checked").val()),
+            'total_price': parseFloat($("#step3_total_price").val().replace(',', '.') || $("#step3_price").val().replace(',', '.')),
+            'planned_transfer_date': $("#step4_1").val(),
+            'payment_doc_type': $("input:checkbox[name=payment_doc_type]:checked").map(function(){return parseInt($(this).val());}).get() || [],
+            'ask_type': $("input:checkbox[name=ask_type]:checked").map(function(){return parseInt($(this).val());}).get() || [],
+            'precourt_letter': parseInt($("input:checkbox[name=precourt_letter]:checked").val()),
+            'total_ask': total_ask
+        };
+
+        data['ddu_date'] = $("#date1_1").val();
+        data['ddu_num'] = $("#date1_2").val();
+        if(data['property_source'] == 2) {
+            // Переуступка
+            data['prop_transfer_date'] = $("#date2_1").val();
+            data['prop_transfer_num'] = $("#date2_2").val();
+        }
+
+        if(data['transferred']) {
+            data['transfer_act_date'] = $("#act_date").val();
+        }
+
+        if(data['payment_doc_type'].indexOf(1) >= 0) {
+            // Платежное поручение
+            data['plat_por_num'] = $("#plat_por_num").val();
+            data['plat_por_date'] = $("#step4_rb1_input2").val();
+        }
+        if(data['payment_doc_type'].indexOf(2) >= 0) {
+            // Квитанция к приходному кассовому ордеру
+            data['order_num'] = $("#order_num").val();
+            data['order_date'] = $("#step4_rb2_input2").val();
+        }
+        if(data['payment_doc_type'].indexOf(3) >= 0) {
+            // Акт сверки взаиморассчетов
+            data['act_start'] = [
+                $("#step4_rb3_input1").val(),
+                $("#step4_rb3_input2").val(),
+                $("#step4_rb3_input3").val()
+            ];
+            data['act_end'] = [
+                $("#step4_rb3_input4").val(),
+                $("#step4_rb3_input5").val(),
+                $("#step4_rb3_input6").val()
+            ];
+        }
+        if(data['payment_doc_type'].indexOf(4) >= 0) {
+            // Другое
+            data['other_payment'] = $("#step4_rb5_input").val();
+            data['payment_extras'] = additional_fields;
+            if(additional_fields > 0) {
+                var i;
+                for(i = 1; i< additional_fields+1; i++) {
+                    data['payment_extra'+i] = $("#extra_field_"+i).val();
+                }
+            }
+        }
+
+        if(data['ask_type'].indexOf(2)>=0) {
+            // Убытки по аренде квартиры
+            data['rent_type'] = parseInt($("input:radio[name=step4_rb_arenda]:checked").val());
+            data['rent_date'] = $("#step4_4").val();
+            data['rent_price'] = parseFloat($("#step4_5").val().replace(',', '.'));
+            data['rent_total'] = $("#step4_6").val();
+        }
+        if(data['ask_type'].indexOf(3)>=0) {
+            // Моральный ущерб
+            data['moral_harm_cost'] = parseFloat($("#step4_2").val().replace(',', '.'));
+            data['moral_harm_desc'] = $("#step4_3").val();
+        }
+        if(data['ask_type'].indexOf(4)>=0) {
+            // Штраф по Закону о защите прав потребителей
+
+        }
+
+        switch(data['precourt_letter']) {
+            case 1: // По почте
+                data['precourt_postbox_date'] = $("#step4_rb6_input").val();
+                break;
+            case 2: // В офисе
+                data['precourt_office_date'] = $("#step4_rb7_input").val();
+                break;
+        }
+
+        return data;
+    };
+
+    var daysDiff = function(date1, date2) {
+        var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+
+        return Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneDay)));
+    };
+
+    var str2date = function(date_str) {
+        var parts = date_str.split('/');
+        return new Date(parts[2], parts[1], parts[0])
+    };
+
+    var change_total_ask = function() {
+        var ask_type = $("input:checkbox[name=ask_type]:checked").map(function(){return parseInt($(this).val());}).get() || []
+        var total_price = parseFloat($("#step3_total_price").val().replace(',', '.') || $("#step3_price").val().replace(',', '.') || '0');
+        var moral_harm_cost = parseFloat($("#step4_2").val().replace(',', '.') || '0');
+        var rent_total = parseFloat($("#step4_6").val().replace(',', '.') || '0');
+        var transferred = parseInt($("input:radio[name=appartment_given]:checked").val());
+
+        var planned_date = null;
+        try {
+            planned_date = str2date($("#step4_1").val());
+        }
+        catch(e) {}
+
+        var transfer_date = null;
+        if(transferred) {
+            try {
+                transfer_date = str2date($("#act_date").val());
+            }
+            catch(e) {}
+        } else {
+            transfer_date = new Date();
+        }
+
+        var penalty_days = 0;
+        if(planned_date && !isNaN(planned_date.getTime()) && transfer_date && !isNaN(transfer_date.getTime())) {
+            penalty_days = daysDiff(transfer_date, planned_date);
+        }
+
+        var penalty = Math.round(9*total_price*penalty_days/150)/100;
+        total_ask = penalty;
+        if(ask_type.indexOf(2)>=0)
+            total_ask += rent_total;
+        if(ask_type.indexOf(3)>=0)
+            total_ask += moral_harm_cost;
+        $("#total_ask").text(''+total_ask);
+    };
+
+    $("#step3_total_price,#step3_price,#step4_1,#step4_2,#step4_6,#act_date,input:checkbox[name=ask_type]").each(function(idx, input) {
+        $(input).on("change", change_total_ask);
+    });
+
+    var activateTab = function(tab) {
+        $('.steps__item a').removeClass('active');
+        $('.main .step').hide();
+        $(tab).fadeIn();
+        $('a[href=\\'+tab+']').addClass('active');
+        $('#progressbar').val(0);
+    };
+
+    var showTab = function(tab) {
+        if(tab == '#step5') {
+            $.post('/app/process_data/', JSON.stringify(collectData()))
+            .done(function(data) {
+                if(data['status'] == 'ok') {
+                    $('#pdf_preview').attr('src', data['link']);
+                    $("a.print_bt").click(function() {
+                        document.getElementById("pdf_preview").contentWindow.print();
+                    });
+                    $("a.download_bt").attr('href', data['link']).attr('target', '_blank');
+                    activateTab(tab);
+                } else {
+                    alert(data['message']);
+                }
+            })
+            .fail(function() {
+                alert("Не удалось сформировать документ. Попробуйте еще раз чуть позже.");
+            })
+            .always(function() {
+
+            });
+        } else {
+            activateTab(tab);
+        }
+    };
 
 
 	// Табы
@@ -55,20 +243,11 @@ $(document).ready(function() {
 	$('.main .step:first').show();
 	$('.steps__item:first a').addClass('active');
     $('.steps__item a').click(function(event) {
-    	$('.main .step').hide();
-    	$('.steps__item a').removeClass('active');
-    	$(this).addClass('active');
-    	var selectTab = $(this).attr("href");
-    	$(selectTab).fadeIn();
-    	$('#progressbar').val(0);
+    	showTab($(this).attr("href"));
 		return false;
     });
     $('.step_buttons a').click(function(event) {
-    	$('.steps__item a').removeClass('active');
-    	$('.main .step').hide();
-    	var selectTab = $(this).attr("href");
-    	$(selectTab).fadeIn();
-    	$('#progressbar').val(0);
+    	showTab($(this).attr("href"));
         return false;
     });
 
@@ -95,7 +274,7 @@ $(document).ready(function() {
     	return false;
     });
 
-		
+
     // Автоматический переход к следующему инпуту
 	$('#step4_rb3_input1').keyup(function(){
 		var total = $(this).val().length;
@@ -146,8 +325,49 @@ $(document).ready(function() {
 	    }
 	});
 
+	var check_float = function(value, max_decimals) {
+	    max_decimals = max_decimals || 0;
+	    if(value.match(/[0-9\.,]/g)) {
+            var dot_pos = value.indexOf('.');
+            if(dot_pos == -1)
+                dot_pos = value.indexOf(',');
+            if(dot_pos >= 0) {
+                var ending = value.substr(dot_pos+1);
+                if(ending.length>0) {
+                    var extra_dot_pos = ending.indexOf('.');
+                    if(extra_dot_pos==-1)
+                        extra_dot_pos = ending.indexOf(',');
+                    if(extra_dot_pos>=0) {
+                        return value.substr(0, dot_pos+extra_dot_pos+1);
+                    } else if(max_decimals>0 && ending.length > max_decimals){
+                        return value.substr(0, dot_pos+max_decimals+1);
+                    }
+                }
+            }
+            return value;
+        } else {
+            return value.replace(/[^0-9\.,]/g, '');
+        }
+	}
+
+    // Ввод дробных чисел
+    $('input.float').bind("change keyup input click", function() {
+        this.value = check_float(this.value, -1);
+    });
+
+    // Ввод цен
+    $('input.price').bind("change keyup input click", function() {
+        this.value = check_float(this.value, 2);
+    });
 
     // Разблокировка форм
+    $("input:radio[name=property_source]").on("change", function(){
+        if($("input:radio[name=property_source]:checked").val() == '1') {
+            $("#date2_1,#date2_2").prop('disabled', true);
+        } else {
+            $("#date2_1,#date2_2").prop('disabled', false);
+        }
+    });
 	$('#step3_appart6').on('change', function(){
 		if($('#step3_appart6').prop('checked')){
 			$('#step3_appart7').prop('disabled', false);
@@ -186,7 +406,8 @@ $(document).ready(function() {
 			$('#step4_rb5_input').focus();
 			// Добавление формы по клику
 			$(".add_bt__item").click(function() {
-				$('.new_inputs').append('<div class="new_input clearfix"><input type="text" class="long_input"><img src="img/cancel.png" class="input_close"></div>');
+			    additional_fields++;
+				$('.new_inputs').append('<div class="new_input clearfix"><input type="text" class="long_input" id="extra_field_'+additional_fields+'"><img src="/static/court_template_app/img/cancel.png" class="input_close"></div>');
 				$('.long_input').focus();
 
 				$(".new_input img").on("click", function() {
@@ -236,12 +457,12 @@ $(document).ready(function() {
 	// Маска для форм ввода
 	// 9 - это любая цифра (0 - 9)
 	// Если использовать один класс, то работает некорректно
-	$("#step4_1, #date1_1, #step4_4б, #date2_1, #act_date, #step4_rb1_input2, #step4_rb2_input2, #step4_rb6_input, #step4_rb7_input").mask("99/99/9999");
+	$("#step4_1, #date1_1, #step4_4б, #step4_4, #date2_1, #act_date, #step4_rb1_input2, #step4_rb2_input2, #step4_rb6_input, #step4_rb7_input").mask("99/99/9999");
 
 
   	// Адаптивное меню(костыль)
 	$('.steps_mob .steps__item .active').parent('.steps__item');
-	
+
   	$('.steps_mob .steps__item .active').parent('.steps__item').css('display', 'block');
 
   	$('.steps_mob .steps__item .active').parent('.steps__item').next().css(
@@ -252,16 +473,16 @@ $(document).ready(function() {
   		'background', 'url(./img/right-arrow.png) no-repeat 40px center'
   	);
 
-  	$('.steps_mob .steps__item a, .step_buttons a').click(function(event) { 
+  	$('.steps_mob .steps__item a, .step_buttons a').click(function(event) {
 	  	var active_step = $('.steps_mob .steps__item .active');
 	  	var active_step_item = $('.steps_mob .active').parent('.steps__item');
 	  	$('.steps_mob .steps__item').css('display', 'none');
 
 	  	active_step_item.css('display', 'block');
 
-	  	$('.steps_mob .steps__item').first().css('margin-left', '33.3333333%'); 
+	  	$('.steps_mob .steps__item').first().css('margin-left', '33.3333333%');
 
-	  	active_step_item.prev().css('margin', '0'); 
+	  	active_step_item.prev().css('margin', '0');
 
 	  	active_step_item.prev().css( 'display', 'block' );
 	  	active_step_item.next().css( 'display', 'block' );

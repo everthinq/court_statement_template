@@ -10,14 +10,14 @@
     <title>Шаги</title>
 </head>
 <body>
-    
+
     <header>
         <div class="container">
             <h1>Lorem ipsum dolor sit amet to</h1>
             <h2>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed dianonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</h2>
         </div>
     </header>
-    
+
     <main class="main">
         <div class="container">
             <!-- МЕНЮ -->
@@ -43,7 +43,7 @@
                 <div class="step_box">
                     <form class="step1_center">
                         <p>Укажите ИНН Застройщика</p>
-                        <input type="text" class="number">
+                        <input type="text" id="inn" class="number">
                         <p class="text_bt">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore.</p>
                         <a class="step_center step2bt_status" href="#step2" >Дальше</a>
                     </form>
@@ -61,7 +61,7 @@
 
                 </div>
             </div>
-        
+
             <!-- ШАГ 2 -->
             <div class="step step2" id="step2">
                 <div class="step_box clearfix">
@@ -70,15 +70,15 @@
                     <div class="step_left clearfix">
                         <label for="fio">Укажите полные ФИО истца
                         <input type="text" id="fio">
-                                
-                        <label for="adress">Укажите адрес истца 
+
+                        <label for="adress">Укажите адрес истца
                             <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                                 <span class="left_bd"></span>
                                 <span class="right_bd"></span>
                             </p>
                         </label>
-                        <input type="text" id="adress">
+                        <input type="text" id="address">
 
                         <label for="nickname">Укажите название застройщика
                             <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
@@ -96,7 +96,7 @@
                                 <span class="right_bd"></span>
                             </p>
                         </label>
-                        <input type="text" id="adress2">
+                        <input type="text" id="address2">
 
                         <label for="sud">Наименование суда
                             <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
@@ -106,20 +106,20 @@
                             </p>
                         </label>
                         <input type="text" id="sud">
-                        
+
                         <!-- Radio button -->
                         <div class="radio_bt_container">
-                            <input type="radio" id="step2_rb1" name="step2_rb" value="По юридическому адресу застройщика">
+                            <input type="radio" id="step2_rb1" name="court_place" value="1">
                             <label for="step2_rb1">По юридическому адресу застройщика</label>
                         </div>
 
                         <div class="radio_bt_container">
-                            <input type="radio" id="step2_rb2" id="" name="step2_rb" value="По месту жительства истца">
+                            <input type="radio" id="step2_rb2" name="court_place" value="2">
                             <label for="step2_rb2">По месту жительства истца</label>
                         </div>
 
                         <div class="radio_bt_container">
-                            <input type="radio" id="step2_rb3" id="" name="step2_rb" value="Договорная подсудность">
+                            <input type="radio" id="step2_rb3" name="court_place" value="3">
                             <label for="step2_rb3">Договорная подсудность</label>
                             <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
@@ -132,14 +132,14 @@
                     <!-- Правая часть колонки -->
                     <div class="step_right clearfix">
                         <label for="textarea">Выписка из ЕГРЮЛ</label>
-                        <textarea name="Выписка из ЕГРЮЛ" id="textarea"></textarea>
+                        <textarea name="egryul" id="egryul"></textarea>
                     </div>
                 </div>
 
                 <!-- Кнопки "НАЗАД" и "ДАЛЕЕ" -->
                 <div class="step_buttons">
-                    <a class="step_back step1bt" href="#step1">Назад</a>
-                    <a class="step_go step3bt" href="#step3">Дальше</a>
+                    <a class="step_back step1bt" id="nav_step1" href="#step1">Назад</a>
+                    <a class="step_go step3bt" id="nav_step3" href="#step3">Дальше</a>
                 </div>
             </div>
 
@@ -149,12 +149,12 @@
                      <div class="step_left clearfix">
                         <label>Как у вас возникло право на квартиру?</label>
                         <div class="radio_bt_container">
-                            <input type="radio" id="step3_rb1" name="step3_rb" value="Я заключил ДДУ с застройщиком">
+                            <input type="radio" id="step3_rb1" name="property_source" value="1">
                             <label for="step3_rb1">Я заключил ДДУ с застройщиком</label>
                         </div>
 
                         <div class="radio_bt_container">
-                            <input type="radio" id="step3_rb2" name="step3_rb" value="Я приобрел право на квартиру по переуступке">
+                            <input type="radio" id="step3_rb2" name="property_source" value="2">
                             <label for="step3_rb2">Я приобрел право на квартиру по переуступке</label>
                         </div>
 
@@ -164,73 +164,73 @@
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                                 <span class="left_bd"></span>
                                 <span class="right_bd"></span>
-                            </p>             
-                        </div>           
+                            </p>
+                        </div>
                         <input type="text" id="date1_1" placeholder="Укажите дату" maxlength="10">
-                        <input type="text" class="number" id="date1_2" placeholder="Укажите номер договора">
+                        <input type="text" id="date1_2" placeholder="Укажите номер договора">
 
-                        <label class="date3_2">Договор уступки:</label>     
+                        <label class="date3_2">Договор уступки:</label>
                         <input type="text" id="date2_1" placeholder="Укажите дату" maxlength="10">
-                        <input type="text" class="number" id="date2_2" placeholder="Укажите номер договора">
+                        <input type="text" id="date2_2" placeholder="Укажите номер договора">
 
                         <label class="date3_3">Характеристики квартиры</label>
                         <div class="radio_box">
                             <div>
-                                <input type="radio" id="step3_appart1" name="step3_appart" value="Студия">
+                                <input type="radio" id="step3_appart1" name="step3_appart" value="1">
                                 <label for="step3_appart1">Студия</label>
                             </div>
-                                <input type="radio" id="step3_appart2" name="step3_appart" value="1к.кв.">
+                                <input type="radio" id="step3_appart2" name="step3_appart" value="2">
                                 <label for="step3_appart2">1к.кв.</label>
                             <div>
-                                <input type="radio" id="step3_appart3" name="step3_appart" value="2к.кв.">
+                                <input type="radio" id="step3_appart3" name="step3_appart" value="3">
                                 <label for="step3_appart3">2к.кв.</label>
                             </div>
-                                <input type="radio" id="step3_appart4" name="step3_appart" value="3к.кв.">
+                                <input type="radio" id="step3_appart4" name="step3_appart" value="4">
                                 <label for="step3_appart4">3к.кв.</label>
                             <div>
-                                <input type="radio" id="step3_appart5" name="step3_appart" value="4к.кв.">
+                                <input type="radio" id="step3_appart5" name="step3_appart" value="5">
                                 <label for="step3_appart5">4к.кв.</label>
                             </div>
                             <div>
-                                <input type="radio" id="step3_appart6" name="step3_appart" value="Свой вариант">
+                                <input type="radio" id="step3_appart6" name="step3_appart" value="6">
                                 <label for="step3_appart6">Свой вариант</label>
                                 <input type="text" id="step3_appart7" disabled />
                             </div>
                        </div>
-                        
-                        <label for="appart_number">Строительный (проектный) номер квартиры</label>     
-                        <input type="text" id="appart_number">
 
-                        <label for="area">Общая площадь квартиры кв.м.</label>     
-                        <input type="text" id="area" class="number">
+                        <label for="appart_number">Строительный (проектный) номер квартиры</label>
+                        <input type="text" class="number" id="appart_number">
+
+                        <label for="area">Общая площадь квартиры кв.м.</label>
+                        <input type="text" id="area" class="float">
                     </div>
 
                      <div class="step_right clearfix">
-                        <label for="step3_price">Стоимость квартиры по договору </label>     
-                        <input type="text" id="step3_price" class="number">
+                        <label for="step3_price">Стоимость квартиры по договору </label>
+                        <input type="text" id="step3_price" class="price">
 
 
                         <label>Передана ли вам квартира по акту приема-передачи?</label>
                         <div class="radio_bt_container radio_bt_input">
-                            <input type="radio" id="step3_rb3" name="step3_rb2" value="Да (Передана ли вам квартира по акту приема-передачи?)">
+                            <input type="radio" id="step3_rb3" name="appartment_given" value="1">
                             <label for="step3_rb3">Да</label>
                             <input type="text" id="act_date" placeholder="Укажите дату подписания акта" maxlength="10" disabled />
                         </div>
 
                         <div class="radio_bt_container">
-                            <input type="radio" id="step3_rb4" name="step3_rb2" value="Нет (Передана ли вам квартира по акту приема-передачи?)">
+                            <input type="radio" id="step3_rb4" name="appartment_given" value="0">
                             <label for="step3_rb4">Нет</label>
                         </div>
 
-                        <label for="step3_total_price">Конечная стоимость квартиры <br> (если производилась доплата/возврат денежных средств) </label>     
-                        <input type="text" class="number" id="step3_total_price">
+                        <label for="step3_total_price">Конечная стоимость квартиры <br> (если производилась доплата/возврат денежных средств) </label>
+                        <input type="text" class="price" id="step3_total_price">
 
                     </div>
                 </div>
 
                 <div class="step_buttons">
-                    <a class="step_back step2bt" href="#step2">Назад</a>
-                    <a class="step_go step4bt" href="#step4">Дальше</a>
+                    <a class="step_back step2bt" id="nav_step2" href="#step2">Назад</a>
+                    <a class="step_go step4bt" id="nav_step4" href="#step4">Дальше</a>
                 </div>
             </div>
 
@@ -243,37 +243,37 @@
                             <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                             <span class="left_bd"></span>
                             <span class="right_bd"></span>
-                        </p>   
-                        </label>     
+                        </p>
+                        </label>
                         <input type="text" id="step4_1" maxlength="10">
 
                         <label>Выберите документы подтверждающие оплату <br> по договору ДДУ и их реквизиты:</label>
                         <div class="radio_bt_container">
-                            <input type="checkbox" id="step4_rb1" value="Платежное поручение">
+                            <input type="checkbox" id="step4_rb1" name="payment_doc_type" value="1">
                             <label for="step4_rb1">Платежное поручение</label>
                         </div>
                         <div class="input_xs step4_rb1_inputs clearfix">
                             <div>№</div>
-                            <input type="text" class="number" maxlength="8" disabled />
+                            <input type="text" id="plat_por_num" maxlength="8" disabled />
                             <div>от</div>
                             <input type="text" id="step4_rb1_input2" disabled />
                         </div>
-                        
+
 
                         <div class="radio_bt_container">
-                            <input type="checkbox" id="step4_rb2" value="Квитанция к приходному кассовому ордеру">
+                            <input type="checkbox" id="step4_rb2" name="payment_doc_type" value="2">
                             <label for="step4_rb2">Квитанция к приходному кассовому ордеру</label>
                         </div>
                         <div class="input_xs step4_rb2_inputs clearfix">
                             <div>№</div>
-                            <input type="text" class="number" maxlength="8" disabled />
+                            <input type="text" id="order_num" maxlength="8" disabled />
                             <div>от</div>
                             <input type="text" id="step4_rb2_input2" disabled />
                         </div>
 
 
                         <div class="radio_bt_container ">
-                            <input type="checkbox" id="step4_rb3" value="Акт сверки взаимных расчетов">
+                            <input type="checkbox" id="step4_rb3" name="payment_doc_type" value="3">
                             <label for="step4_rb3">Акт сверки взаимных расчетов</label>
                         </div>
                         <div class="input_lg step4_rb3_inputs clearfix">
@@ -288,16 +288,16 @@
                             <div>г.</div>
                         </div>
 
-                        
+
                         <div class="radio_bt_container">
-                            <input type="checkbox" id="step4_rb4" value="Свой вариант">
+                            <input type="checkbox" id="step4_rb4" name="payment_doc_type" value="4">
                             <label for="step4_rb4">Свой вариант</label>
                         </div>
                         <input type="text" id="step4_rb5_input" disabled />
-                            
+
                         <!-- внутри этого блока появляются формы после клика на add_bt__item -->
                         <div class="new_inputs">
-                            
+
                         </div>
 
                         <div class="radio_bt_container add_bt">
@@ -305,41 +305,41 @@
                             <label class="add_bt__item">Добавить</label>
                         </div>
 
-                        
-                        <label>Что вы планируете взыскать с застройщика? </label>
 
+                        <label>Что вы планируете взыскать с застройщика, помимо неустойки? </label>
+<!--
                         <div class="radio_bt_container">
-                            <input type="checkbox" id="step4_rb5" value="Неустойку">
+                            <input type="checkbox" id="step4_rb5" name="ask_type" value="1">
                             <label for="step4_rb5">Неустойку</label>
                         </div>
-
+-->
                         <div class="radio_bt_container">
-                            <input type="checkbox" id="step4_rb6" value="Убытки по аренде квартиры">
+                            <input type="checkbox" id="step4_rb6" name="ask_type" value="2">
                             <label for="step4_rb6">Убытки по аренде квартиры</label>
                         </div>
 
                         <div class="radio_bt_container">
-                            <input type="checkbox" id="step4_rb7" value="Моральный вред ">
+                            <input type="checkbox" id="step4_rb7" name="ask_type" value="3">
                             <label for="step4_rb7">Моральный вред </label>
                         </div>
 
                         <div class="radio_bt_container">
-                            <input type="checkbox" id="step4_rb8" value="Штраф по закону о защите прав потребителей(если направлялось претензия-требование об уплате неустойки)">
+                            <input type="checkbox" id="step4_rb8" name="ask_type" value="4">
                             <label for="step4_rb8">Штраф по закону о защите прав потребителей <br> (если направлялось претензия-требование об уплате неустойки)</label>
                         </div>
 
-                        <label id="docourt">Досудебная претензия:</label>     
+                        <label id="docourt">Досудебная претензия:</label>
 
                         <div class="radio_bt_container">
-                        
-                            <input type="checkbox" id="step4_rb9" value="Я направлял досудебную претензию застройщику по почте" disabled>
+
+                            <input type="checkbox" id="step4_rb9" name="precourt_letter" value="1" disabled>
                             <label for="step4_rb9">Я направлял досудебную претензию застройщику по почте</label>
                         </div>
                         <input type="text" id="step4_rb6_input" class="step4_date" placeholder="Дата направления" disabled />
 
 
                         <div class="radio_bt_container">
-                            <input type="checkbox" id="step4_rb10" value="Я вручил досудебную претензию застройщику в офисе" disabled>
+                            <input type="checkbox" id="step4_rb10" name="precourt_letter" value="2" disabled>
                             <label for="step4_rb10">Я вручил досудебную претензию застройщику в офисе</label>
                         </div>
                         <input type="text" id="step4_rb7_input" class="step4_date" placeholder="Дата вручения" disabled />
@@ -354,25 +354,25 @@
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                                 <span class="left_bd"></span>
                                 <span class="right_bd"></span>
-                            </p>   
+                            </p>
                         </label>
-                        <input type="text" id="step4_2">
+                        <input type="text" class="price" id="step4_2">
 
-                        <label for="step4_3">Перечислить в чем именно заключался моральный вред 
+                        <label for="step4_3">Перечислить в чем именно заключался моральный вред
                             <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                                 <span class="left_bd"></span>
                                 <span class="right_bd"></span>
-                            </p> 
+                            </p>
                         </label>
                         <input type="text" id="step4_3">
 
-                        <b class="second_caption">Убытки по аренде квартире:</b>
+                        <b class="second_caption">Убытки по аренде жилья:</b>
 
-                        <label>Наименование договора, на основании которого вы арендовали квартиру:</label>
+                        <label>Наименование договора, на основании которого вы арендовали жилье:</label>
                         <div class="radio_bt_container">
-                            <input type="radio" id="step4_rb11" name="step4_rb_arenda" value="Аренда"><label for="step4_rb11">Аренда</label>
-                            <input type="radio" id="step4_rb12" name="step4_rb_arenda" value="Найм"><label for="step4_rb12">Найм</label>
+                            <input type="radio" id="step4_rb11" name="step4_rb_arenda" value="1"><label for="step4_rb11">Аренда</label>
+                            <input type="radio" id="step4_rb12" name="step4_rb_arenda" value="2"><label for="step4_rb12">Найм</label>
                         </div>
 
 
@@ -380,20 +380,20 @@
                         <input type="text" id="step4_4">
 
                         <label for="step4_5">Размер арендной платы в месяц </label>
-                        <input type="text" id="step4_5">
+                        <input type="text" class="price" id="step4_5">
 
                         <label for="step4_6">Общая сумма вынужденной переплаты </label>
-                        <input type="text" id="step4_6">
+                        <input type="text" class="price" id="step4_6">
 
                         <b>Цена иска:</b>
-                        <input type="text" id="total_isc">
+                        <p id="total_ask"></p>
                     </div>
                 </div>
 
                 <!-- Кнопки "НАЗАД" и "ДАЛЕЕ" -->
                 <div class="step_buttons">
-                    <a class="step_back step3bt" href="#step3">Назад</a>
-                    <a class="step_go step5bt" href="#step5">Дальше</a>
+                    <a class="step_back step3bt" id="nav_step3" href="#step3">Назад</a>
+                    <a class="step_go step5bt" id="nav_step5" href="#step5">Дальше</a>
                 </div>
             </div>
 
@@ -406,20 +406,20 @@
                         <a href="#" class="email_bt">Отправить на E-mail</a>
                     </div>
                     <div class="step_right">
-                        <textarea rows="520"></textarea>
+                        <iframe id="pdf_preview"></iframe>
                     </div>
                 </div>
 
                 <!-- Кнопки "НАЗАД" и "ДАЛЕЕ" -->
                 <div class="step_buttons">
-                    <a class="step_back step4bt" href="#step4">Назад</a>
+                    <a class="step_back step4bt" id="nav_step4" href="#step4">Назад</a>
                 </div>
 
                 <!--  POP-up окно -->
                 <div class="overlay js-overlay-campaign">
                     <div class="feedback_form">
                         <form>
-                            <input type="email" name="E-mail" placeholder="E-mail" required>
+                            <input type="email" name="email" placeholder="E-mail" required>
                             <button type="submit">Отправить</button>
                             <label>Я согласен на обработку <a href="#">персональных данных</a></label>
                         </form>

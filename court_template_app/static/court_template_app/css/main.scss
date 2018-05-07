@@ -7,8 +7,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
     margin: 0;
@@ -22,7 +22,7 @@ time, mark, audio, video {
 * {
     box-sizing: border-box;
 }
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
@@ -33,7 +33,7 @@ body {
     font-family: 'HelveticaNeueCyr-Roman';
     overflow-x: hidden;
     position: relative;
-    background: #F6F7FC;    
+    background: #F6F7FC;
     min-height: 100vh;
     line-height: 1;
 }
@@ -112,15 +112,15 @@ header {
             background: #fff;
             width: 20%;
             height: 55px;
-            float: left;    
+            float: left;
             & a {
                 display: block;
                 width: 100%;
-                height: 100%; 
-                font-size: 15px;    
-                line-height: 55px;  
-                text-align: center; 
-                text-decoration: none;  
+                height: 100%;
+                font-size: 15px;
+                line-height: 55px;
+                text-align: center;
+                text-decoration: none;
                 color: #151515;
             }
             &:last-child {
@@ -131,27 +131,27 @@ header {
         & .active {
             background: #20C454;
             color: #fff;
-            position: relative; 
+            position: relative;
             & a {
                 color: #fff !important  ;
             }
             &::before {
                 content: "";
-                position: absolute; 
+                position: absolute;
                 border: 27px solid transparent; border-left: 13px solid #FFF;
-                left: 0px;    
-                top: 0; 
+                left: 0px;
+                top: 0;
             }
             &::after {
                 content: "";
-                position: absolute; 
+                position: absolute;
                 border: 27px solid transparent; border-left: 13px solid #20C454;
-                right: -40px;    
-                top: 0; 
+                right: -40px;
+                top: 0;
             }
         }
         & .steps__item:first-child a::before {
-            display: none;  
+            display: none;
         }
     }
 }
@@ -159,37 +159,37 @@ header {
 /* ОБЩИЕ СТИЛИ */
 .step {
     &_box {
-        background: #fff;   
+        background: #fff;
         border-radius: 2px;
         box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.06);
         padding: 70px 50px 70px;
         min-height: 750px;
     }
     & .step_buttons {
-        margin-top: 50px;   
+        margin-top: 50px;
         display: -webkit-flex;
         display: -moz-flex;
         display: -ms-flex;
         display: -o-flex;
-        display: flex;  
-        width: 100%;    
-        justify-content: space-between; 
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
         & a {
             display: block;
-            width: 230px;   
-            height: 55px;   
-            line-height: 55px;  
-            text-align: center; 
+            width: 230px;
+            height: 55px;
+            line-height: 55px;
+            text-align: center;
             border-radius: 2px;
-            background: #fff;   
+            background: #fff;
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
-            font-size: 20px;    
-            text-decoration: none;  
+            font-size: 20px;
+            text-decoration: none;
             color: #000;
         }
     }
     & .step_go {
-        background: #20C454 !important  ;    
+        background: #20C454 !important  ;
         color: #fff !important  ;
     }
     & label {
@@ -212,7 +212,7 @@ header {
         color: #141414;
         height: 42px;
         color: #838D96;
-        border: 1px solid #E2E2E2;   
+        border: 1px solid #E2E2E2;
         margin: 16px 0 26px;
         &::-webkit-input-placeholder {color:#838D96 !important; }
         &::-moz-placeholder          {color:#838D96 !important; }/* Firefox 19+ */
@@ -238,7 +238,7 @@ header {
     }
     & textarea {
         display: block;
-        border: 1px solid #E2E2E2; 
+        border: 1px solid #E2E2E2;
         width: 100%;
         cursor: pointer;
         height: 100%;
@@ -271,7 +271,7 @@ header {
             white-space: pre-wrap;
             font-family: 'HelveticaNeueCyr-Medium';
             text-shadow: none;
-            font-size: 12px; 
+            font-size: 12px;
             width: 335px;
             color: #A2A2A2;
             line-height: 25px;
@@ -319,7 +319,7 @@ header {
         float: none;
         min-width: 30px;
         outline: none;
-        background: #FAFAFA;   
+        background: #FAFAFA;
         margin-right: 15px;
         border: 1px solid #E2E2E2;
     }
@@ -379,15 +379,15 @@ header {
             }
             & .step_center {
                 display: block;
-                width: 230px;   
-                height: 55px;   
-                line-height: 55px;  
-                text-align: center; 
+                width: 230px;
+                height: 55px;
+                line-height: 55px;
+                text-align: center;
                 border-radius: 2px;
                 box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
-                font-size: 20px;    
-                text-decoration: none;  
-                background: #20C454;    
+                font-size: 20px;
+                text-decoration: none;
+                background: #20C454;
                 color: #fff;
                 margin: 50px auto 0;
             }
@@ -411,9 +411,9 @@ header {
             max-width: 520px;
         }
         & .progress_text {
-            font-size: 19px;    
-            margin-top: 10px;   
-            text-align: center; 
+            font-size: 19px;
+            margin-top: 10px;
+            text-align: center;
         }
         & .progress {
             position: relative;
@@ -458,11 +458,11 @@ header {
                   height: 10px;
                   &::before {
                     content: "";
-                    position: absolute; 
-                    width: 100%;    
-                    height: 3px;    
-                    top: 4px;   
-                    left: 0;    
+                    position: absolute;
+                    width: 100%;
+                    height: 3px;
+                    top: 4px;
+                    left: 0;
                     background-color: rgba(105, 105, 105, 0.651);
                     opacity: 0.561;
                     box-shadow: inset 0px 1px 0px 0px rgba(0, 0, 0, 0.75);
@@ -596,7 +596,7 @@ header {
         float: none;
         min-width: 30px;
         outline: none;
-        background: #FAFAFA;   
+        background: #FAFAFA;
         margin: 0 10px 0 0;
         border: 1px solid #E2E2E2;
     }
@@ -636,8 +636,8 @@ header {
         float: left;
         margin: 17px 0;
     }
-    & #step3_price { 
-        margin-bottom: 65px !important;             
+    & #step3_price {
+        margin-bottom: 65px !important;
     }
     & .step_right {
         & .radio_bt_input {
@@ -689,9 +689,9 @@ footer {
         align-items: center;
         color: #fff;
         & a {
-            color: #fff;     
-            text-decoration: none;    
-            font-size: 13px;   
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
         }
         &:last-child {
             padding-right: 0;
@@ -798,7 +798,7 @@ footer {
         & input {
             border: 0;
             margin: 0 5px;
-            text-align: center; 
+            text-align: center;
             padding: 0 3px;
             border-bottom: 1px solid #C8C8C8;
             height: auto;
@@ -841,7 +841,7 @@ footer {
             border-bottom: 1px solid #C8C8C8;
             height: auto;
             font-size: 12px;
-            text-align: center; 
+            text-align: center;
         }
         & .input_lw {
             width: 20px;
@@ -902,9 +902,9 @@ footer {
 
     /* ШАГ 5 */
 .step5 {
-    position: relative; 
+    position: relative;
     & .overlay {
-        display: none;  
+        display: none;
         position: absolute;
         top: 0;
         left: 0;
@@ -914,7 +914,7 @@ footer {
         z-index: 88;
     }
     & .feedback_form {
-        display: none;  
+        display: none;
         z-index: 9;
         position: absolute;
         left: 50%;
@@ -939,7 +939,7 @@ footer {
             padding: 15px;
             font-size: 16px;
             border: 3px solid #20C454;
-            margin-bottom: 8px;    
+            margin-bottom: 8px;
             border-radius: 8px;
             width: 100%;
             outline: none;
@@ -966,10 +966,10 @@ footer {
             }
         }
         & label {
-            font-size: 16px;    
-            line-height: 16px;  
+            font-size: 16px;
+            line-height: 16px;
             & a {
-                text-decoration: none;  
+                text-decoration: none;
                 &:hover {
                     text-decoration: underline;
                 }
@@ -1062,7 +1062,7 @@ footer {
             margin-bottom: 15px !important;
         }
         & label[for*="step3_appart"] {
-            margin-right: 10px; 
+            margin-right: 10px;
         }
         & label[for="step3_appart5"] {
             margin-right: 60%;
@@ -1121,17 +1121,17 @@ footer {
             }
             & .active {
                 &::before {
-                    display: none;  
+                    display: none;
                 }
                 &::after {
-                    display: none;  
+                    display: none;
                 }
             }
         }
     }
     .step input[type="text"], .step input[type="number"] {
         font-size: 15px;
-    } 
+    }
     .step3 #act_date, .step3 #appart_number, .step3 #area, .step3 #appart_number, .step3 #area {
         max-width: 100% !important;
         font-size: 14px;
@@ -1141,37 +1141,37 @@ footer {
     }
     .step {
         &_box {
-            background: #fff;   
+            background: #fff;
             border-radius: 2px;
             box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.06);
             padding: 70px 30px 80px;
             min-height: 750px;
         }
         & .step_buttons {
-            margin-top: 50px;   
+            margin-top: 50px;
             display: -webkit-flex;
             display: -moz-flex;
             display: -ms-flex;
             display: -o-flex;
-            display: flex;  
-            width: 100%;    
-            justify-content: space-between; 
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
             & a {
                 display: block;
-                width: 230px;   
-                height: 55px;   
-                line-height: 55px;  
-                text-align: center; 
+                width: 230px;
+                height: 55px;
+                line-height: 55px;
+                text-align: center;
                 border-radius: 2px;
-                background: #fff;   
+                background: #fff;
                 box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
-                font-size: 20px;    
-                text-decoration: none;  
+                font-size: 20px;
+                text-decoration: none;
                 color: #000;
             }
         }
         & .step_go {
-            background: #20C454 !important  ;    
+            background: #20C454 !important  ;
             color: #fff !important  ;
         }
         & p {
@@ -1198,11 +1198,11 @@ footer {
             position: static !important;
             cursor: pointer;
             &:before {
-                display: none; 
+                display: none;
             }
             &:after {
                 padding: 25px 20px 40px;
-                font-size: 12px; 
+                font-size: 12px;
                 width: 100%;
                 margin-left: 15px;
                 top: 100%;
@@ -1230,7 +1230,7 @@ footer {
             float: none;
             min-width: 30px;
             outline: none;
-            background: #FAFAFA;   
+            background: #FAFAFA;
             margin-right: 15px;
             border: 1px solid #E2E2E2;
         }
@@ -1260,7 +1260,7 @@ footer {
         width: 100% !important  ;
     }
     #date1_1, #date2_1 {
-        margin-bottom: 0 !important;    
+        margin-bottom: 0 !important;
     }
     #step4_rb7_input {
         margin-bottom: 35px !important;
@@ -1276,7 +1276,7 @@ footer {
             margin-bottom: 15px !important;
         }
         & label[for*="step3_appart"] {
-            margin-right: 10px; 
+            margin-right: 10px;
         }
         & label[for="step3_appart5"] {
             margin-right: 60%;
@@ -1311,7 +1311,7 @@ footer {
             color: #fff;
             margin-bottom: 15px;
             & a {
-                font-size: 14px;   
+                font-size: 14px;
                 line-height: 20px;
             }
             & img {
@@ -1381,4 +1381,10 @@ footer {
             width: 45px !important;
         }
     }
+}
+
+#pdf_preview {
+    width: 100%;
+    height: 100%;
+    min-height: 40em;
 }

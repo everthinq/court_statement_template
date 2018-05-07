@@ -29,7 +29,7 @@ urlpatterns = [
     path('', root_page),
     path('random_game', random_number_game),
 
-    path('app', include('court_template_app.urls')),
+    path('app/', include('court_template_app.urls')),
 ]
 
 if settings.DEBUG:

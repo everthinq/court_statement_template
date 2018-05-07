@@ -1,0 +1,307 @@
+{% load statement_utils %}
+{% load staticfiles %}
+{% comment %}
+var data = {
+            'inn': $("#inn").val(),
+            'fio': $("#fio").val(),
+            'address": $("#address").val(),
+            'company': $("#nickname").val(),
+            'company_address': $("#address2").val(),
+            'court_name': $("#sud").val(),
+            'court_place': $("input:radio[name=court_place]:checked").val(),
+            'property_source': $("input:radio[name=property_source]:checked").val(),
+            'appartment_type': $("input:radio[name=step3_appart]:checked").val(),
+            'appartment_num': $("#appart_number").val(),
+            'total_area': $("#area").val(),
+            'deal_price': $("#step3_price").val(),
+            'transferred': $("input:radio[name=appartment_given]:checked").val(),
+            'total_price': $("#step3_total_price").val(),
+            'planned_transfer_date': $("#step4_1").val(),
+            'payment_doc_type': $("input:checkbox[name=payment_doc_type]:checked").val() || [],
+            'ask_type': $("input:checkbox[name=ask_type]:checked").val() || [],
+            'precourt_letter': $("input:checkbox[name=precourt_letter]:checked").val(),
+            'total_ask': $("#total_isc").val(),
+        };
+
+        switch(data['property_source']) {
+            case 1: // ДДУ
+                data['ddu_date'] = $("#date1_1").val();
+                data['ddu_num'] = $("#date1_2").val();
+                break;
+            case 2: // Переуступка
+                data['prop_transfer_date'] = $("#date2_1").val();
+                data['prop_transfer_num'] = $("#date2_2").val();
+                break;
+        }
+
+        if(data['transferred']) {
+            data['transfer_act_date'] = $("#act_date").val();
+        }
+
+        switch(data['payment_doc_type']) {
+            case 1: // Платежное поручение
+                data['plat_por_num'] = $("#plat_por_num").val();
+                data['plat_por_date'] = $("#step4_rb1_input2").val();
+                break;
+            case 2: // Квитанция к приходному кассовому ордеру
+                data['order_num'] = $("#order_num").val();
+                data['order_date'] = $("#step4_rb2_input2").val();
+                break;
+            case 3: // Акт сверки взаиморассчетов
+                data['act_start'] = [
+                    $("#step4_rb3_input1").val(),
+                    $("#step4_rb3_input2").val(),
+                    $("#step4_rb3_input3").val()
+                ];
+                data['act_end'] = [
+                    $("#step4_rb3_input4").val(),
+                    $("#step4_rb3_input5").val(),
+                    $("#step4_rb3_input6").val()
+                ];
+                break;
+            case 4: // Другое
+                break;
+        }
+
+        switch(data['ask_type']) {
+            case 1: // Неустойка
+
+                break;
+            case 2: // Убытки по аренде квартиры
+                data['rent_type'] = $("input:radio[name=step4_rb_arenda]:checked").val();
+                data['rent_date'] = $("#step4_4").val();
+                data['rent_price'] = $("#step4_5").val();
+                data['rent_total'] = $("#step4_6").val();
+                break;
+            case 3: // Моральный ущерб
+                data['moral_harm_cost'] = $("#step4_2").val();
+                data['moral_harm_desc'] = $("#step4_3").val();
+                break;
+            case 4: // Штраф по Закону о защите прав потребителей
+                break;
+        }
+
+        switch(data['precourt_letter']) {
+            case 1: // По почте
+                data['precourt_postbox_date'] = $("#step4_rb6_input").val();
+                break;
+            case 2: // В офисе
+                data['precourt_office_date'] = $("#step4_rb7_input").val();
+                break;
+        }
+{% endcomment %}
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<style>
+    @page {
+        size: a4 portrait;
+        margin-left: 3cm;
+        margin-top: 2cm;
+        margin-right: 2cm;
+        margin-bottom: 2cm;
+    }
+
+    @font-face {
+        font-family: TimesNewRomanCyr;
+        src: url("static/court_template_app/fonts/TimesNewRomanCyr.ttf");
+    }
+    body {
+        font-family: TimesNewRomanCyr, 'Times New Roman', serif;
+        font-size:  12pt;
+    }
+    div, p {
+        padding: 0;
+    }
+    .bold {
+        font-weight: bold;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 100%;
+        margin-top: 3em;
+        margin-bottom: 2em;
+    }
+    p {
+        margin-bottom: 1em;
+    }
+    #header td {
+        right: 0;
+        width: 50%;
+    }
+    #header p {
+        text-align: left;
+        margin: 0;
+    }
+
+</style>
+</head>
+<body>
+  <table id="header"><tr><td style="width:50%"></td><td>
+    <p>В {{court_name}}</p>
+    <p><span class="bold">Истец:</span> {{fio}}<br/>Адрес места жительства: {{address}}</p>
+    <p><span class="bold">Ответчик:</span> {{company}}<br>(ИНН {{inn}})<br/>Юридический адрес: {{company_address}}</p>
+    <p><span class="bold">Цена иска:</span> {{total_ask|floatformat:2}} рублей ({{total_ask|price_in_words}})</p>
+    {% if total_ask < 1000000 %}
+        <p>От уплаты госпошлины истец освобожден на основании пп.4 п.2 ст.333.36 НК РФ</p>
+    {% else %}
+        <p>Размер госпошлины {{total_ask|state_fee|floatformat:2}}</p>
+    {% endif %}
+    {% if court_place == 3 %}
+        <p>Подсудность определена на основании ст. 32 Гражданского процессуального кодекса РФ (договорная подсудность)</p>
+    {% else %}
+        <p>Подсудность определена на основании ч.7 ст.29 Гражданского процессуального кодекса РФ, п.2 ст.17 Закона РФ «О защите прав потребителей»</p>
+    {% endif %}
+  </td></tr></table>
+  <h1>ИСКОВОЕ ЗАЯВЛЕНИЕ</h1>
+   <div id="fabula">
+    {% if property_source == 1 %}
+    <p>{{ddu_date|date:"d.m.Y"}} {{fio}} (далее – истец, дольщик) и {{company}} (далее - ответчик, застройщик) заключили договор № {{ddu_num}} участия в долевом строительстве (далее – договор).</p>
+    {% else %}
+    <p>{{ddu_date|date:"d.m.Y"}} {{fio}} (далее – истец, дольщик) на основании договора уступки прав требования №{{prop_transfer_num}} от {{prop_transfer_date|date:"d.m.Y"}} перешли права по договору № {{ddu_num}} участия в долевом строительстве (далее – договор), заключенному с {{company}} (далее - ответчик, застройщик).</p>
+    {% endif %}
+
+<p>По условиям договора застройщик принял на себя обязательство построить многоквартирный дом и после получения разрешения на ввод в эксплуатацию передать дольщику {{appartment_type|app_type}} с проектным № {{appartment_num}} общей проектной площадью {{total_area}} кв.м. (далее – квартира).</p>
+
+<p>Дольщик, в свою очередь, принял на себя обязательство уплатить застройщику цену договора и принять квартиру по акту приема-передачи.</p>
+
+<p>Согласно условиям договора цена договора составила {{deal_price|floatformat:2}} ({{deal_price|price_in_words}}).
+{% if total_price < deal_price %}А в связи с уменьшением площади квартиры окончательная цена договора составила  {{total_price|floatformat:2}} ({{total_price|price_in_words}}).{% endif %}</p>
+
+<p>Обязательства по оплате цены договора исполнены в полном объеме,
+что подтверждается следующими документами: {{payment_docs}}.</p>
+
+<p>По условиям договора застройщик обязуется передать дольщику квартиру по акту приема-передачи не позднее {{planned_transfer_date|date:"d.m.Y"}}.</p>
+
+{% if transferred %}
+<p>Квартира была передана дольщику по акту приема-передачи только {{transfer_act_date|date:"d.m.Y"}}.</p>
+{% else %}
+<p>Квартира дольщику передана не была.</p>
+{% endif %}
+
+{% if ask_penalty %}
+{% if precourt_letter %}
+<p>{{precourt_date|date:"d.m.Y"}} истец {% if precourt_letter == 2 %}вручил{% else %}направил{% endif %} ответчику требование об уплате неустойки.</p>
+{% endif %}
+
+<p>Данное требование ответчиком не удовлетворено, оплата неустойки до сих пор не произведена.</p>
+{% endif %}
+
+<ol type="1">
+{% if ask_penalty %}
+<li>
+<p>В силу ч. 2 ст. 6 Федерального закона «Об участии в долевом строительстве
+многоквартирных домов и иных объектов недвижимости и внесении изменений в некоторые
+законодательные акты Российской Федерации» в случае нарушения предусмотренного
+договором срока передачи участнику долевого строительства объекта долевого строительства
+застройщик уплачивает участнику долевого строительства неустойку (пени) в размере
+одной трехсотой ставки рефинансирования Центрального банка Российской Федерации,
+действующей на день исполнения обязательства, от цены договора за каждый день просрочки.
+Если участником долевого строительства является гражданин, предусмотренная настоящей
+частью неустойка (пени) уплачивается застройщиком в двойном размере.</p>
+
+<p>Согласно положениям ст.ст. 309, 310 Гражданского кодекса РФ обязательства должны
+исполняться надлежащим образом в соответствии с условиями обязательств и требованиями закона,
+односторонний отказ от исполнения обязательства не допускается.</p>
+
+<p>Размер неустойки, подлежащей уплате ответчиком истцу, составляет {{penalty|floatformat:2}}  рублей
+({{penalty|price_in_words}}) и определен следующим образом:<br/>
+Размер применяемой ключевой ставки = 9%<br/>
+Цена договора –  {{total_price}} рублей<br/>
+Период просрочки на момент написания искового заявления = {{overdue_days}} дня (с {{overdue_start_date|date:"d.m.Y"}} по {{overdue_end_date|date:"d.m.Y"}} включительно)<br/>
+<br>
+1/150 x 9 x {{total_price}}/100 x {{overdue_days}} = {{penalty|floatformat:2}} рублей<br>
+<br></p>
+</li>
+{% endif %}
+{% if ask_rental %}
+<li>
+<p>В результате неисполнения (нарушения) обязательств по договору со стороны ответчика истец был вынужден {% if rent_type == 2 %}нанимать{% else %}арендовать{% endif %} жилье в течении дополнительного времени.
+По договору {% if  rent_type == 2 %}найма{% else %}аренды{% endif %} жилого помещения от {{ rent_date|date:"d.m.Y" }} оплата составляет {{ rent_price|floatformat:2 }} рублей ({{ rent_price|price_in_words }}) в месяц.
+В общей сложности, истец был вынужден переплатить {{ rent_total|floatformat:2 }} рублей ({{ rent_total|price_in_words }}).</p>
+</li>
+{% endif %}
+{% if ask_moral %}
+<li>
+<p>В результате неисполнения (нарушения) обязательств по договору со стороны ответчика истцу был причинен моральный вред.
+Он выражается в {{moral_harm_desc}}.<br/>
+В соответствии со ст.15 Закона РФ «О защите прав потребителей» моральный вред,
+причиненный потребителю, подлежит компенсации причинителем вреда.<br/>
+Компенсацию морального вреда, причиненного застройщиком в результате нарушения срока передачи квартиры,
+истец оценивает в {{moral_harm_cost|floatformat:2}} рублей ({{moral_harm_cost|price_in_words}})</p>
+</li>
+{% endif %}
+
+{% if ask_fine %}
+<li>
+<p>В соответствии с п.6 ст.13 Закона РФ «О защите прав потребителей» при удовлетворении судом требований потребителя,
+установленных законом, суд взыскивает с изготовителя (исполнителя, продавца, уполномоченной организации или
+уполномоченного индивидуального предпринимателя, импортера) за несоблюдение в добровольном порядке
+удовлетворения требований потребителя штраф в размере пятьдесят процентов от суммы, присужденной судом в пользу потребителя.</p>
+</li>
+{% endif %}
+</ol>
+{% if total_ask < 1000000 %}
+    <p>От уплаты государственной пошлины истец освобожден на основании пп.4 п.2 ст.333.36 НК РФ.</p>
+{% else %}
+    <p>Размер уплаченной госпошлины составляет {{total_ask|state_fee|floatformat:2}} рублей.</p>
+{% endif %}
+<p>На основании вышеизложенного, и руководствуясь ст.ст. 309, 310, 329, ГК РФ, ст. 29, 35, 131-133 ГПК РФ,
+ФЗ «О защите прав потребителей»,
+ст.6 ФЗ «Об участии в долевом строительстве многоквартирных домов и иных объектов недвижимости
+и внесении изменений в некоторые законодательные акты Российской Федерации»,
+Постановления Пленума Верховного Суда РФ от 28.06.2012 года N 17 "О рассмотрении судами
+гражданских дел по спорам о защите прав потребителей"</p>
+<h1>ПРОШУ СУД:</h1>
+{% if penalty > 0 %}
+<p>Взыскать с ответчика в пользу истца неустойку за нарушение срока передачи квартиры
+в размере {{penalty|floatformat:2}} ({{penalty|price_in_words}}).</p>
+{% endif %}
+
+{% if ask_rental %}
+<p>Взыскать с ответчика в пользу истца компенсацию переплаты по {% if rent_type == 2 %}найму{% else %}аренде{% endif %} жилья в размере {{ rent_total|floatformat:2 }} рублей ({{ rent_price|price_in_words }}).</p>
+{% endif %}
+
+{% if ask_moral %}
+<p>Взыскать с ответчика в пользу истца компенсацию причиненного морального вреда
+в размере {{moral_harm_cost|floatformat:2}} рублей ({{moral_harm_cost|price_in_words}}).</p>
+{% endif %}
+
+{% if ask_fine %}
+<p>Взыскать с ответчика в пользу истца штраф в размере 50 % от суммы, присужденной в пользу истца.</p>
+{% endif %}
+
+<p>Приложения:<br/>
+<br/>
+Копия искового заявления для ответчика с приложениями отсутствующих у него документов (ст.132 ГПК РФ).<br/>
+{% if property_source == 2 %}
+Копия договора уступки прав требования №{{prop_transfer_num}} от {{prop_transfer_date|date:"d.m.Y"}} года.<br/>
+{% endif %}
+Копия договора участия в долевом строительстве жилого дома № {{ddu_num}} от {{ddu_date|date:"d.m.Y"}} года.<br/>
+{% if ask_rental %}
+Копия договора {% if rent_type == 2 %}найма{% else %}аренды{% endif %} жилого помещения от {{rent_date|date:"d.m.Y"}} г.<br/>
+{% endif %}
+{% if plat_por_num %}
+Копия платежного поручения № {{plat_por_num}} от {{plat_por_date|date:"d.m.Y"}} г.<br/>
+{% endif %}
+{% if order_num %}
+Копия приходного кассового ордера № {{ order_num }} от {{order_date|date:"d.m.Y"}} г.<br/>
+{% endif %}
+{% if transferred %}
+Копия акта приема-передачи квартиры от {{transfer_act_date|date:"d.m.Y"}} г.<br/>
+{% endif %}
+{% if precourt_date %}
+Копия требования об уплате неустойки от {{precourt_date|date:"d.m.Y"}} г.</p>
+{% endif %}
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<p>Истец      ___________________ /{{fio_short}}/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{today|date:"d.m.Y"}}</p>
+
+</body>
+</html>
