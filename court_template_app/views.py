@@ -36,6 +36,13 @@ def link_callback(uri, rel):
 
     return path
 
+def parse_date(data, key, fmt='%d/%m/%Y'):
+    if key in data:
+        data[key] = datetime.strptime(data[key], fmt)
+
+def format_date(date, fmt='%d.%m.%Y'):
+    return datetime.strftime(date, fmt)
+
 @csrf_exempt
 def process_data(request):
     pdf_filename = 'static/pdf/%s.pdf' % random.random()
@@ -52,42 +59,43 @@ def process_data(request):
 
     data['planned_transfer_date'] = datetime.strptime(data['planned_transfer_date'], '%d/%m/%Y')
 
-    if 'ddu_date' in data:
-        data['ddu_date'] = datetime.strptime(data['ddu_date'], '%d/%m/%Y')
+    parse_date(data, 'ddu_date')
+    parse_date(data, 'prop_transfer_date')
+    parse_date(data, 'transfer_act_date')
+    parse_date(data, 'precourt_postbox_date')
+    parse_date(data, 'precourt_office_date')
+    parse_date(data, 'rent_date')
+    parse_date(data, 'plat_por_date')
+    parse_date(data, 'order_date')
 
-    if 'prop_transfer_date' in data:
-        data['prop_transfer_date'] = datetime.strptime(data['prop_transfer_date'], '%d/%m/%Y')
+    if 'act_start' in data:
+        data['act_start'] = datetime.strptime('/'.join(data['act_start']), '%d/%m/%Y')
 
-    if 'transfer_act_date' in data:
-        data['transfer_act_date'] = datetime.strptime(data['transfer_act_date'], '%d/%m/%Y')
-
-    if 'precourt_postbox_date' in data:
-        data['precourt_postbox_date'] = datetime.strptime(data['precourt_postbox_date'], '%d/%m/%Y')
-
-    if 'precourt_office_date' in data:
-        data['precourt_office_date'] = datetime.strptime(data['precourt_office_date'], '%d/%m/%Y')
-
-    if 'rent_date' in data:
-        data['rent_date'] = datetime.strptime(data['rent_date'], '%d/%m/%Y')
+    if 'act_end' in data:
+        data['act_end'] = datetime.strptime('/'.join(data['act_end']), '%d/%m/%Y')
 
     payment_doc_type = data['payment_doc_type']
     payment_docs = []
+    payment_docs_extra= []
     if 1 in payment_doc_type:
-        payment_docs.append("платёжное поручение №%s от %s" % (data['plat_por_num'], data['plat_por_date']))
+        payment_docs.append("платёжным поручением №%s от %s" % (data['plat_por_num'], format_date(data['plat_por_date'])))
 
     if 2 in payment_doc_type:
-        payment_docs.append("квитанция к приходному кассовому ордеру №%s от %s" % (data['order_num'], data['order_date']))
+        payment_docs.append("квитанцией к приходному кассовому ордеру №%s от %s" % (data['order_num'], format_date(data['order_date'])))
 
     if 3 in payment_doc_type:
-        payment_docs.append("акт сверки взаиморассчётов с %s по %s" % ('.'.join(data['act_start']), '.'.join(data['act_end'])))
+        payment_docs.append("актом сверки взаиморассчётов с %s по %s" % (format_date(data['act_start']), format_date(data['act_end'])))
 
     if 4 in payment_doc_type:
-        payment_docs.append(data['other_payment'])
+        payment_docs.append(data['other_payment_ablative'])
+        payment_docs_extra.append(data['other_payment'])
         extras = data['payment_extras']
         for i in range(extras):
-            payment_docs.append(data['payment_extra%d' % (i+1)])
+            payment_docs.append(data['payment_extra%d_ablative' % (i+1)])
+            payment_docs_extra.append(data['payment_extra%d' % (i+1)])
 
-    data['payment_docs'] = ', '.join(payment_docs)
+    data['payment_docs_ablative'] = ', '.join(payment_docs)
+    data['payment_docs_extra'] = payment_docs_extra
 
     precourt_letter = data.get('precourt_letter', None)
     if precourt_letter:

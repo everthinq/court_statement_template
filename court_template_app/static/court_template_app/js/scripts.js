@@ -60,6 +60,9 @@ $(document).ready(function() {
             'company': $("#nickname").val(),
             'company_address': $("#address2").val(),
             'court_name': $("#sud").val(),
+
+            'address_suda': $("#address_suda").val(),
+
             'court_place': parseInt($("input:radio[name=court_place]:checked").val()),
             'property_source': parseInt($("input:radio[name=property_source]:checked").val()),
             'appartment_type': parseInt($("input:radio[name=step3_appart]:checked").val()),
@@ -212,7 +215,248 @@ $(document).ready(function() {
     };
 
     var showTab = function(tab) {
+// start input validation
+        if(tab == '#step1') {
+            activateTab(tab);
+            $('#inn').focus();
+        }
+
+        if(tab == '#step2') {
+            if($("#inn").val() == '') {
+                $("#inn").addClass('empty_field');
+                $('#inn').focus();
+            } else {
+                $("#inn").removeClass('empty_field');
+                activateTab(tab);
+            }
+        }
+
+        if(tab == '#step3') {
+            if($("#fio").val() == '') {
+                $("#fio").addClass('empty_field');
+            } else {
+                $("#fio").removeClass('empty_field');
+            }
+            if($("#address").val() == '') {
+                $("#address").addClass('empty_field');
+            } else {
+                $("#address").removeClass('empty_field');
+            }
+            if($("#nickname").val() == '') {
+                $("#nickname").addClass('empty_field');
+            } else {
+                $("#nickname").removeClass('empty_field');
+            }
+            if($("#address2").val() == '') {
+                $("#address2").addClass('empty_field');
+            } else {
+                $("#address2").removeClass('empty_field');
+            }
+            if($("#sud").val() == '') {
+                $("#sud").addClass('empty_field');
+            } else {
+                $("#sud").removeClass('empty_field');
+            }
+            if($("#address_suda").val() == '') {
+                $("#address_suda").addClass('empty_field');
+            } else {
+                $("#address_suda").removeClass('empty_field');
+            }
+            // focus start
+            if($("#fio").val() == '') {
+                $('#fio').focus();
+                $("#fio")[0].scrollIntoView();
+                return;
+            }
+            if($("#address").val() == '') {
+                $('#address').focus();
+                $("#address")[0].scrollIntoView();
+                return;
+            }
+            if($("#nickname").val() == '') {
+                $('#nickname').focus();
+                $("#nickname")[0].scrollIntoView();
+                return;
+            }
+            if($("#address2").val() == '') {
+                $('#address2').focus();
+                $("#address2")[0].scrollIntoView();
+                return;
+            }
+            if($("#sud").val() == '') {
+                $('#sud').focus();
+                $("#sud")[0].scrollIntoView();
+                return;
+            }
+            if($("#address_suda").val() == '') {
+                $('#address_suda').focus();
+                $("#address_suda")[0].scrollIntoView();
+                return;
+            }
+            // focus end
+            if($("#fio").val() != ''
+            && $("#address").val() != ''  
+            && $("#nickname").val() != '' 
+            && $("#address2").val() != '' 
+            && $("#sud").val() != '' 
+            && $("#address_suda").val() != ''
+            ) {
+                activateTab(tab);
+            }
+        }
+
+        if(tab == '#step4') {
+            if($("#date1_1").val() == '') {
+                $("#date1_1").addClass('empty_field');
+            } else {
+                $("#date1_1").removeClass('empty_field');
+            }
+            if($("#date1_2").val() == '') {
+                $("#date1_2").addClass('empty_field');
+            } else {
+                $("#date1_2").removeClass('empty_field');
+            }
+            if(isNaN( parseInt($("input:radio[name=step3_appart]:checked").val()) ) == true) {
+                $("#step3_radio_box").addClass('empty_field');
+            } else {
+                $("#step3_radio_box").removeClass('empty_field');
+            }
+            if($("#appart_number").val() == '') {
+                $("#appart_number").addClass('empty_field');
+            } else {
+                $("#appart_number").removeClass('empty_field');
+            }
+            if($("#area").val() == '') {
+                $("#area").addClass('empty_field');
+            } else {
+                $("#area").removeClass('empty_field');
+            }
+            if($("#step3_price").val() == '') {
+                $("#step3_price").addClass('empty_field');
+            } else {
+                $("#step3_price").removeClass('empty_field');
+            }
+            // focus start
+            if($("#date1_1").val() == '') {
+                $('#date1_1').focus();
+                $("#date1_1")[0].scrollIntoView();
+                return;
+            }
+            if($("#date1_2").val() == '') {
+                $('#date1_2').focus();
+                $("#date1_2")[0].scrollIntoView();
+                return;
+            }
+            if(isNaN( parseInt($("input:radio[name=step3_appart]:checked").val()) ) == true) {
+                $("#step3_radio_box")[0].scrollIntoView();
+            }
+            if($("#appart_number").val() == '') {
+                $('#appart_number').focus();
+                $("#appart_number")[0].scrollIntoView();
+                return;
+            }
+            if($("#area").val() == '') {
+                $('#area').focus();
+                $("#area")[0].scrollIntoView();
+                return;
+            }
+            if($("#step3_price").val() == '') {
+                $('#step3_price').focus();
+                $("#step3_price")[0].scrollIntoView();
+                return;
+            }
+            // focus end
+            if($("#date1_1").val() != '' 
+            && $("#date1_2").val() != ''
+            && isNaN( parseInt($("input:radio[name=step3_appart]:checked").val()) ) != true  
+            && $("#step3_price").val() != ''
+            && $("#area").val() != ''
+            && $("#appart_number").val() != ''
+            ) {
+                activateTab(tab);
+            }
+        }
+
         if(tab == '#step5') {
+            if($("#step4_1").val() == '') {
+                $("#step4_1").addClass('empty_field');
+            } else {
+                $("#step4_1").removeClass('empty_field');
+            }
+            if($("#step4_2").val() == '') {
+                $("#step4_2").addClass('empty_field');
+            } else {
+                $("#step4_2").removeClass('empty_field');
+            }
+            if($("#step4_3").val() == '') {
+                $("#step4_3").addClass('empty_field');
+            } else {
+                $("#step4_3").removeClass('empty_field');
+            }
+            
+            // Проверка наличия досудебного извещения
+            var precourt_boxes = $("input:checkbox[name=precourt_letter]");
+            var precourt_letter = precourt_boxes.filter(":checked").map(function(){return parseInt($(this).val());}).get() || [];
+            if(precourt_letter.length == 0) {
+                precourt_boxes.addClass('empty_field').focus()[0].scrollIntoView();
+                return;
+            } else {
+                precourt_boxes.removeClass('empty_field');
+            }
+            
+            if(isNaN( parseInt($("input:radio[name=step4_rb_arenda]:checked").val()) ) == false) {
+                if($("#step4_4").val() == '') {
+                    $("#step4_4").addClass('empty_field');
+                } else {
+                    $("#step4_4").removeClass('empty_field');
+                }
+                if($("#step4_5").val() == '') {
+                    $("#step4_5").addClass('empty_field');
+                } else {
+                    $("#step4_5").removeClass('empty_field');
+                }
+                if($("#step4_6").val() == '') {
+                    $("#step4_6").addClass('empty_field');
+                } else {
+                $("#step4_6").removeClass('empty_field');
+                }
+            }
+            // focus start
+            if($("#step4_1").val() == '') {
+                $('#step4_1').focus();
+                $("#step4_1")[0].scrollIntoView();
+                return;
+            }
+            if($("#step4_2").val() == '') {
+                $('#step4_2').focus();
+                $("#step4_2")[0].scrollIntoView();
+                return;
+            }
+            if($("#step4_3").val() == '') {
+                $('#step4_3').focus();
+                $("#step4_3")[0].scrollIntoView();
+                return;
+            }
+            if(isNaN( parseInt($("input:radio[name=step4_rb_arenda]:checked").val()) ) == false) { 
+                if($("#step4_4").val() == '') {
+                    $('#step4_4').focus();
+                    $("#step4_4")[0].scrollIntoView();
+                    return;
+                }
+                if($("#step4_5").val() == '') {
+                    $('#step4_5').focus();
+                    $("#step4_5")[0].scrollIntoView();
+                    return;
+                }
+                if($("#step4_6").val() == '') {
+                    $('#step4_6').focus();
+                    $("#step4_6")[0].scrollIntoView();
+                    return;
+                }
+            }
+            // focus end
+// end of input validation
+
             $.post('/app/process_data/', JSON.stringify(collectData()))
             .done(function(data) {
                 if(data['status'] == 'ok') {
@@ -221,22 +465,40 @@ $(document).ready(function() {
                         document.getElementById("pdf_preview").contentWindow.print();
                     });
                     $("a.download_bt").attr('href', data['link']).attr('target', '_blank');
-                    activateTab(tab);
+                    
+// continue input validation
+                    if(isNaN( parseInt($("input:radio[name=step4_rb_arenda]:checked").val()) ) == false) {
+                        if($("#step4_1").val() != '' 
+                        && $("#step4_2").val() != ''  
+                        && $("#step4_3").val() != ''
+                        && $("#step4_4").val() != ''
+                        && $("#step4_5").val() != ''
+                        && $("#step4_6").val() != ''
+                        ) {
+                            activateTab(tab);
+                        }
+                    } else {
+                        if($("#step4_1").val() != '' 
+                        && $("#step4_2").val() != ''  
+                        && $("#step4_3").val() != ''
+                        ) {
+                            activateTab(tab);
+                        }
+                    }
+// end of continue input validation
+
                 } else {
                     alert(data['message']);
                 }
             })
             .fail(function() {
-                alert("Не удалось сформировать документ. Попробуйте еще раз чуть позже.");
+                // alert("Не удалось сформировать документ. Проверьте входные данные.");
             })
             .always(function() {
 
             });
-        } else {
-            activateTab(tab);
         }
     };
-
 
 	// Табы
 	$('.main .step').hide();

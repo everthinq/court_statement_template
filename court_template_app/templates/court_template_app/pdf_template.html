@@ -1,5 +1,6 @@
 {% load statement_utils %}
 {% load staticfiles %}
+{% load i18n %}
 {% comment %}
 var data = {
             'inn': $("#inn").val(),
@@ -106,16 +107,37 @@ var data = {
     @font-face {
         font-family: TimesNewRomanCyr;
         src: url("static/court_template_app/fonts/TimesNewRomanCyr.ttf");
+        font-weight: normal;
+    }
+    @font-face {
+        font-family: TimesNewRomanCyr;
+        src: url("static/court_template_app/fonts/TimesNewRomanCyrBold.ttf");
+        font-weight: bold;
+    }
+    @font-face {
+        font-family: TimesNewRomanCyr;
+        src: url("static/court_template_app/fonts/TimesNewRomanCyrItalic.ttf");
+        font-style: italic;
     }
     body {
         font-family: TimesNewRomanCyr, 'Times New Roman', serif;
         font-size:  12pt;
+        font-weight: normal;
     }
     div, p {
+        margin: 0;
         padding: 0;
     }
     .bold {
         font-weight: bold;
+    }
+    .framed {
+        border: 1px solid black;
+        padding: 1cm;
+    }
+    .centered {
+        text-align: center;
+        width: 100%;
     }
 
     h1 {
@@ -123,44 +145,72 @@ var data = {
         font-size: 100%;
         margin-top: 3em;
         margin-bottom: 2em;
+        font-weight: bold;
     }
     p {
+        text-indent: 1em;
         margin-bottom: 1em;
+        display: block;
+    }
+    i {
+        font-style: italic;
+    }
+    u {
+        text-decoration: underline;
     }
     #header td {
         right: 0;
-        width: 50%;
+        width: 70%;
     }
     #header p {
         text-align: left;
-        margin: 0;
+        text-indent: 0;
     }
-
+    ol.outside {
+        margin: 0;
+        padding: 0;
+        counter-reset: outside;
+    }
+    ol.outside li {
+        list-style-position: outside;
+        display: block;
+        margin: 0;
+        padding: 0;
+        text-indent: 1em;
+        margin-bottom: 1em;
+    }
+    ol.outside li p:first-child::before {
+        counter-increment: outside;
+        content: counter(outside) ". ";
+    }
 </style>
 </head>
 <body>
-  <table id="header"><tr><td style="width:50%"></td><td>
-    <p>В {{court_name}}</p>
-    <p><span class="bold">Истец:</span> {{fio}}<br/>Адрес места жительства: {{address}}</p>
-    <p><span class="bold">Ответчик:</span> {{company}}<br>(ИНН {{inn}})<br/>Юридический адрес: {{company_address}}</p>
-    <p><span class="bold">Цена иска:</span> {{total_ask|floatformat:2}} рублей ({{total_ask|price_in_words}})</p>
+  <table id="header"><tr><td style="width:30%"></td><td>
+    <p><span class="bold">В {{court_name}}</span></p>
+    <p><span class="bold">Истец:</span> {{fio}}<br/>
+    Адрес места жительства: {{address}}</p>
+    <p><span class="bold">Ответчик:</span> {{company}}<br/>
+    (ИНН {{inn}})<br/>
+    Юридический адрес: {{company_address}}</p>
+    <p><span class="bold">Цена иска:</span> {{total_ask|floatformat:2}} рублей.</p>
     {% if total_ask < 1000000 %}
-        <p>От уплаты госпошлины истец освобожден на основании пп.4 п.2 ст.333.36 НК РФ</p>
+        <p><i>От уплаты госпошлины истец освобожден на основании пп.4 п.2 ст.333.36 НК РФ.</i></p>
     {% else %}
-        <p>Размер госпошлины {{total_ask|state_fee|floatformat:2}}</p>
+        <p><i>Размер госпошлины {{total_ask|state_fee|floatformat:2}}.</i></p>
     {% endif %}
     {% if court_place == 3 %}
-        <p>Подсудность определена на основании ст. 32 Гражданского процессуального кодекса РФ (договорная подсудность)</p>
+        <p><i>Подсудность определена на основании ст. 32 Гражданского процессуального кодекса РФ (договорная подсудность).</i></p>
     {% else %}
-        <p>Подсудность определена на основании ч.7 ст.29 Гражданского процессуального кодекса РФ, п.2 ст.17 Закона РФ «О защите прав потребителей»</p>
+        <p><i>Подсудность определена на основании ч.7 ст.29 Гражданского процессуального кодекса РФ, п.2 ст.17 Закона РФ «О защите прав потребителей».</i></p>
     {% endif %}
   </td></tr></table>
   <h1>ИСКОВОЕ ЗАЯВЛЕНИЕ</h1>
    <div id="fabula">
     {% if property_source == 1 %}
-    <p>{{ddu_date|date:"d.m.Y"}} {{fio}} (далее – истец, дольщик) и {{company}} (далее - ответчик, застройщик) заключили договор № {{ddu_num}} участия в долевом строительстве (далее – договор).</p>
+    <p>{{ddu_date|date_by_words}} {{fio}} (далее – истец, дольщик) и {{company}} (далее - ответчик, застройщик) заключили договор № {{ddu_num}} участия в долевом строительстве (далее – договор).</p>
     {% else %}
-    <p>{{ddu_date|date:"d.m.Y"}} {{fio}} (далее – истец, дольщик) на основании договора уступки прав требования №{{prop_transfer_num}} от {{prop_transfer_date|date:"d.m.Y"}} перешли права по договору № {{ddu_num}} участия в долевом строительстве (далее – договор), заключенному с {{company}} (далее - ответчик, застройщик).</p>
+    <p>{{ddu_date|date_by_words}} {{fio}} (далее – истец, дольщик) на основании договора уступки прав требования №{{prop_transfer_num}} от {{prop_transfer_date|date_by_words}} перешли права по договору № {{ddu_num}} участия в долевом строительстве (далее – договор), заключенному с {{company}} (далее - ответчик, застройщик).</p>
     {% endif %}
 
 <p>По условиям договора застройщик принял на себя обязательство построить многоквартирный дом и после получения разрешения на ввод в эксплуатацию передать дольщику {{appartment_type|app_type}} с проектным № {{appartment_num}} общей проектной площадью {{total_area}} кв.м. (далее – квартира).</p>
@@ -171,25 +221,24 @@ var data = {
 {% if total_price < deal_price %}А в связи с уменьшением площади квартиры окончательная цена договора составила  {{total_price|floatformat:2}} ({{total_price|price_in_words}}).{% endif %}</p>
 
 <p>Обязательства по оплате цены договора исполнены в полном объеме,
-что подтверждается следующими документами: {{payment_docs}}.</p>
+что подтверждается {{payment_docs_ablative}}.</p>
 
-<p>По условиям договора застройщик обязуется передать дольщику квартиру по акту приема-передачи не позднее {{planned_transfer_date|date:"d.m.Y"}}.</p>
+<p>По условиям договора застройщик обязуется передать дольщику квартиру по акту приема-передачи <u class="bold">не позднее {{planned_transfer_date|date_by_words_quotes}}.</u></p>
 
 {% if transferred %}
-<p>Квартира была передана дольщику по акту приема-передачи только {{transfer_act_date|date:"d.m.Y"}}.</p>
+<p class="bold"><u>Квартира была передана дольщику по акту приема-передачи только {{transfer_act_date|date_by_words}}.</u></p>
 {% else %}
-<p>Квартира дольщику передана не была.</p>
+<p class="bold"><u>Квартира дольщику передана не была.</u></p>
 {% endif %}
 
 {% if ask_penalty %}
 {% if precourt_letter %}
-<p>{{precourt_date|date:"d.m.Y"}} истец {% if precourt_letter == 2 %}вручил{% else %}направил{% endif %} ответчику требование об уплате неустойки.</p>
+<p>{{precourt_date|date_by_words}} истец {% if precourt_letter == 2 %}вручил{% else %}направил{% endif %} ответчику требование об уплате неустойки.</p>
 {% endif %}
 
-<p>Данное требование ответчиком не удовлетворено, оплата неустойки до сих пор не произведена.</p>
+<p class="bold"><u>Данное требование ответчиком не удовлетворено, оплата неустойки до сих пор не произведена.</u></p>
 {% endif %}
-
-<ol type="1">
+<ol class="outside">
 {% if ask_penalty %}
 <li>
 <p>В силу ч. 2 ст. 6 Федерального закона «Об участии в долевом строительстве
@@ -206,31 +255,31 @@ var data = {
 исполняться надлежащим образом в соответствии с условиями обязательств и требованиями закона,
 односторонний отказ от исполнения обязательства не допускается.</p>
 
-<p>Размер неустойки, подлежащей уплате ответчиком истцу, составляет {{penalty|floatformat:2}}  рублей
-({{penalty|price_in_words}}) и определен следующим образом:<br/>
-Размер применяемой ключевой ставки = 9%<br/>
-Цена договора –  {{total_price}} рублей<br/>
-Период просрочки на момент написания искового заявления = {{overdue_days}} дня (с {{overdue_start_date|date:"d.m.Y"}} по {{overdue_end_date|date:"d.m.Y"}} включительно)<br/>
-<br>
-1/150 x 9 x {{total_price}}/100 x {{overdue_days}} = {{penalty|floatformat:2}} рублей<br>
-<br></p>
+<p><span class="bold">Размер неустойки, подлежащей уплате ответчиком истцу, составляет {{penalty|floatformat:2}}  рублей
+({{penalty|price_in_words}}) и определен следующим образом:</span></p>
+<p class="framed centered"><br/>Размер неустойки =<br/> 1/150 x ключевая ставка x цена договора/100 x период просрочки<br/></p>
+<p>Размер применяемой ключевой ставки = 9%</p>
+<p>Цена договора –  {{total_price}} рублей</p>
+<p>Период просрочки на момент написания искового заявления = {% blocktrans count days=overdue_days %}{{ days }} день{% plural %}{{ days }} дней{% endblocktrans %} (с {{overdue_start_date|date:"d.m.Y"}} по {{overdue_end_date|date:"d.m.Y"}} включительно)</p>
+
+<p class="bold centered">1/150 x 9 x {{total_price}}/100 x {{overdue_days}} = {{penalty|floatformat:2}} рублей</p>
 </li>
 {% endif %}
 {% if ask_rental %}
 <li>
 <p>В результате неисполнения (нарушения) обязательств по договору со стороны ответчика истец был вынужден {% if rent_type == 2 %}нанимать{% else %}арендовать{% endif %} жилье в течении дополнительного времени.
 По договору {% if  rent_type == 2 %}найма{% else %}аренды{% endif %} жилого помещения от {{ rent_date|date:"d.m.Y" }} оплата составляет {{ rent_price|floatformat:2 }} рублей ({{ rent_price|price_in_words }}) в месяц.
-В общей сложности, истец был вынужден переплатить {{ rent_total|floatformat:2 }} рублей ({{ rent_total|price_in_words }}).</p>
+<span class="bold">В общей сложности, истец был вынужден переплатить {{ rent_total|floatformat:2 }} рублей ({{ rent_total|price_in_words }}).</span></p>
 </li>
 {% endif %}
 {% if ask_moral %}
 <li>
-<p>В результате неисполнения (нарушения) обязательств по договору со стороны ответчика истцу был причинен моральный вред.
-Он выражается в {{moral_harm_desc}}.<br/>
-В соответствии со ст.15 Закона РФ «О защите прав потребителей» моральный вред,
-причиненный потребителю, подлежит компенсации причинителем вреда.<br/>
-Компенсацию морального вреда, причиненного застройщиком в результате нарушения срока передачи квартиры,
-истец оценивает в {{moral_harm_cost|floatformat:2}} рублей ({{moral_harm_cost|price_in_words}})</p>
+<p>В результате неисполнения (нарушения) обязательств по договору со стороны ответчика истцу был причинен моральный вред.</p>
+<p>Он выражается в {{moral_harm_desc}}.</p>
+<p>В соответствии со ст.15 Закона РФ «О защите прав потребителей» моральный вред,
+причиненный потребителю, подлежит компенсации причинителем вреда.</p>
+<p><span class="bold">Компенсацию морального вреда, причиненного застройщиком в результате нарушения срока передачи квартиры,
+истец оценивает в {{moral_harm_cost|floatformat:2}} рублей ({{moral_harm_cost|price_in_words}}).</span></p>
 </li>
 {% endif %}
 
@@ -239,7 +288,7 @@ var data = {
 <p>В соответствии с п.6 ст.13 Закона РФ «О защите прав потребителей» при удовлетворении судом требований потребителя,
 установленных законом, суд взыскивает с изготовителя (исполнителя, продавца, уполномоченной организации или
 уполномоченного индивидуального предпринимателя, импортера) за несоблюдение в добровольном порядке
-удовлетворения требований потребителя штраф в размере пятьдесят процентов от суммы, присужденной судом в пользу потребителя.</p>
+удовлетворения требований потребителя <span class="bold">штраф в размере пятьдесят процентов от суммы, присужденной судом в пользу потребителя.</span></p>
 </li>
 {% endif %}
 </ol>
@@ -254,54 +303,63 @@ var data = {
 и внесении изменений в некоторые законодательные акты Российской Федерации»,
 Постановления Пленума Верховного Суда РФ от 28.06.2012 года N 17 "О рассмотрении судами
 гражданских дел по спорам о защите прав потребителей"</p>
-<h1>ПРОШУ СУД:</h1>
+<h1><u>ПРОШУ СУД:</u></h1>
+<ol>
 {% if penalty > 0 %}
-<p>Взыскать с ответчика в пользу истца неустойку за нарушение срока передачи квартиры
-в размере {{penalty|floatformat:2}} ({{penalty|price_in_words}}).</p>
+<li>Взыскать с ответчика в пользу истца неустойку за нарушение срока передачи квартиры
+в размере {{penalty|floatformat:2}} ({{penalty|int_number_by_words}}) рублей {{penalty|kopecks_by_words}}.</li>
 {% endif %}
 
 {% if ask_rental %}
-<p>Взыскать с ответчика в пользу истца компенсацию переплаты по {% if rent_type == 2 %}найму{% else %}аренде{% endif %} жилья в размере {{ rent_total|floatformat:2 }} рублей ({{ rent_price|price_in_words }}).</p>
+<li>Взыскать с ответчика в пользу истца компенсацию переплаты по {% if rent_type == 2 %}найму{% else %}аренде{% endif %} жилья в размере {{ rent_total|floatformat:2 }} рублей ({{ rent_price|int_number_by_words}}) рублей {{rent_price|kopecks_by_words}}.</li>
 {% endif %}
 
 {% if ask_moral %}
-<p>Взыскать с ответчика в пользу истца компенсацию причиненного морального вреда
-в размере {{moral_harm_cost|floatformat:2}} рублей ({{moral_harm_cost|price_in_words}}).</p>
+<li>Взыскать с ответчика в пользу истца компенсацию причиненного морального вреда
+в размере {{moral_harm_cost|floatformat:2}} рублей ({{moral_harm_cost|int_number_by_words}}) рублей {{moral_harm_cost|kopecks_by_words}}.</li>
 {% endif %}
 
 {% if ask_fine %}
-<p>Взыскать с ответчика в пользу истца штраф в размере 50 % от суммы, присужденной в пользу истца.</p>
+<li>Взыскать с ответчика в пользу истца штраф в размере 50 % от суммы, присужденной в пользу истца.</li>
 {% endif %}
-
-<p>Приложения:<br/>
-<br/>
-Копия искового заявления для ответчика с приложениями отсутствующих у него документов (ст.132 ГПК РФ).<br/>
+</ol>
+<p><br/><u class="bold">Приложения:</u>
+<ol>
+<li>Копия искового заявления для ответчика с приложениями отсутствующих у него документов (ст.132 ГПК РФ).</li>
 {% if property_source == 2 %}
-Копия договора уступки прав требования №{{prop_transfer_num}} от {{prop_transfer_date|date:"d.m.Y"}} года.<br/>
+<li>Копия договора уступки прав требования №{{prop_transfer_num}} от {{prop_transfer_date|date:"d.m.Y"}} года.</li>
 {% endif %}
-Копия договора участия в долевом строительстве жилого дома № {{ddu_num}} от {{ddu_date|date:"d.m.Y"}} года.<br/>
+<li>Копия договора участия в долевом строительстве жилого дома № {{ddu_num}} от {{ddu_date|date:"d.m.Y"}} года.</li>
 {% if ask_rental %}
-Копия договора {% if rent_type == 2 %}найма{% else %}аренды{% endif %} жилого помещения от {{rent_date|date:"d.m.Y"}} г.<br/>
+<li>Копия договора {% if rent_type == 2 %}найма{% else %}аренды{% endif %} жилого помещения от {{rent_date|date:"d.m.Y"}} г.</li>
 {% endif %}
 {% if plat_por_num %}
-Копия платежного поручения № {{plat_por_num}} от {{plat_por_date|date:"d.m.Y"}} г.<br/>
+<li>Копия платежного поручения № {{plat_por_num}} от {{plat_por_date|date:"d.m.Y"}} г.</li>
 {% endif %}
 {% if order_num %}
-Копия приходного кассового ордера № {{ order_num }} от {{order_date|date:"d.m.Y"}} г.<br/>
+<li>Копия приходного кассового ордера № {{ order_num }} от {{order_date|date:"d.m.Y"}} г.</li>
+{% endif %}
+{% if act_start and act_end %}
+<li>Копия акта сверки взаиморассчётов с {{ act_start|date:"d.m.Y" }} по {{act_end|date:"d.m.Y" }} г.</li>
 {% endif %}
 {% if transferred %}
-Копия акта приема-передачи квартиры от {{transfer_act_date|date:"d.m.Y"}} г.<br/>
+<li>Копия акта приема-передачи квартиры от {{transfer_act_date|date:"d.m.Y"}} г.</li>
 {% endif %}
 {% if precourt_date %}
-Копия требования об уплате неустойки от {{precourt_date|date:"d.m.Y"}} г.</p>
+<li>Копия требования об уплате неустойки от {{precourt_date|date:"d.m.Y"}} г.</li>
 {% endif %}
+{% for extra_doc in payment_docs_extra %}
+    <li>{{ extra_doc|capfirst }}.</li>
+{% endfor %}
+</ol>
+</p>
 
 <br/>
 <br/>
 <br/>
 <br/>
 <br/>
-<p>Истец      ___________________ /{{fio_short}}/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{today|date:"d.m.Y"}}</p>
+<p>Истец      ___________________ /{{fio_short}}/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{today|date_by_words_quotes}}</p>
 
 </body>
 </html>
