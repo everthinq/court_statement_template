@@ -116,11 +116,13 @@ $(document).ready(function() {
         if(data['payment_doc_type'].indexOf(4) >= 0) {
             // Другое
             data['other_payment'] = $("#step4_rb5_input").val();
+            data['other_payment_ablative'] = $("#step4_rb5_input_ablative").val();
             data['payment_extras'] = additional_fields;
             if(additional_fields > 0) {
                 var i;
                 for(i = 1; i< additional_fields+1; i++) {
                     data['payment_extra'+i] = $("#extra_field_"+i).val();
+                    data['payment_extra'+i+'_ablative'] = $("#extra_field_"+i+"_ablative").val();
                 }
             }
         }
@@ -295,10 +297,10 @@ $(document).ready(function() {
             }
             // focus end
             if($("#fio").val() != ''
-            && $("#address").val() != ''  
-            && $("#nickname").val() != '' 
-            && $("#address2").val() != '' 
-            && $("#sud").val() != '' 
+            && $("#address").val() != ''
+            && $("#nickname").val() != ''
+            && $("#address2").val() != ''
+            && $("#sud").val() != ''
             && $("#address_suda").val() != ''
             ) {
                 activateTab(tab);
@@ -366,9 +368,9 @@ $(document).ready(function() {
                 return;
             }
             // focus end
-            if($("#date1_1").val() != '' 
+            if($("#date1_1").val() != ''
             && $("#date1_2").val() != ''
-            && isNaN( parseInt($("input:radio[name=step3_appart]:checked").val()) ) != true  
+            && isNaN( parseInt($("input:radio[name=step3_appart]:checked").val()) ) != true
             && $("#step3_price").val() != ''
             && $("#area").val() != ''
             && $("#appart_number").val() != ''
@@ -393,7 +395,7 @@ $(document).ready(function() {
             } else {
                 $("#step4_3").removeClass('empty_field');
             }
-            
+
             // Проверка наличия досудебного извещения
             var precourt_boxes = $("input:checkbox[name=precourt_letter]");
             var precourt_letter = precourt_boxes.filter(":checked").map(function(){return parseInt($(this).val());}).get() || [];
@@ -403,7 +405,7 @@ $(document).ready(function() {
             } else {
                 precourt_boxes.removeClass('empty_field');
             }
-            
+
             if(isNaN( parseInt($("input:radio[name=step4_rb_arenda]:checked").val()) ) == false) {
                 if($("#step4_4").val() == '') {
                     $("#step4_4").addClass('empty_field');
@@ -437,7 +439,7 @@ $(document).ready(function() {
                 $("#step4_3")[0].scrollIntoView();
                 return;
             }
-            if(isNaN( parseInt($("input:radio[name=step4_rb_arenda]:checked").val()) ) == false) { 
+            if(isNaN( parseInt($("input:radio[name=step4_rb_arenda]:checked").val()) ) == false) {
                 if($("#step4_4").val() == '') {
                     $('#step4_4').focus();
                     $("#step4_4")[0].scrollIntoView();
@@ -465,11 +467,11 @@ $(document).ready(function() {
                         document.getElementById("pdf_preview").contentWindow.print();
                     });
                     $("a.download_bt").attr('href', data['link']).attr('target', '_blank');
-                    
+
 // continue input validation
                     if(isNaN( parseInt($("input:radio[name=step4_rb_arenda]:checked").val()) ) == false) {
-                        if($("#step4_1").val() != '' 
-                        && $("#step4_2").val() != ''  
+                        if($("#step4_1").val() != ''
+                        && $("#step4_2").val() != ''
                         && $("#step4_3").val() != ''
                         && $("#step4_4").val() != ''
                         && $("#step4_5").val() != ''
@@ -478,8 +480,8 @@ $(document).ready(function() {
                             activateTab(tab);
                         }
                     } else {
-                        if($("#step4_1").val() != '' 
-                        && $("#step4_2").val() != ''  
+                        if($("#step4_1").val() != ''
+                        && $("#step4_2").val() != ''
                         && $("#step4_3").val() != ''
                         ) {
                             activateTab(tab);
@@ -664,12 +666,12 @@ $(document).ready(function() {
 	});
 	$('#step4_rb4').on('change', function(){
 		if($('#step4_rb4').prop('checked')){
-			$('#step4_rb5_input, .long_input').prop('disabled', false);
+			$('#step4_rb5_input, #step4_rb5_input_ablative, .long_input').prop('disabled', false);
 			$('#step4_rb5_input').focus();
 			// Добавление формы по клику
 			$(".add_bt__item").click(function() {
 			    additional_fields++;
-				$('.new_inputs').append('<div class="new_input clearfix"><input type="text" class="long_input" id="extra_field_'+additional_fields+'"><img src="/static/court_template_app/img/cancel.png" class="input_close"></div>');
+				$('.new_inputs').append('<div class="new_input clearfix"><input type="text" class="long_input" id="extra_field_'+additional_fields+'" placeholder="В именительном падеже"><input type="text" class="long_input" id="extra_field_'+additional_fields+'_ablative" placeholder="В творительном падеже"><img src="/static/court_template_app/img/cancel.png" class="input_close"></div>');
 				$('.long_input').focus();
 
 				$(".new_input img").on("click", function() {
@@ -678,7 +680,7 @@ $(document).ready(function() {
 
 		    });
 		} else {
-			$('#step4_rb5_input, .long_input').prop('disabled', true);
+			$('#step4_rb5_input, #step4_rb5_input_ablative, .long_input').prop('disabled', true);
 			$(".add_bt__item").unbind('click');
 		}
 	});
