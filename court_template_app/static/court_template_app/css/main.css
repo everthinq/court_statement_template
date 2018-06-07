@@ -1939,4 +1939,39 @@ footer {
     height: 100%;
     min-height: 40em;
 }
+
+/*input validation start*/
+.step1_center input.empty_field {
+  border: 3px ridge red;
+  padding: 5px;
+}
+
+.step_left.clearfix input.empty_field {
+  border: 3px ridge red;
+  padding: 5px;
+}
+
+.step_right.clearfix input.empty_field {
+  border: 3px ridge red;
+  padding: 5px;
+}
+
+.empty_field {
+  border: 3px ridge red;
+  padding: 5px;
+}
+
+.input_xs.empty_field {
+  /*step4 payment docs*/
+  border: 3px ridge red;
+  padding: 10px;
+}
+
+.input_lg.empty_field {
+  /*step4 payment docs*/
+  border: 3px ridge red;
+  padding: 10px;
+}
+/*input validation end*/
+
 }

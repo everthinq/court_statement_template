@@ -14,41 +14,55 @@ $(document).ready(function() {
     	return false;
     });
 
-
     // Прогресс(статус) бар
+
+    /*input validation start*/
     $('.step2bt_status').click(function(event) {
-		var progressbar = $('#progressbar'),
-		    max = 100,
+        if($("#inn").val() == '') {
+            $("#inn").addClass('empty_field');
+        setTimeout(function(){
+            $("input#inn").focus();},100);
+        } else {
+            $("#inn").removeClass('empty_field');
+            $('.steps__item a').removeClass('active');
+            $('.main .step').hide();
+            $('#step2').fadeIn();
+            $('.step2_bt').addClass('active');
+        }
+    /*input validation end*/
 
-		    // Указываем время в секундах
-		    time = (1000/max)* 10,
+		// var progressbar = $('#progressbar'),
+		//     max = 100,
 
-		    value = progressbar.val();
+		//     // Указываем время в секундах
+		//     time = (1000/max)* 10,
 
-	    var loading = function() {
-	        value += 1;
-	        addValue = progressbar.val(value);
+		//     value = progressbar.val();
 
-	        $('.progress-value').html(value + '%');
+	 //    var loading = function() {
+	 //        value += 1;
+	 //        addValue = progressbar.val(value);
 
-	        if (value == max) {
-	            clearInterval(animate);
-	            setTimeout(fadeStatusBar, 1500);
-				$('.steps__item a').removeClass('active');
-		    	$('.main .step').hide();
-		    	$('#step2').fadeIn();
-		        $('.step2_bt').addClass('active');
-		    	return false;
-	        }
-	    };
-    	$('.overlay_js').fadeIn();
-    	var animate = setInterval(function() {
-        	loading();
-	    }, time);
+	 //        $('.progress-value').html(value + '%');
 
-		var fadeStatusBar = function() {
-			$('.overlay_js').fadeOut();
-		}
+	 //        if (value == max) {
+	 //            clearInterval(animate);
+	 //            setTimeout(fadeStatusBar, 1500);
+		// 		$('.steps__item a').removeClass('active');
+		//     	$('.main .step').hide();
+		//     	$('#step2').fadeIn();
+		//         $('.step2_bt').addClass('active');
+		//     	return false;
+	 //        }
+	 //    };
+  //   	$('.overlay_js').fadeIn();
+  //   	var animate = setInterval(function() {
+  //       	loading();
+	 //    }, time);
+
+		// var fadeStatusBar = function() {
+		// 	$('.overlay_js').fadeOut();
+		// }
     });
 
 
@@ -308,15 +322,50 @@ $(document).ready(function() {
         }
 
         if(tab == '#step4') {
-            if($("#date1_1").val() == '') {
-                $("#date1_1").addClass('empty_field');
+            if(isNaN(parseInt($("input:radio[name=property_source]:checked").val()) ) == true ) {
+                $("#pravo_na_kvartiru").addClass('empty_field');
+            } else {
+                $("#pravo_na_kvartiru").removeClass('empty_field');
+            }
+            if($("input:radio[name=property_source]:checked").val() == '1') {
+                if($("#date1_1").val() == '') {
+                    $("#date1_1").addClass('empty_field');
+                } else {
+                    $("#date1_1").removeClass('empty_field');
+                }
+                if($("#date1_2").val() == '') {
+                    $("#date1_2").addClass('empty_field');
+                } else {
+                    $("#date1_2").removeClass('empty_field');
+                }
             } else {
                 $("#date1_1").removeClass('empty_field');
-            }
-            if($("#date1_2").val() == '') {
-                $("#date1_2").addClass('empty_field');
-            } else {
                 $("#date1_2").removeClass('empty_field');
+            }
+            if($("input:radio[name=property_source]:checked").val() == '2') {
+                if($("#date1_1").val() == '') {
+                    $("#date1_1").addClass('empty_field');
+                } else {
+                    $("#date1_1").removeClass('empty_field');
+                }
+                if($("#date1_2").val() == '') {
+                    $("#date1_2").addClass('empty_field');
+                } else {
+                    $("#date1_2").removeClass('empty_field');
+                }
+                if($("#date2_1").val() == '') {
+                    $("#date2_1").addClass('empty_field');
+                } else {
+                    $("#date2_1").removeClass('empty_field');
+                }
+                if($("#date2_2").val() == '') {
+                    $("#date2_2").addClass('empty_field');
+                } else {
+                    $("#date2_2").removeClass('empty_field');
+                }
+            } else {
+                $("#date2_1").removeClass('empty_field');
+                $("#date2_2").removeClass('empty_field');
             }
             if(isNaN( parseInt($("input:radio[name=step3_appart]:checked").val()) ) == true) {
                 $("#step3_radio_box").addClass('empty_field');
@@ -338,19 +387,53 @@ $(document).ready(function() {
             } else {
                 $("#step3_price").removeClass('empty_field');
             }
+            if($("input:radio[name=appartment_given]:checked").val() == "1") {
+                if($('#act_date').val() == '') {
+                    $("#act_date").addClass('empty_field');
+                } else {
+                    $("#act_date").removeClass('empty_field');
+                }
+            } else {
+                $("#act_date").removeClass('empty_field');
+            }
+            if(isNaN(parseInt($("input:radio[name=appartment_given]:checked").val())) == true) {
+                $("#label_for_appartment_given").addClass('empty_field');
+                return;
+            } else {
+                $("#label_for_appartment_given").removeClass('empty_field');
+            }
             // focus start
-            if($("#date1_1").val() == '') {
-                $('#date1_1').focus();
-                $("#date1_1")[0].scrollIntoView();
+            if(isNaN(parseInt($("input:radio[name=property_source]:checked").val()) ) == true ) {
+                // $("pravo_na_kvartiru")[0].scrollIntoView();
                 return;
             }
-            if($("#date1_2").val() == '') {
-                $('#date1_2').focus();
-                $("#date1_2")[0].scrollIntoView();
-                return;
+            if($("input:radio[name=property_source]:checked").val() == '1') {
+                if($("#date1_1").val() == '') {
+                    $('#date1_1').focus();
+                    $("#date1_1")[0].scrollIntoView();
+                    return;
+                }
+                if($("#date1_2").val() == '') {
+                    $('#date1_2').focus();
+                    $("#date1_2")[0].scrollIntoView();
+                    return;
+                }
+            }
+            if($("input:radio[name=property_source]:checked").val() == '2') {
+                if($("#date2_1").val() == '') {
+                    $('#date2_1').focus();
+                    $("#date2_1")[0].scrollIntoView();
+                    return;
+                }
+                if($("#date2_2").val() == '') {
+                    $('#date2_2').focus();
+                    $("#date2_2")[0].scrollIntoView();
+                    return;
+                }
             }
             if(isNaN( parseInt($("input:radio[name=step3_appart]:checked").val()) ) == true) {
-                $("#step3_radio_box")[0].scrollIntoView();
+                // $("#step3_radio_box").scrollIntoView();
+                // return;
             }
             if($("#appart_number").val() == '') {
                 $('#appart_number').focus();
@@ -367,10 +450,15 @@ $(document).ready(function() {
                 $("#step3_price")[0].scrollIntoView();
                 return;
             }
+            if($("input:radio[name=appartment_given]:checked").val() == "1") {
+                if($('#act_date').val() == '') {
+                    $('#act_date').focus();
+                    $("#act_date")[0].scrollIntoView();
+                    return; 
+                }
+            }
             // focus end
-            if($("#date1_1").val() != ''
-            && $("#date1_2").val() != ''
-            && isNaN( parseInt($("input:radio[name=step3_appart]:checked").val()) ) != true
+            if(isNaN( parseInt($("input:radio[name=step3_appart]:checked").val()) ) != true  
             && $("#step3_price").val() != ''
             && $("#area").val() != ''
             && $("#appart_number").val() != ''
@@ -385,27 +473,6 @@ $(document).ready(function() {
             } else {
                 $("#step4_1").removeClass('empty_field');
             }
-            if($("#step4_2").val() == '') {
-                $("#step4_2").addClass('empty_field');
-            } else {
-                $("#step4_2").removeClass('empty_field');
-            }
-            if($("#step4_3").val() == '') {
-                $("#step4_3").addClass('empty_field');
-            } else {
-                $("#step4_3").removeClass('empty_field');
-            }
-
-            // Проверка наличия досудебного извещения
-            var precourt_boxes = $("input:checkbox[name=precourt_letter]");
-            var precourt_letter = precourt_boxes.filter(":checked").map(function(){return parseInt($(this).val());}).get() || [];
-            if(precourt_letter.length == 0) {
-                precourt_boxes.addClass('empty_field').focus()[0].scrollIntoView();
-                return;
-            } else {
-                precourt_boxes.removeClass('empty_field');
-            }
-
             if(isNaN( parseInt($("input:radio[name=step4_rb_arenda]:checked").val()) ) == false) {
                 if($("#step4_4").val() == '') {
                     $("#step4_4").addClass('empty_field');
@@ -420,26 +487,122 @@ $(document).ready(function() {
                 if($("#step4_6").val() == '') {
                     $("#step4_6").addClass('empty_field');
                 } else {
-                $("#step4_6").removeClass('empty_field');
+                    $("#step4_6").removeClass('empty_field');
                 }
             }
+            if($("input:checkbox[name=ask_type]:checked").val() == '3') {
+                if($("#step4_2").val() == '') {
+                    $("#step4_2").addClass('empty_field');
+                } else {
+                    $("#step4_2").removeClass('empty_field');
+                }
+                if($("#step4_3").val() == '') {
+                    $("#step4_3").addClass('empty_field');
+                } else {
+                    $("#step4_3").removeClass('empty_field');
+                }
+            } else {
+                $("#step4_2").removeClass('empty_field');
+                $("#step4_3").removeClass('empty_field');
+            }
+            if($("input:checkbox[name=payment_doc_type]:checked").map(function(){return parseInt($(this).val());}).length == 0) {
+                $("#step4_payments_docs").addClass('empty_field');
+            } else {
+                $("#step4_payments_docs").removeClass('empty_field');
+            }
+            var payment_doc_type = $("input:checkbox[name=payment_doc_type]:checked").map(function(){return parseInt($(this).val());}).get() || []
+            if(payment_doc_type.includes(1) == true) {
+                if($("#plat_por_num").val() == ''
+                || $("#step4_rb1_input2").val() == '') {
+                    $("#step4_platejnoe_poruchenie").addClass('empty_field');
+                } else {
+                    $("#step4_platejnoe_poruchenie").removeClass('empty_field');
+                }
+            } else {
+                $("#step4_platejnoe_poruchenie").removeClass('empty_field');
+            }
+            if(payment_doc_type.includes(2) == true) {
+                if($("#order_num").val() == ''
+                || $("#step4_rb2_input2").val() == '') {
+                    $("#step4_kvitanciya").addClass('empty_field');
+                } else {
+                    $("#step4_kvitanciya").removeClass('empty_field');
+                }
+            } else {
+                $("#step4_kvitanciya").removeClass('empty_field');
+            }
+            if(payment_doc_type.includes(3) == true) {
+                if($("#step4_rb3_input1").val() == ''
+                || $("#step4_rb3_input2").val() == ''
+                || $("#step4_rb3_input3").val() == ''
+                || $("#step4_rb3_input4").val() == ''
+                || $("#step4_rb3_input5").val() == ''
+                || $("#step4_rb3_input6").val() == '') {
+                    $("#step4_akt").addClass('empty_field');
+                } else {
+                    $("#step4_akt").removeClass('empty_field');
+                }
+            } else {
+                $("#step4_akt").removeClass('empty_field');
+            }
+			
             // focus start
+            if(payment_doc_type.includes(1) == true) {
+                if($("#plat_por_num").val() == '') {
+                    $('#plat_por_num').focus();
+                    $("#plat_por_num")[0].scrollIntoView();
+                    return;
+            }
+                if($("#step4_rb1_input2").val() == ''
+                || $("#step4_rb1_input2").val() == "__/__/____") {
+                    $('#step4_rb1_input2').focus();
+                    $("#step4_rb1_input2")[0].scrollIntoView();
+                    return;
+                }
+            }
+            if(payment_doc_type.includes(2) == true) {
+                if($("#order_num").val() == '') {
+                    $('#order_num').focus();
+                    $("#order_num")[0].scrollIntoView();
+                    return;
+            }
+                if($("#step4_rb2_input2").val() == ''
+                || $("#step4_rb2_input2").val() == "__/__/____") {
+                    $('#step4_rb2_input2').focus();
+                    $("#step4_rb2_input2")[0].scrollIntoView();
+                    return;
+                }
+            }
+            if(payment_doc_type.includes(3) == true) {
+                if($("#step4_rb3_input1").val() == ''
+                || $("#step4_rb3_input2").val() == ''
+                || $("#step4_rb3_input3").val() == ''
+                || $("#step4_rb3_input4").val() == ''
+                || $("#step4_rb3_input5").val() == ''
+                || $("#step4_rb3_input6").val() == '') {
+                    $('#step4_rb3_input1').focus();
+                    $("#step4_rb3_input1")[0].scrollIntoView();
+                    return;
+                }
+            }
             if($("#step4_1").val() == '') {
                 $('#step4_1').focus();
                 $("#step4_1")[0].scrollIntoView();
                 return;
             }
-            if($("#step4_2").val() == '') {
-                $('#step4_2').focus();
-                $("#step4_2")[0].scrollIntoView();
-                return;
+            if($("input:checkbox[name=ask_type]:checked").val() == '3') {
+                if($("#step4_2").val() == '') {
+                    $('#step4_2').focus();
+                    $("#step4_2")[0].scrollIntoView();
+                    return;
+                }
+                if($("#step4_3").val() == '') {
+                    $('#step4_3').focus();
+                    $("#step4_3")[0].scrollIntoView();
+                    return;
+                }
             }
-            if($("#step4_3").val() == '') {
-                $('#step4_3').focus();
-                $("#step4_3")[0].scrollIntoView();
-                return;
-            }
-            if(isNaN( parseInt($("input:radio[name=step4_rb_arenda]:checked").val()) ) == false) {
+            if(isNaN( parseInt($("input:radio[name=step4_rb_arenda]:checked").val()) ) == false) { 
                 if($("#step4_4").val() == '') {
                     $('#step4_4').focus();
                     $("#step4_4")[0].scrollIntoView();
@@ -456,6 +619,27 @@ $(document).ready(function() {
                     return;
                 }
             }
+            if($("input:checkbox[name=payment_doc_type]:checked").map(function(){return parseInt($(this).val());}).length == 0) {
+                return;
+            }
+
+            // Проверка наличия досудебного извещения
+            var shtraf_po_zakonu = $("input:checkbox[name=ask_type]:checked").map(function(){return parseInt($(this).val());}).get() || []
+            if(shtraf_po_zakonu.includes(4) == false) {
+            	$('#shtraf_po_zakonu').addClass('empty_field').focus()[0].scrollIntoView();
+            	return;
+            } else {
+            	$('#shtraf_po_zakonu').removeClass('empty_field');
+            	var precourt_boxes = $("input:checkbox[name=precourt_letter]");
+            	var precourt_letter = precourt_boxes.filter(":checked").map(function(){return parseInt($(this).val());}).get() || [];
+            	if(precourt_letter.length == 0) {
+                	precourt_boxes.addClass('empty_field').focus()[0].scrollIntoView();
+                	return;
+            	} else {
+                	precourt_boxes.removeClass('empty_field');
+            	}
+            }
+
             // focus end
 // end of input validation
 
@@ -470,9 +654,7 @@ $(document).ready(function() {
 
 // continue input validation
                     if(isNaN( parseInt($("input:radio[name=step4_rb_arenda]:checked").val()) ) == false) {
-                        if($("#step4_1").val() != ''
-                        && $("#step4_2").val() != ''
-                        && $("#step4_3").val() != ''
+                        if($("#step4_1").val() != '' 
                         && $("#step4_4").val() != ''
                         && $("#step4_5").val() != ''
                         && $("#step4_6").val() != ''
@@ -480,9 +662,7 @@ $(document).ready(function() {
                             activateTab(tab);
                         }
                     } else {
-                        if($("#step4_1").val() != ''
-                        && $("#step4_2").val() != ''
-                        && $("#step4_3").val() != ''
+                        if($("#step4_1").val() != '' 
                         ) {
                             activateTab(tab);
                         }
@@ -671,7 +851,7 @@ $(document).ready(function() {
 			// Добавление формы по клику
 			$(".add_bt__item").click(function() {
 			    additional_fields++;
-				$('.new_inputs').append('<div class="new_input clearfix"><input type="text" class="long_input" id="extra_field_'+additional_fields+'" placeholder="В именительном падеже"><input type="text" class="long_input" id="extra_field_'+additional_fields+'_ablative" placeholder="В творительном падеже"><img src="/static/court_template_app/img/cancel.png" class="input_close"></div>');
+				$('.new_inputs').append('<div class="new_input clearfix"><input type="text" class="long_input" id="extra_field_'+additional_fields+'" placeholder="В именительном падеже"><input type="text" class="long_input" id="extra_field_'+additional_fields+'_ablative" placeholder="В творительном падеже"></div>');
 				$('.long_input').focus();
 
 				$(".new_input img").on("click", function() {
@@ -756,4 +936,3 @@ $(document).ready(function() {
 	  	active_step_item.next().children().css( 'background', 'url(./img/right-arrow.png)');
 	});
 });
-

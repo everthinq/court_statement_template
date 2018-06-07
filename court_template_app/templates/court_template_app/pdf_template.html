@@ -9,6 +9,9 @@ var data = {
             'company': $("#nickname").val(),
             'company_address': $("#address2").val(),
             'court_name': $("#sud").val(),
+			            
+            'address_suda': $("#address_suda").val(),
+            
             'court_place': $("input:radio[name=court_place]:checked").val(),
             'property_source': $("input:radio[name=property_source]:checked").val(),
             'appartment_type': $("input:radio[name=step3_appart]:checked").val(),
@@ -187,7 +190,8 @@ var data = {
 </head>
 <body>
   <table id="header"><tr><td style="width:30%"></td><td>
-    <p><span class="bold">В {{court_name}}</span></p>
+    <p><span class="bold">В {{court_name}}</span><br/>
+	{{address_suda}}</p>
     <p><span class="bold">Истец:</span> {{fio}}<br/>
     Адрес места жительства: {{address}}</p>
     <p><span class="bold">Ответчик:</span> {{company}}<br/>
