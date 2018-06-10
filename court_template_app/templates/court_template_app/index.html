@@ -45,14 +45,14 @@
                         <p>Укажите ИНН Застройщика</p>
                         <input type="text" id="inn" class="number">
                         <p class="text_bt">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore.</p>
-                        <a class="step_center step2bt_status" href="#step2" >Дальше</a>
+                        <a class="step_center step2bt_status">Дальше</a>
                     </form>
 
                     <!-- PROGRESS BAR -->
                     <div class="overlay_js">
                       <div class="progress-out">
                           <div class="progress">
-                                <progress max="100" value="98" id="progressbar"></progress>
+                                <progress max="100" value="0" id="progressbar"></progress>
                                 <div class="progress-bg"><div class="progress-bar"></div></div>
                            </div>
                            <div class="progress_text">Загрузка...</div>
@@ -141,7 +141,7 @@
                     <!-- Правая часть колонки -->
                     <div class="step_right clearfix">
                         <label for="textarea">Выписка из ЕГРЮЛ</label>
-						<iframe width="500" height="1000" src="https://egrul.nalog.ru/"></iframe>
+						<iframe id="captcha_pdf" width="100%" height="720"></iframe>
                         <!-- <textarea name="egryul" id="egryul"></textarea> -->
                     </div>
                 </div>

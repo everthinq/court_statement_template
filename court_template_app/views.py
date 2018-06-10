@@ -44,6 +44,88 @@ def format_date(date, fmt='%d.%m.%Y'):
     return datetime.strftime(date, fmt)
 
 @csrf_exempt
+def process_captcha(request):
+    pdf_filename = 'static/pdf/%s.pdf' % random.random()
+    data = simplejson.loads(request.body, encoding='utf-8')
+
+    from selenium import webdriver
+    from selenium.webdriver.common.keys import Keys
+
+    from selenium.webdriver.chrome.options import Options
+    import os
+
+    ### - set options and open headless chrome start
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+
+    chrome_driver = os.getcwd() + "\\chromedriver.exe"
+
+    driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=chrome_driver)
+    driver.get("https://egrul.nalog.ru/")
+    ### - set options and open headless chrome end
+
+
+    ### - get CAPTCHA URL start
+    captcha_elem = driver.find_element_by_xpath('//*[@id="criteriaPanel"]/div/form/div[4]/div/div/img')
+    captcha_url = captcha_elem.get_attribute('src')
+    captcha_url = captcha_url[:-1] + '3'
+    ### - get CAPTCHA URL end
+
+
+    ### - download image start
+    import urllib
+    captcha_filename = 'static/pdf/%s.jpg' % random.random()
+    urllib.request.urlretrieve(captcha_url, captcha_filename)
+    ### - download image end
+
+
+    ### - from image to digits start
+    from python_anticaptcha import AnticaptchaClient, ImageToTextTask
+    api_key = '4daab0ba499b49cd10cb0c91cefdccd1'
+    captcha_fp = open(captcha_filename, 'rb')
+    client = AnticaptchaClient(api_key)
+    task = ImageToTextTask(captcha_fp)
+    job = client.createTask(task)
+    job.join()
+
+    #CAPTCHA_str = job.get_captcha_text()
+    ### - from image to digits start
+
+
+    ### - post start
+    inn = data['inn']
+    CAPTCHA_str = job.get_captcha_text()
+
+    inn_input = driver.find_element_by_id('ogrninnul')
+    for each in inn:
+        inn_input.send_keys(each)
+
+    captcha_input = driver.find_element_by_id('captcha')
+    for each in CAPTCHA_str:
+        captcha_input.send_keys(each)
+
+    driver.find_element_by_xpath('//*[@id="criteriaPanel"]/div/form/div[5]/button[2]').click()
+
+    import time
+    time.sleep(5)
+
+    a = driver.find_element_by_xpath('//*[@id="resultContent"]/table/tbody/tr/td[1]/a')
+
+    urllib.request.urlretrieve(a.get_attribute('href'), pdf_filename)
+    ### - post end
+
+
+    ### - selenium close && quit start
+    driver.close()
+    driver.quit()
+    ### - selenium close && quit end
+
+    response = {'status': 'ok'}
+    response['link'] = pdf_filename
+
+    return JsonResponse(response)
+
+@csrf_exempt
 def process_data(request):
     pdf_filename = 'static/pdf/%s.pdf' % random.random()
     template = 'court_template_app/pdf_template.html'

@@ -14,57 +14,53 @@ $(document).ready(function() {
     	return false;
     });
 
-    // Прогресс(статус) бар
+    var collectINN = function() {
+        data = {
+            'inn': $("#inn").val()
+        }
 
+        return data;
+    };
+
+    // Прогресс(статус) бар
     /*input validation start*/
     $('.step2bt_status').click(function(event) {
+        if($("#inn").val().length < 10) {
+            alert('ИНН содержит 10 или 12 цифр');
+            return;
+        }
+
+        if($("#inn").val().length > 12) {
+            alert('ИНН содержит 10 или 12 цифр');
+            return;
+        }
+
         if($("#inn").val() == '') {
             $("#inn").addClass('empty_field');
         setTimeout(function(){
             $("input#inn").focus();},100);
+            return;
         } else {
             $("#inn").removeClass('empty_field');
-            $('.steps__item a').removeClass('active');
-            $('.main .step').hide();
-            $('#step2').fadeIn();
-            $('.step2_bt').addClass('active');
         }
     /*input validation end*/
+            
+        $('.overlay_js').fadeIn();
 
-		// var progressbar = $('#progressbar'),
-		//     max = 100,
+        $.post('/app/process_captcha/', JSON.stringify(collectINN()))
+        
+        .done(function(data) {
+            if(data['status'] == 'ok') {
+                $('#captcha_pdf').attr('src', data['link']);
 
-		//     // Указываем время в секундах
-		//     time = (1000/max)* 10,
-
-		//     value = progressbar.val();
-
-	 //    var loading = function() {
-	 //        value += 1;
-	 //        addValue = progressbar.val(value);
-
-	 //        $('.progress-value').html(value + '%');
-
-	 //        if (value == max) {
-	 //            clearInterval(animate);
-	 //            setTimeout(fadeStatusBar, 1500);
-		// 		$('.steps__item a').removeClass('active');
-		//     	$('.main .step').hide();
-		//     	$('#step2').fadeIn();
-		//         $('.step2_bt').addClass('active');
-		//     	return false;
-	 //        }
-	 //    };
-  //   	$('.overlay_js').fadeIn();
-  //   	var animate = setInterval(function() {
-  //       	loading();
-	 //    }, time);
-
-		// var fadeStatusBar = function() {
-		// 	$('.overlay_js').fadeOut();
-		// }
+                $('.steps__item a').removeClass('active');
+                $('.main .step').hide();
+                $('#step2').fadeIn();
+                $('.step2_bt').addClass('active');
+                $('.overlay_js').fadeOut();
+            } 
+        })
     });
-
 
     var collectData = function() {
         var data = {
@@ -238,13 +234,38 @@ $(document).ready(function() {
         }
 
         if(tab == '#step2') {
+            if($("#inn").val().length < 10) {
+                alert('ИНН содержит 10 или 12 цифр');
+                return;
+            }
+
+            if($("#inn").val().length > 12) {
+                alert('ИНН содержит 10 или 12 цифр');
+                return;
+            }
+            
             if($("#inn").val() == '') {
                 $("#inn").addClass('empty_field');
                 $('#inn').focus();
+                return;
             } else {
                 $("#inn").removeClass('empty_field');
-                activateTab(tab);
             }
+
+            $('.overlay_js').fadeIn();
+
+            $.post('/app/process_captcha/', JSON.stringify(collectINN()))
+            .done(function(data) {
+                if(data['status'] == 'ok') {
+                    $('#captcha_pdf').attr('src', data['link']);
+
+                    $('.steps__item a').removeClass('active');
+                    $('.main .step').hide();
+                    $('#step2').fadeIn();
+                    $('.step2_bt').addClass('active');
+                    $('.overlay_js').fadeOut();
+                } 
+            })
         }
 
         if(tab == '#step3') {
