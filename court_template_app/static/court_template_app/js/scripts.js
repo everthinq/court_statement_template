@@ -44,11 +44,7 @@ $(document).ready(function() {
             $("#inn").removeClass('empty_field');
         }
     /*input validation end*/
-            
-        $('.overlay_js').fadeIn();
-
         $.post('/app/process_captcha/', JSON.stringify(collectINN()))
-        
         .done(function(data) {
             if(data['status'] == 'ok') {
                 $('#captcha_pdf').attr('src', data['link']);
@@ -60,6 +56,35 @@ $(document).ready(function() {
                 $('.overlay_js').fadeOut();
             } 
         })
+        .fail(function() {
+            alert('Ошибка при обработке данных. Проверьте правильность введённого ИНН. Если ошибка повторяется, обратитесь к администратору.');
+            location.reload(true);
+        })
+
+        var progressbar = $('#progressbar'),
+        max = 100,
+
+        // Указываем время в секундах
+        time = (1000/max) * 15,  
+
+        value = progressbar.val();
+
+        var loading = function() {
+            value += 1;
+            addValue = progressbar.val(value);
+
+            $('.progress-value').html(value + '%');
+
+            if (value == max) {
+                clearInterval(animate);
+                return false;
+            }
+        };
+        $('.overlay_js').fadeIn();
+        var animate = setInterval(function() {
+            loading();
+        }, time);
+
     });
 
     var collectData = function() {
@@ -252,8 +277,6 @@ $(document).ready(function() {
                 $("#inn").removeClass('empty_field');
             }
 
-            $('.overlay_js').fadeIn();
-
             $.post('/app/process_captcha/', JSON.stringify(collectINN()))
             .done(function(data) {
                 if(data['status'] == 'ok') {
@@ -264,8 +287,37 @@ $(document).ready(function() {
                     $('#step2').fadeIn();
                     $('.step2_bt').addClass('active');
                     $('.overlay_js').fadeOut();
-                } 
+                }
             })
+            .fail(function() {
+                alert('Ошибка при обработке данных. Проверьте правильность введённого ИНН. Если ошибка повторяется, обратитесь к администратору.');  
+                location.reload(true);
+            })
+
+            var progressbar = $('#progressbar'),
+            max = 100,
+
+            // Указываем время в секундах
+            time = (1000/max) * 15,  
+
+            value = progressbar.val();
+
+            var loading = function() {
+                value += 1;
+                addValue = progressbar.val(value);
+
+                $('.progress-value').html(value + '%');
+
+                if (value == max) {
+                    clearInterval(animate);
+                    return false;
+                }
+            };
+            $('.overlay_js').fadeIn();
+            var animate = setInterval(function() {
+                loading();
+            }, time);
+
         }
 
         if(tab == '#step3') {
@@ -695,7 +747,7 @@ $(document).ready(function() {
                 }
             })
             .fail(function() {
-                // alert("Не удалось сформировать документ. Проверьте входные данные.");
+                alert("Не удалось сформировать документ. Проверьте входные данные.");
             })
             .always(function() {
 
