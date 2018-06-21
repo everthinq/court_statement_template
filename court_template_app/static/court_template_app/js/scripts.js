@@ -65,7 +65,7 @@ $(document).ready(function() {
         max = 100,
 
         // Указываем время в секундах
-        time = (1000/max) * 15,  
+        time = (1000/max) * 20,  
 
         value = progressbar.val();
 
@@ -619,6 +619,26 @@ $(document).ready(function() {
                 $("#step4_akt").removeClass('empty_field');
             }
 			
+            if ($('#step4_rb6').is(":checked")) {
+                $('#step4_rb11').addClass('empty_field').focus()[0].scrollIntoView();
+                $("#step4_rb12").addClass('empty_field');
+                if($(step4_rb11).prop("checked") == true || $(step4_rb12).prop("checked") == true) {
+                    $("#step4_rb11").removeClass('empty_field');
+                    $("#step4_rb12").removeClass('empty_field');
+                } else {
+                    return;
+                }
+            } else {
+                $("#step4_rb11").removeClass('empty_field');
+                $("#step4_rb12").removeClass('empty_field');
+            }
+
+            if ($('#step4_rb9').is(":checked")) {
+                $("#step4_rb6_input").addClass('empty_field');
+            } else {
+                $("#step4_rb6_input").removeClass('empty_field');
+            }
+
             // focus start
             if(payment_doc_type.includes(1) == true) {
                 if($("#plat_por_num").val() == '') {
@@ -712,7 +732,14 @@ $(document).ready(function() {
                 	precourt_boxes.removeClass('empty_field');
             	}
             }
-
+            
+            if ($("#step4_rb6_input").val() == '') {
+                $('#step4_rb6_input').focus();
+                $("#step4_rb6_input")[0].scrollIntoView();
+                return;
+            } else {
+                $("#step4_rb6_input").removeClass('empty_field');
+            }
             // focus end
 // end of input validation
 
