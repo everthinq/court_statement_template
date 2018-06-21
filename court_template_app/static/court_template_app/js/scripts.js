@@ -298,7 +298,7 @@ $(document).ready(function() {
             max = 100,
 
             // Указываем время в секундах
-            time = (1000/max) * 15,  
+            time = (1000/max) * 20,  
 
             value = progressbar.val();
 
