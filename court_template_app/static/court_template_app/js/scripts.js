@@ -613,6 +613,21 @@ $(document).ready(function() {
             } else {
                 $("#step4_kvitanciya").removeClass('empty_field');
             }
+
+            if($('#step4_rb4_akkreditiv').is(":checked")) {
+                if($("#step4_akkreditivNUM").val() == ''
+                || $("#step4_akkreditivDATE").val() == ''
+                || $("#step4_akkreditivDATE").val() == '__/__/____') {
+                    $("#step4_inputs_akkreditiv").addClass('empty_field');
+                    $("#step4_akkreditivNUM").focus();
+                    return;
+                } else {
+                    $("#step4_inputs_akkreditiv").removeClass('empty_field');
+                }
+            } else {
+                $("#step4_inputs_akkreditiv").removeClass('empty_field');
+            }
+
             if(payment_doc_type.includes(3) == true) {
                 if($("#step4_rb3_input1").val() == ''
                 || $("#step4_rb3_input2").val() == ''
