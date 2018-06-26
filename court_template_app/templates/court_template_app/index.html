@@ -298,26 +298,32 @@
                             <div>г.</div>
                         </div>
 
-
                         <div class="radio_bt_container">
-                            <input type="checkbox" id="step4_rb4" name="payment_doc_type" value="4">
-                            <label for="step4_rb4">Свой вариант</label>
+                            <input type="checkbox" id="step4_rb4_akkreditiv" name="payment_doc_type" value="4">
+                            <label for="step4_rb4_akkreditiv">Аккредитив</label>
                         </div>
-                        <input type="text" id="step4_rb5_input" placeholder="В именительном падеже" disabled />
-                        <input type="text" id="step4_rb5_input_ablative" placeholder="В творительном падеже" disabled />
+
+                        <div id="step4_rb4_akkreditiv" class="input_xs clearfix">
+                            <div>№</div>
+                            <input type="text" id="step4_akkreditivNUM" maxlength="8" disabled />
+                            <div>от</div>
+                            <input type="text" id="step4_akkreditivDATE" disabled />
+                        </div>
+<!--                         <input type="text" id="step4_rb5_input" placeholder="В именительном падеже" disabled />
+                        <input type="text" id="step4_rb5_input_ablative" placeholder="В творительном падеже" disabled /> -->
 
                         <!-- внутри этого блока появляются формы после клика на add_bt__item -->
-                        <div class="new_inputs">
+<!--                         <div class="new_inputs">
 
-                        </div>
+                        </div> -->
 
-                        <div class="radio_bt_container add_bt">
+<!--                         <div class="radio_bt_container add_bt">
                             <img src="{% static 'court_template_app/img/add.png' %}" alt="" class="add_bt__item">
                             <label class="add_bt__item">Добавить</label>
-                        </div>
+                        </div> -->
 
 
-                        <label>Что вы планируете взыскать с застройщика, помимо неустойки? </label>
+                        <label id="step4_customCSSlabel">Что вы планируете взыскать с застройщика, помимо неустойки? </label>
 <!--
                         <div class="radio_bt_container">
                             <input type="checkbox" id="step4_rb5" name="ask_type" value="1">

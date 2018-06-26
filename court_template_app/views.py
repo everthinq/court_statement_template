@@ -155,6 +155,8 @@ def process_data(request):
     parse_date(data, 'rent_date')
     parse_date(data, 'plat_por_date')
     parse_date(data, 'order_date')
+    parse_date(data, 'step4_akkreditivDATE')
+
 
     if 'act_start' in data:
         data['act_start'] = datetime.strptime('/'.join(data['act_start']), '%d/%m/%Y')
@@ -164,7 +166,6 @@ def process_data(request):
 
     payment_doc_type = data['payment_doc_type']
     payment_docs = []
-    payment_docs_extra= []
     if 1 in payment_doc_type:
         payment_docs.append("платёжным поручением №%s от %s" % (data['plat_por_num'], format_date(data['plat_por_date'])))
 
@@ -175,15 +176,9 @@ def process_data(request):
         payment_docs.append("актом сверки взаиморассчётов с %s по %s" % (format_date(data['act_start']), format_date(data['act_end'])))
 
     if 4 in payment_doc_type:
-        payment_docs.append(data['other_payment_ablative'])
-        payment_docs_extra.append(data['other_payment'])
-        extras = data['payment_extras']
-        for i in range(extras):
-            payment_docs.append(data['payment_extra%d_ablative' % (i+1)])
-            payment_docs_extra.append(data['payment_extra%d' % (i+1)])
+        payment_docs.append("аккредитивом №%s от %s" % (data['step4_akkreditivNUM'], format_date(data['step4_akkreditivDATE'])))
 
     data['payment_docs_ablative'] = ', '.join(payment_docs)
-    data['payment_docs_extra'] = payment_docs_extra
 
     precourt_letter = data.get('precourt_letter', None)
     if precourt_letter:

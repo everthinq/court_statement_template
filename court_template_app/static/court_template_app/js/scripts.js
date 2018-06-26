@@ -90,15 +90,15 @@ $(document).ready(function() {
     var collectData = function() {
         var data = {
             'inn': $("#inn").val(),
+
             'fio': $("#fio").val(),
             'address': $("#address").val(),
             'company': $("#nickname").val(),
             'company_address': $("#address2").val(),
             'court_name': $("#sud").val(),
-
             'address_suda': $("#address_suda").val(),
-
             'court_place': parseInt($("input:radio[name=court_place]:checked").val()),
+
             'property_source': parseInt($("input:radio[name=property_source]:checked").val()),
             'appartment_type': parseInt($("input:radio[name=step3_appart]:checked").val()),
             'appartment_num': parseInt($("#appart_number").val()),
@@ -106,6 +106,7 @@ $(document).ready(function() {
             'deal_price': parseFloat($("#step3_price").val().replace(',', '.')),
             'transferred': parseInt($("input:radio[name=appartment_given]:checked").val()),
             'total_price': parseFloat($("#step3_total_price").val().replace(',', '.') || $("#step3_price").val().replace(',', '.')),
+            
             'planned_transfer_date': $("#step4_1").val(),
             'payment_doc_type': $("input:checkbox[name=payment_doc_type]:checked").map(function(){return parseInt($(this).val());}).get() || [],
             'ask_type': $("input:checkbox[name=ask_type]:checked").map(function(){return parseInt($(this).val());}).get() || [],
@@ -150,16 +151,9 @@ $(document).ready(function() {
         }
         if(data['payment_doc_type'].indexOf(4) >= 0) {
             // Другое
-            data['other_payment'] = $("#step4_rb5_input").val();
-            data['other_payment_ablative'] = $("#step4_rb5_input_ablative").val();
+            data['step4_akkreditivNUM'] = $("#step4_akkreditivNUM").val();
+            data['step4_akkreditivDATE'] = $("#step4_akkreditivDATE").val();
             data['payment_extras'] = additional_fields;
-            if(additional_fields > 0) {
-                var i;
-                for(i = 1; i< additional_fields+1; i++) {
-                    data['payment_extra'+i] = $("#extra_field_"+i).val();
-                    data['payment_extra'+i+'_ablative'] = $("#extra_field_"+i+"_ablative").val();
-                }
-            }
         }
 
         if(data['ask_type'].indexOf(2)>=0) {
@@ -259,6 +253,11 @@ $(document).ready(function() {
         }
 
         if(tab == '#step2') {
+			if($('#fio').val() != '') {
+				activateTab(tab);
+				return;
+			}
+        	
             if($("#inn").val().length < 10) {
                 alert('ИНН содержит 10 или 12 цифр');
                 return;
@@ -493,6 +492,16 @@ $(document).ready(function() {
                 }
             }
             if($("input:radio[name=property_source]:checked").val() == '2') {
+                if($("#date1_1").val() == '') {
+                    $('#date1_1').focus();
+                    $("#date1_1")[0].scrollIntoView();
+                    return;
+                }
+                if($("#date1_2").val() == '') {
+                    $('#date1_2').focus();
+                    $("#date1_2")[0].scrollIntoView();
+                    return;
+                }
                 if($("#date2_1").val() == '') {
                     $('#date2_1').focus();
                     $("#date2_1")[0].scrollIntoView();
@@ -716,29 +725,69 @@ $(document).ready(function() {
                 return;
             }
 
+            // Моральный ущерб 
+            if($('#step4_rb7').is(":checked")) {
+                if($("#step4_2").val() == '') {
+                    $("#step4_2").addClass('empty_field');
+                    $('#step4_2').focus();
+                    $("#step4_2")[0].scrollIntoView();
+                    return;
+                } else {
+                    $("#step4_2").removeClass('empty_field');
+                }
+                if($("#step4_3").val() == '') {
+                	$("#step4_3").addClass('empty_field');
+                    $('#step4_3').focus();
+                    $("#step4_3")[0].scrollIntoView();
+                    return;
+                } else {
+                    $("#step4_3").removeClass('empty_field');
+                }
+            } else {
+                $("#step4_2").removeClass('empty_field');
+                $("#step4_3").removeClass('empty_field');
+            }
+
             // Проверка наличия досудебного извещения
             var shtraf_po_zakonu = $("input:checkbox[name=ask_type]:checked").map(function(){return parseInt($(this).val());}).get() || []
-            if(shtraf_po_zakonu.includes(4) == false) {
-            	$('#shtraf_po_zakonu').addClass('empty_field').focus()[0].scrollIntoView();
-            	return;
-            } else {
-            	$('#shtraf_po_zakonu').removeClass('empty_field');
+            if(shtraf_po_zakonu.includes(4) == true) {
             	var precourt_boxes = $("input:checkbox[name=precourt_letter]");
             	var precourt_letter = precourt_boxes.filter(":checked").map(function(){return parseInt($(this).val());}).get() || [];
             	if(precourt_letter.length == 0) {
                 	precourt_boxes.addClass('empty_field').focus()[0].scrollIntoView();
-                	return;
+            		return;
             	} else {
                 	precourt_boxes.removeClass('empty_field');
             	}
-            }
-            
-            if ($("#step4_rb6_input").val() == '') {
-                $('#step4_rb6_input').focus();
-                $("#step4_rb6_input")[0].scrollIntoView();
-                return;
-            } else {
-                $("#step4_rb6_input").removeClass('empty_field');
+
+            	if ($('#step4_rb9').is(":checked")) {
+                	$("#step4_rb6_input").addClass('empty_field');
+            		if ($("#step4_rb6_input").val() == '') {
+                		$('#step4_rb6_input').focus();
+                		$("#step4_rb6_input")[0].scrollIntoView();
+                		return;
+            		} else {
+                		$("#step4_rb6_input").removeClass('empty_field');
+            		}
+            	} else {
+                	$("#step4_rb6_input").removeClass('empty_field');
+            	}
+
+            	if ($('#step4_rb10').is(":checked")) {
+                	$("#step4_rb7_input").addClass('empty_field');
+            		if ($("#step4_rb7_input").val() == '') {
+                		$('#step4_rb7_input').focus();
+                		$("#step4_rb7_input")[0].scrollIntoView();
+            			return;
+            		} else {
+                		$("#step4_rb7_input").removeClass('empty_field');
+            		}
+            	} else {
+                	$("#step4_rb7_input").removeClass('empty_field');
+            	} 
+            } else { 
+				$("#step4_rb9").removeClass('empty_field');
+				$("#step4_rb10").removeClass('empty_field');
             }
             // focus end
 // end of input validation
@@ -944,24 +993,12 @@ $(document).ready(function() {
 			$('.step4_rb3_inputs input').prop('disabled', true);
 		}
 	});
-	$('#step4_rb4').on('change', function(){
-		if($('#step4_rb4').prop('checked')){
-			$('#step4_rb5_input, #step4_rb5_input_ablative, .long_input').prop('disabled', false);
-			$('#step4_rb5_input').focus();
-			// Добавление формы по клику
-			$(".add_bt__item").click(function() {
-			    additional_fields++;
-				$('.new_inputs').append('<div class="new_input clearfix"><input type="text" class="long_input" id="extra_field_'+additional_fields+'" placeholder="В именительном падеже"><input type="text" class="long_input" id="extra_field_'+additional_fields+'_ablative" placeholder="В творительном падеже"></div>');
-				$('.long_input').focus();
-
-				$(".new_input img").on("click", function() {
-					$(this).parent('.new_input').remove();
-				});
-
-		    });
+	$('#step4_rb4_akkreditiv').on('change', function(){
+		if($('#step4_rb4_akkreditiv').prop('checked')){
+			$('#step4_akkreditivNUM, #step4_akkreditivDATE').prop('disabled', false);
+			$('#step4_akkreditivNUM').focus();
 		} else {
-			$('#step4_rb5_input, #step4_rb5_input_ablative, .long_input').prop('disabled', true);
-			$(".add_bt__item").unbind('click');
+			$('#step4_akkreditivNUM, #step4_akkreditivDATE').prop('disabled', true);
 		}
 	});
 	$('#step4_rb9').on('change', function(){
@@ -1001,7 +1038,7 @@ $(document).ready(function() {
 	// Маска для форм ввода
 	// 9 - это любая цифра (0 - 9)
 	// Если использовать один класс, то работает некорректно
-	$("#step4_1, #date1_1, #step4_4б, #step4_4, #date2_1, #act_date, #step4_rb1_input2, #step4_rb2_input2, #step4_rb6_input, #step4_rb7_input").mask("99/99/9999");
+	$("#step4_1, #date1_1, #step4_4б, #step4_4, #date2_1, #act_date, #step4_rb1_input2, #step4_rb2_input2, #step4_akkreditivDATE, #step4_rb6_input, #step4_rb7_input").mask("99/99/9999");
 
 
   	// Адаптивное меню(костыль)

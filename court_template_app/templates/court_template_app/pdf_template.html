@@ -64,6 +64,8 @@ var data = {
                 ];
                 break;
             case 4: // Другое
+                data['step4_akkreditivNUM'] = $("#step4_akkreditivNUM").val();
+                data['step4_akkreditivDATE'] = $("#step4_akkreditivDATE").val()
                 break;
         }
 
@@ -358,6 +360,11 @@ var data = {
 {% for extra_doc in payment_docs_extra %}
     <li>{{ extra_doc|capfirst }}.</li>
 {% endfor %}
+
+{% if step4_akkreditivDATE %}
+<li>Копия аккредитива № {{ step4_akkreditivNUM }} от {{step4_akkreditivDATE|date:"d.m.Y"}} г.</li>
+{% endif %}
+
 </ol>
 </p>
 
