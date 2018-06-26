@@ -245,7 +245,10 @@ var data = {
 <p align="justify">{{precourt_date|date_by_words}} истец {% if precourt_letter == 2 %}вручил{% else %}направил{% endif %} ответчику требование об уплате неустойки.</p>
 {% endif %}
 
+{% if precourt_letter %}
 <p align="justify" class="bold"><u>Данное требование ответчиком не удовлетворено, оплата неустойки до сих пор не произведена.</u></p>
+{% endif %}
+
 {% endif %}
 <ol class="outside">
 {% if ask_penalty %}
