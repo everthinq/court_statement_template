@@ -127,7 +127,7 @@ def process_captcha(request):
     ### - selenium close && quit end
 
     response = {'status': 'ok'}
-    response['link'] = pdf_filename
+    response['link'] = '/' + pdf_filename
 
     return JsonResponse(response)
 
@@ -232,7 +232,7 @@ def process_data(request):
         response["status"] = "error"
         response["message"] = "Ошибка при генерации PDF."
     else:
-        response["link"] = pdf_filename
+        response["link"] = '/' + pdf_filename
 
     return JsonResponse(response)
 
