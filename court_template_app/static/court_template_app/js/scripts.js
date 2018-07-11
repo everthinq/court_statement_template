@@ -1118,7 +1118,7 @@ $.ajaxSetup({ cache: false });
   $('#state').val('');
   var searchField = $('#address_suda').val();
   var expression = new RegExp(searchField, "i");
-  $.getJSON('static/courts_addresses.json', function(data) {
+  $.getJSON('/static/courts_addresses.json', function(data) {
    $.each(data, function(key, value){
     if (value.court_name.search(expression) != -1 || value.court_address.search(expression) != -1)
     {
