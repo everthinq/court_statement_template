@@ -69,7 +69,9 @@
                     <!-- Левая часть колонки -->
                     <div class="step_left clearfix">
                         <label for="fio">Укажите полные ФИО истца
+                        </label>
                         <input type="text" id="fio">
+                        
 
                         <label for="adress">Укажите адрес истца
                             <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
@@ -115,6 +117,7 @@
                             </p>
                         </label>
                         <input type="text" id="address_suda">
+                        <ul class="list-group" id="result" style="width: 100%; height: 300px; overflow: auto"></ul>
 						
                         <!-- Radio button -->
                         <div class="radio_bt_container">
@@ -179,7 +182,7 @@
                         <input type="text" id="date1_1" placeholder="Укажите дату" maxlength="10">
                         <input type="text" id="date1_2" placeholder="Укажите номер договора">
 
-                        <label class="date3_2">Договор уступки:</label>
+                        <label class="date3_2">Договор уступки: (если вы приобрели квартиру по переуступке)</label>
                         <input type="text" id="date2_1" placeholder="Укажите дату" maxlength="10">
                         <input type="text" id="date2_2" placeholder="Укажите номер договора">
 
@@ -471,5 +474,7 @@
     <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script defer src="{% static 'court_template_app/js/jquery.maskedinput.min.js' %}"></script>
     <script defer src="{% static 'court_template_app/js/scripts.js' %}"></script>
+
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

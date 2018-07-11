@@ -1978,4 +1978,20 @@ footer {
 }
 /*input validation end*/
 
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.list-group-item:hover{
+  cursor: pointer;
+  color: #20c454;
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+
 }

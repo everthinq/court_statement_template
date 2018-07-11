@@ -2,16 +2,16 @@ $(document).ready(function() {
     var additional_fields = 0;
     var total_ask = 0;
 
-	//Pop-up
+    //Pop-up
     $('.email_bt').click(function(event) {
-    	$('.step5 .overlay').fadeIn();
-    	$('.step5 .feedback_form').fadeIn();
-    	return false;
+        $('.step5 .overlay').fadeIn();
+        $('.step5 .feedback_form').fadeIn();
+        return false;
     });
     $('.js-close-campaign').click(function(event) {
-    	$('.step5 .overlay').fadeOut();
-    	$('.step5 .feedback_form').fadeOut();
-    	return false;
+        $('.step5 .overlay').fadeOut();
+        $('.step5 .feedback_form').fadeOut();
+        return false;
     });
 
     var collectINN = function() {
@@ -25,6 +25,11 @@ $(document).ready(function() {
     // Прогресс(статус) бар
     /*input validation start*/
     $('.step2bt_status').click(function(event) {
+        if($('#fio').val() != '') {
+            activateTab('#step2');
+            return;
+        }
+
         if($("#inn").val().length < 10) {
             alert('ИНН содержит 10 или 12 цифр');
             return;
@@ -253,11 +258,11 @@ $(document).ready(function() {
         }
 
         if(tab == '#step2') {
-			if($('#fio').val() != '') {
-				activateTab(tab);
-				return;
-			}
-        	
+            if($('#fio').val() != '') {
+                activateTab(tab);
+                return;
+            }
+            
             if($("#inn").val().length < 10) {
                 alert('ИНН содержит 10 или 12 цифр');
                 return;
@@ -642,7 +647,7 @@ $(document).ready(function() {
             } else {
                 $("#step4_akt").removeClass('empty_field');
             }
-			
+            
             if ($('#step4_rb6').is(":checked")) {
                 $('#step4_rb11').addClass('empty_field').focus()[0].scrollIntoView();
                 $("#step4_rb12").addClass('empty_field');
@@ -751,7 +756,7 @@ $(document).ready(function() {
                     $("#step4_2").removeClass('empty_field');
                 }
                 if($("#step4_3").val() == '') {
-                	$("#step4_3").addClass('empty_field');
+                    $("#step4_3").addClass('empty_field');
                     $('#step4_3').focus();
                     $("#step4_3")[0].scrollIntoView();
                     return;
@@ -766,43 +771,43 @@ $(document).ready(function() {
             // Проверка наличия досудебного извещения
             var shtraf_po_zakonu = $("input:checkbox[name=ask_type]:checked").map(function(){return parseInt($(this).val());}).get() || []
             if(shtraf_po_zakonu.includes(4) == true) {
-            	var precourt_boxes = $("input:checkbox[name=precourt_letter]");
-            	var precourt_letter = precourt_boxes.filter(":checked").map(function(){return parseInt($(this).val());}).get() || [];
-            	if(precourt_letter.length == 0) {
-                	precourt_boxes.addClass('empty_field').focus()[0].scrollIntoView();
-            		return;
-            	} else {
-                	precourt_boxes.removeClass('empty_field');
-            	}
+                var precourt_boxes = $("input:checkbox[name=precourt_letter]");
+                var precourt_letter = precourt_boxes.filter(":checked").map(function(){return parseInt($(this).val());}).get() || [];
+                if(precourt_letter.length == 0) {
+                    precourt_boxes.addClass('empty_field').focus()[0].scrollIntoView();
+                    return;
+                } else {
+                    precourt_boxes.removeClass('empty_field');
+                }
 
-            	if ($('#step4_rb9').is(":checked")) {
-                	$("#step4_rb6_input").addClass('empty_field');
-            		if ($("#step4_rb6_input").val() == '') {
-                		$('#step4_rb6_input').focus();
-                		$("#step4_rb6_input")[0].scrollIntoView();
-                		return;
-            		} else {
-                		$("#step4_rb6_input").removeClass('empty_field');
-            		}
-            	} else {
-                	$("#step4_rb6_input").removeClass('empty_field');
-            	}
+                if ($('#step4_rb9').is(":checked")) {
+                    $("#step4_rb6_input").addClass('empty_field');
+                    if ($("#step4_rb6_input").val() == '') {
+                        $('#step4_rb6_input').focus();
+                        $("#step4_rb6_input")[0].scrollIntoView();
+                        return;
+                    } else {
+                        $("#step4_rb6_input").removeClass('empty_field');
+                    }
+                } else {
+                    $("#step4_rb6_input").removeClass('empty_field');
+                }
 
-            	if ($('#step4_rb10').is(":checked")) {
-                	$("#step4_rb7_input").addClass('empty_field');
-            		if ($("#step4_rb7_input").val() == '') {
-                		$('#step4_rb7_input').focus();
-                		$("#step4_rb7_input")[0].scrollIntoView();
-            			return;
-            		} else {
-                		$("#step4_rb7_input").removeClass('empty_field');
-            		}
-            	} else {
-                	$("#step4_rb7_input").removeClass('empty_field');
-            	} 
+                if ($('#step4_rb10').is(":checked")) {
+                    $("#step4_rb7_input").addClass('empty_field');
+                    if ($("#step4_rb7_input").val() == '') {
+                        $('#step4_rb7_input').focus();
+                        $("#step4_rb7_input")[0].scrollIntoView();
+                        return;
+                    } else {
+                        $("#step4_rb7_input").removeClass('empty_field');
+                    }
+                } else {
+                    $("#step4_rb7_input").removeClass('empty_field');
+                } 
             } else { 
-				$("#step4_rb9").removeClass('empty_field');
-				$("#step4_rb10").removeClass('empty_field');
+                $("#step4_rb9").removeClass('empty_field');
+                $("#step4_rb10").removeClass('empty_field');
             }
             // focus end
 // end of input validation
@@ -846,96 +851,96 @@ $(document).ready(function() {
         }
     };
 
-	// Табы
-	$('.main .step').hide();
-	$('.main .step:first').show();
-	$('.steps__item:first a').addClass('active');
+    // Табы
+    $('.main .step').hide();
+    $('.main .step:first').show();
+    $('.steps__item:first a').addClass('active');
     $('.steps__item a').click(function(event) {
-    	showTab($(this).attr("href"));
-		return false;
+        showTab($(this).attr("href"));
+        return false;
     });
     $('.step_buttons a').click(function(event) {
-    	showTab($(this).attr("href"));
+        showTab($(this).attr("href"));
         return false;
     });
 
 
     // Подсветка табов
     $('.step1bt').click(function(event) {
-    	$('.step1_bt').addClass('active');
-    	return false;
+        $('.step1_bt').addClass('active');
+        return false;
     });
     $('.step2bt').click(function(event) {
-    	$('.step2_bt').addClass('active');
-    	return false;
+        $('.step2_bt').addClass('active');
+        return false;
     });
     $('.step3bt').click(function(event) {
-    	$('.step3_bt').addClass('active');
-    	return false;
+        $('.step3_bt').addClass('active');
+        return false;
     });
     $('.step4bt').click(function(event) {
-    	$('.step4_bt').addClass('active');
-    	return false;
+        $('.step4_bt').addClass('active');
+        return false;
     });
     $('.step5bt').click(function(event) {
-    	$('.step5_bt').addClass('active');
-    	return false;
+        $('.step5_bt').addClass('active');
+        return false;
     });
 
 
     // Автоматический переход к следующему инпуту
-	$('#step4_rb3_input1').keyup(function(){
-		var total = $(this).val().length;
-		if ( total == 2 ) {
-			$('#step4_rb3_input2').focus();
-		} else {
-			return false;
-		}
-	});
-	$('#step4_rb3_input2').keyup(function(){
-		var total = $(this).val().length;
-		if ( total == 2 ) {
-			$('#step4_rb3_input3').focus();
-		} else {
-			return false;
-		}
-	});
-	$('#step4_rb3_input3').keyup(function(){
-		var total = $(this).val().length;
-		if ( total == 4 ) {
-			$('#step4_rb3_input4').focus();
-		} else {
-			return false;
-		}
-	});
-	$('#step4_rb3_input4').keyup(function(){
-		var total = $(this).val().length;
-		if ( total == 2 ) {
-			$('#step4_rb3_input5').focus();
-		} else {
-			return false;
-		}
-	});
-	$('#step4_rb3_input5').keyup(function(){
-		var total = $(this).val().length;
-		if ( total == 2 ) {
-			$('#step4_rb3_input6').focus();
-		} else {
-			return false;
-		}
-	});
+    $('#step4_rb3_input1').keyup(function(){
+        var total = $(this).val().length;
+        if ( total == 2 ) {
+            $('#step4_rb3_input2').focus();
+        } else {
+            return false;
+        }
+    });
+    $('#step4_rb3_input2').keyup(function(){
+        var total = $(this).val().length;
+        if ( total == 2 ) {
+            $('#step4_rb3_input3').focus();
+        } else {
+            return false;
+        }
+    });
+    $('#step4_rb3_input3').keyup(function(){
+        var total = $(this).val().length;
+        if ( total == 4 ) {
+            $('#step4_rb3_input4').focus();
+        } else {
+            return false;
+        }
+    });
+    $('#step4_rb3_input4').keyup(function(){
+        var total = $(this).val().length;
+        if ( total == 2 ) {
+            $('#step4_rb3_input5').focus();
+        } else {
+            return false;
+        }
+    });
+    $('#step4_rb3_input5').keyup(function(){
+        var total = $(this).val().length;
+        if ( total == 2 ) {
+            $('#step4_rb3_input6').focus();
+        } else {
+            return false;
+        }
+    });
 
 
      // Ограничение на ввод букв
     $('input.number').bind("change keyup input click", function() {
-	    if (this.value.match(/[^0-9]/g)) {
-	        this.value = this.value.replace(/[^0-9]/g, '');
-	    }
-	});
+        if (this.value.match(/[^0-9]/g)) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        }
+    });
 
-	var check_float = function(value, max_decimals) {
-	    max_decimals = max_decimals || 0;
-	    if(value.match(/[0-9\.,]/g)) {
+    var check_float = function(value, max_decimals) {
+        max_decimals = max_decimals || 0;
+        if(value.match(/[0-9\.,]/g)) {
             var dot_pos = value.indexOf('.');
             if(dot_pos == -1)
                 dot_pos = value.indexOf(',');
@@ -956,7 +961,7 @@ $(document).ready(function() {
         } else {
             return value.replace(/[^0-9\.,]/g, '');
         }
-	}
+    }
 
     // Ввод дробных чисел
     $('input.float').bind("change keyup input click", function() {
@@ -976,115 +981,157 @@ $(document).ready(function() {
             $("#date2_1,#date2_2").prop('disabled', false);
         }
     });
-	$('#step3_appart6').on('change', function(){
-		if($('#step3_appart6').prop('checked')){
-			$('#step3_appart7').prop('disabled', false);
-			$('#step3_appart7').focus();
-		} else {
-			$('#step3_appart7').prop('disabled', true);
-		}
-	});
-	$('#step4_rb1').on('change', function(){
-		if($('#step4_rb1').prop('checked')){
-			$('.step4_rb1_inputs input').prop('disabled', false);
-			$('.step4_rb1_inputs input.number').focus();
-		} else {
-			$('.step4_rb1_inputs input').prop('disabled', true);
-		}
-	});
-	$('#step4_rb2').on('change', function(){
-		if($('#step4_rb2').prop('checked')){
-			$('.step4_rb2_inputs input').prop('disabled', false);
-			$('.step4_rb2_inputs input.number').focus();
-		} else {
-			$('.step4_rb2_inputs input').prop('disabled', true);
-		}
-	});
-	$('#step4_rb3').on('change', function(){
-		if($('#step4_rb3').prop('checked')){
-			$('.step4_rb3_inputs input').prop('disabled', false);
-			$('#step4_rb3_input1').focus();
-		} else {
-			$('.step4_rb3_inputs input').prop('disabled', true);
-		}
-	});
-	$('#step4_rb4_akkreditiv').on('change', function(){
-		if($('#step4_rb4_akkreditiv').prop('checked')){
-			$('#step4_akkreditivNUM, #step4_akkreditivDATE').prop('disabled', false);
-			$('#step4_akkreditivNUM').focus();
-		} else {
-			$('#step4_akkreditivNUM, #step4_akkreditivDATE').prop('disabled', true);
-		}
-	});
-	$('#step4_rb9').on('change', function(){
-		if($('#step4_rb9').prop('checked')){
-			$('#step4_rb6_input').prop('disabled', false);
-			$('#step4_rb6_input').focus();
-		} else {
-			$('#step4_rb6_input').prop('disabled', true);
-		}
-	});
-	$('#step4_rb10').on('change', function(){
-		if($('#step4_rb10').prop('checked')){
-			$('#step4_rb7_input').prop('disabled', false);
-			$('#step4_rb7_input').focus();
-		} else {
-			$('#step4_rb7_input').prop('disabled', true);
-		}
-	});
-	$('#step3_rb3').on('change', function(){
-		if($('#step3_rb3').prop('checked')){
-			$('#act_date').prop('disabled', false);
-			$('#act_date').focus();
-		} else {
-			$('#act_date').prop('disabled', true);
-		}
-	});
-	$('#step4_rb8').on('change', function(){
-		if($('#step4_rb8').prop('checked')){
-			$('#step4_rb9, #step4_rb10').prop('disabled', false);
-			$('#step4_rb9, #step4_rb10').css('background', '#FAFAFA');
-		} else {
-			$('#step4_rb9, #step4_rb10').prop('disabled', true);
-			$('#step4_rb9, #step4_rb10').css('background', '#E2E2E2');
-		}
-	});
+    $('#step3_appart6').on('change', function(){
+        if($('#step3_appart6').prop('checked')){
+            $('#step3_appart7').prop('disabled', false);
+            $('#step3_appart7').focus();
+        } else {
+            $('#step3_appart7').prop('disabled', true);
+        }
+    });
+    $('#step4_rb1').on('change', function(){
+        if($('#step4_rb1').prop('checked')){
+            $('.step4_rb1_inputs input').prop('disabled', false);
+            $('.step4_rb1_inputs input.number').focus();
+        } else {
+            $('.step4_rb1_inputs input').prop('disabled', true);
+        }
+    });
+    $('#step4_rb2').on('change', function(){
+        if($('#step4_rb2').prop('checked')){
+            $('.step4_rb2_inputs input').prop('disabled', false);
+            $('.step4_rb2_inputs input.number').focus();
+        } else {
+            $('.step4_rb2_inputs input').prop('disabled', true);
+        }
+    });
+    $('#step4_rb3').on('change', function(){
+        if($('#step4_rb3').prop('checked')){
+            $('.step4_rb3_inputs input').prop('disabled', false);
+            $('#step4_rb3_input1').focus();
+        } else {
+            $('.step4_rb3_inputs input').prop('disabled', true);
+        }
+    });
+    $('#step4_rb4_akkreditiv').on('change', function(){
+        if($('#step4_rb4_akkreditiv').prop('checked')){
+            $('#step4_akkreditivNUM, #step4_akkreditivDATE').prop('disabled', false);
+            $('#step4_akkreditivNUM').focus();
+        } else {
+            $('#step4_akkreditivNUM, #step4_akkreditivDATE').prop('disabled', true);
+        }
+    });
+    $('#step4_rb9').on('change', function(){
+        if($('#step4_rb9').prop('checked')){
+            $('#step4_rb6_input').prop('disabled', false);
+            $('#step4_rb6_input').focus();
 
-	// Маска для форм ввода
-	// 9 - это любая цифра (0 - 9)
-	// Если использовать один класс, то работает некорректно
-	$("#step4_1, #date1_1, #step4_4б, #step4_4, #date2_1, #act_date, #step4_rb1_input2, #step4_rb2_input2, #step4_akkreditivDATE, #step4_rb6_input, #step4_rb7_input").mask("99/99/9999");
+            $('#step4_rb10').prop('disabled', true);
+            $('#step4_rb7_input').prop('disabled', true);
+        } else {
+            $('#step4_rb6_input').prop('disabled', true);
+
+            $('#step4_rb10').prop('disabled', false);
+            $('#step4_rb7_input').prop('disabled', false);
+        }
+    });
+    $('#step4_rb10').on('change', function(){
+        if($('#step4_rb10').prop('checked')){
+            $('#step4_rb7_input').prop('disabled', false);
+            $('#step4_rb7_input').focus();
+
+            $('#step4_rb9').prop('disabled', true);
+            $('#step4_rb6_input').prop('disabled', true);
+        } else {
+            $('#step4_rb7_input').prop('disabled', true);
+
+            $('#step4_rb9').prop('disabled', false);
+            $('#step4_rb6_input').prop('disabled', false);
+        }
+    });
+    $('#step3_rb3').on('change', function(){
+        if($('#step3_rb3').prop('checked')){
+            $('#act_date').prop('disabled', false);
+            $('#act_date').focus();
+        } else {
+            $('#act_date').prop('disabled', true);
+        }
+    });
+    $('#step4_rb8').on('change', function(){
+        if($('#step4_rb8').prop('checked')){
+            $('#step4_rb9, #step4_rb10').prop('disabled', false);
+            $('#step4_rb9, #step4_rb10').css('background', '#FAFAFA');
+        } else {
+            $('#step4_rb9, #step4_rb10').prop('disabled', true);
+            $('#step4_rb9, #step4_rb10').css('background', '#E2E2E2');
+
+            $("#step4_rb6_input").val('');
+            $("#step4_rb7_input").val('');
+            
+            $("#step4_rb9").prop("checked", false);
+            $("#step4_rb10").prop("checked", false);
+        }
+    });
+
+    // Маска для форм ввода
+    // 9 - это любая цифра (0 - 9)
+    // Если использовать один класс, то работает некорректно
+    $("#step4_1, #date1_1, #step4_4б, #step4_4, #date2_1, #act_date, #step4_rb1_input2, #step4_rb2_input2, #step4_akkreditivDATE, #step4_rb6_input, #step4_rb7_input").mask("99/99/9999");
 
 
-  	// Адаптивное меню(костыль)
-	$('.steps_mob .steps__item .active').parent('.steps__item');
+    // Адаптивное меню(костыль)
+    $('.steps_mob .steps__item .active').parent('.steps__item');
 
-  	$('.steps_mob .steps__item .active').parent('.steps__item').css('display', 'block');
+    $('.steps_mob .steps__item .active').parent('.steps__item').css('display', 'block');
 
-  	$('.steps_mob .steps__item .active').parent('.steps__item').next().css(
-  		'display', 'block'
-  	);
+    $('.steps_mob .steps__item .active').parent('.steps__item').next().css(
+        'display', 'block'
+    );
 
-  	$('.steps_mob .steps__item .active').parent('.steps__item').next().children().css(
-  		'background', 'url(./img/right-arrow.png) no-repeat 40px center'
-  	);
+    $('.steps_mob .steps__item .active').parent('.steps__item').next().children().css(
+        'background', 'url(./img/right-arrow.png) no-repeat 40px center'
+    );
 
-  	$('.steps_mob .steps__item a, .step_buttons a').click(function(event) {
-	  	var active_step = $('.steps_mob .steps__item .active');
-	  	var active_step_item = $('.steps_mob .active').parent('.steps__item');
-	  	$('.steps_mob .steps__item').css('display', 'none');
+    $('.steps_mob .steps__item a, .step_buttons a').click(function(event) {
+        var active_step = $('.steps_mob .steps__item .active');
+        var active_step_item = $('.steps_mob .active').parent('.steps__item');
+        $('.steps_mob .steps__item').css('display', 'none');
 
-	  	active_step_item.css('display', 'block');
+        active_step_item.css('display', 'block');
 
-	  	$('.steps_mob .steps__item').first().css('margin-left', '33.3333333%');
+        $('.steps_mob .steps__item').first().css('margin-left', '33.3333333%');
 
-	  	active_step_item.prev().css('margin', '0');
+        active_step_item.prev().css('margin', '0');
 
-	  	active_step_item.prev().css( 'display', 'block' );
-	  	active_step_item.next().css( 'display', 'block' );
+        active_step_item.prev().css( 'display', 'block' );
+        active_step_item.next().css( 'display', 'block' );
 
-	  	active_step_item.prev().children().css('background', 'url(./img/left-arrow.png)');
+        active_step_item.prev().children().css('background', 'url(./img/left-arrow.png)');
 
-	  	active_step_item.next().children().css( 'background', 'url(./img/right-arrow.png)');
-	});
+        active_step_item.next().children().css( 'background', 'url(./img/right-arrow.png)');
+    });
+
+
+$.ajaxSetup({ cache: false });
+ $('#address_suda').keyup(function(){
+  $('#result').html('');
+  $('#state').val('');
+  var searchField = $('#address_suda').val();
+  var expression = new RegExp(searchField, "i");
+  $.getJSON('static/courts_addresses.json', function(data) {
+   $.each(data, function(key, value){
+    if (value.court_name.search(expression) != -1 || value.court_address.search(expression) != -1)
+    {
+     $('#result').append('<li class="list-group-item link-class"><img /> '+value.court_name+' | <span class="text-muted">'+value.court_address+'</span></li>');
+    }
+   });   
+  });
+ });
+ 
+ $('#result').on('click', 'li', function() {
+  var click_text = $(this).text().split('|');
+  $('#address_suda').val($.trim(click_text[1]));
+  $("#result").html('');
+ });
+
 });
