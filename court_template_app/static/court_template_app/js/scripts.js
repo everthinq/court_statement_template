@@ -974,6 +974,23 @@ $(document).ready(function() {
     });
 
     // Разблокировка форм
+    $('#step4_rb6').on('change', function(){
+        if($('#step4_rb6').prop('checked')){            
+            $('#step4_rb11, #step4_rb12, #step4_4, #step4_5, #step4_6').prop('disabled', false);
+            $('#step4_rb11, #step4_rb12, #step4_4, #step4_5, #step4_6').css('background', '#FAFAFA');
+        } else {
+            $('#step4_rb11, #step4_rb12, #step4_4, #step4_5, #step4_6').prop('disabled', true);
+            $('#step4_rb11, #step4_rb12, #step4_4, #step4_5, #step4_6').css('background', '#E2E2E2');
+
+            $("#step4_4").val('');
+            $("#step4_5").val('');
+            $("#step4_6").val('');
+            
+            $("#step4_rb11").prop("checked", false);
+            $("#step4_rb12").prop("checked", false);
+        }
+    });
+
     $("input:radio[name=property_source]").on("change", function(){
         if($("input:radio[name=property_source]:checked").val() == '1') {
             $("#date2_1,#date2_2").prop('disabled', true);
