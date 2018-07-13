@@ -1067,12 +1067,11 @@ $(document).ready(function() {
         }
     });
     $('#step3_rb3').on('change', function(){
-        if($('#step3_rb3').prop('checked')){
-            $('#act_date').prop('disabled', false);
-            $('#act_date').focus();
-        } else {
-            $('#act_date').prop('disabled', true);
-        }
+        $('#act_date').prop('disabled', false);
+        $('#act_date').focus();
+    });
+    $('#step3_rb4').on('change', function(){
+        $('#act_date').prop('disabled', true);
     });
     $('#step4_rb8').on('change', function(){
         if($('#step4_rb8').prop('checked')){
