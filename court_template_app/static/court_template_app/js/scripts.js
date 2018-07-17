@@ -108,9 +108,9 @@ $(document).ready(function() {
             'appartment_type': parseInt($("input:radio[name=step3_appart]:checked").val()),
             'appartment_num': $("#appart_number").val(),
             'total_area': parseFloat($("#area").val().replace(',', '.')),
-            'deal_price': parseFloat($("#step3_price").val().replace(',', '.')),
+            'deal_price': parseFloat($("#step3_price").val().trim().replace(',', '.').replace(/\s+/g, '')),
             'transferred': parseInt($("input:radio[name=appartment_given]:checked").val()),
-            'total_price': parseFloat($("#step3_total_price").val().replace(',', '.') || $("#step3_price").val().replace(',', '.')),
+            'total_price': parseFloat($("#step3_total_price").val().trim().replace(',', '.').replace(/\s+/g, '') || $("#step3_price").val().trim().replace(',', '.').replace(/\s+/g, '')),
             
             'planned_transfer_date': $("#step4_1").val(),
             'payment_doc_type': $("input:checkbox[name=payment_doc_type]:checked").map(function(){return parseInt($(this).val());}).get() || [],
