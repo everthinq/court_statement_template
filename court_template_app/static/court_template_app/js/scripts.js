@@ -106,7 +106,7 @@ $(document).ready(function() {
 
             'property_source': parseInt($("input:radio[name=property_source]:checked").val()),
             'appartment_type': parseInt($("input:radio[name=step3_appart]:checked").val()),
-            'appartment_num': parseInt($("#appart_number").val()),
+            'appartment_num': $("#appart_number").val(),
             'total_area': parseFloat($("#area").val().replace(',', '.')),
             'deal_price': parseFloat($("#step3_price").val().replace(',', '.')),
             'transferred': parseInt($("input:radio[name=appartment_given]:checked").val()),
