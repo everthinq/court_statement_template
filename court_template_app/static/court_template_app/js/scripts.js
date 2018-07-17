@@ -203,9 +203,9 @@ $(document).ready(function() {
 
     var change_total_ask = function() {
         var ask_type = $("input:checkbox[name=ask_type]:checked").map(function(){return parseInt($(this).val());}).get() || []
-        var total_price = parseFloat($("#step3_total_price").val().replace(',', '.') || $("#step3_price").val().replace(',', '.') || '0');
-        var moral_harm_cost = parseFloat($("#step4_2").val().replace(',', '.') || '0');
-        var rent_total = parseFloat($("#step4_6").val().replace(',', '.') || '0');
+        var total_price = parseFloat($("#step3_total_price").val().trim().replace(',', '.').replace(/\s+/g, '') || $("#step3_price").val().trim().replace(',', '.').replace(/\s+/g, '') || '0');
+        var moral_harm_cost = parseFloat($("#step4_2").val().trim().replace(',', '.').replace(/\s+/g, '') || '0');
+        var rent_total = parseFloat($("#step4_6").val().trim().replace(',', '.').replace(/\s+/g, '') || '0');
         var transferred = parseInt($("input:radio[name=appartment_given]:checked").val());
 
         var planned_date = null;
