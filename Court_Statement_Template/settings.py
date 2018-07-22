@@ -9,6 +9,15 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
+# for gmail -- google apps
+from .email_info import *
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_TLS = EMAIL_USE_TLS
+EMAIL_HOST = EMAIL_HOST
+EMAIL_HOST_USER = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+EMAIL_PORT = EMAIL_PORT
 
 import os
 
@@ -26,7 +35,6 @@ SECRET_KEY = 'i^&i8s)-nnut4r0l+n_no250vcsmi$y96@&tcc2pqu9+pktq#h'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 

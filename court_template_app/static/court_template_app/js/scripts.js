@@ -22,6 +22,33 @@ $(document).ready(function() {
         return data;
     };
 
+    var collectEMAIL = function() {
+        data = {
+            'email': $('[name=email]').val(),
+            'pdf_preview_src': $('#pdf_preview').attr('src')
+        }
+
+        return data;
+    };
+
+    $("#step5_email_form").submit(function(event) {        
+        $.post('/app/email/', JSON.stringify(collectEMAIL()))
+        .done(function(data) {
+            if(data['status'] == 'success') {
+                alert(data['message']);
+                $('.step5 .overlay').fadeOut();
+                $('.step5 .feedback_form').fadeOut();
+                $('[name=email]').val("");
+            } else {
+                alert(data['message']);
+                $('.step5 .overlay').fadeOut();
+                $('.step5 .feedback_form').fadeOut();
+                $('[name=email]').val("");
+            }
+        })
+        return false;
+    });
+
     // Прогресс(статус) бар
     /*input validation start*/
     $('.step2bt_status').click(function(event) {

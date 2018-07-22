@@ -8,6 +8,8 @@ from django.template.loader import render_to_string
 from django.conf import settings
 from django.core.mail import EmailMessage
 
+from django.core.mail import send_mail
+
 import os
 import random
 from datetime import datetime
@@ -62,9 +64,9 @@ def process_captcha(request):
 
     chrome_options.add_argument("--disable-dev-shm-usage")
 
-    chrome_driver = os.getcwd() + "/chromedriver" # uncomment for LINUX chmod 777 chromedriver
+    #chrome_driver = os.getcwd() + "/chromedriver" # uncomment for LINUX chmod 777 chromedriver
 
-    #chrome_driver = os.getcwd() + "\\chromedriver.exe" # uncomment for WINDOWS 
+    chrome_driver = os.getcwd() + "\\chromedriver.exe" # uncomment for WINDOWS 
 
     driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=chrome_driver)
     driver.get("https://egrul.nalog.ru/")
@@ -239,14 +241,15 @@ def process_data(request):
 @csrf_exempt
 def send_email(request):
     data = simplejson.loads(request.body)
-
     email = data['email']
-    pdf_filename = os.path.join(settings.BASE_DIR, 'static/pdf/%s' % os.path.basename(data['pdf']))
+    pdf_filepath = data['pdf_preview_src']
+
+    pdf_filename = os.path.join(settings.BASE_DIR, 'static/pdf/%s' % os.path.basename(pdf_filepath))
 
     msg = EmailMessage(
             "Исковое заявление",
             "В приложенном файле находится заполненное исковое заявление.",
-            settings.PDF_EMAIL_FROM,
+            settings.EMAIL_HOST_USER,
             [email]
         )
 
