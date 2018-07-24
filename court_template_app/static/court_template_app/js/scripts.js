@@ -52,7 +52,7 @@ $(document).ready(function() {
     // Прогресс(статус) бар
     /*input validation start*/
     $('.step2bt_status').click(function(event) {
-        if($('#fio').val() != '') {
+        if($("#step1_radio_no_download").is(":checked")) { 
             activateTab('#step2');
             return;
         }
@@ -287,7 +287,7 @@ $(document).ready(function() {
         }
 
         if(tab == '#step2') {
-            if($('#fio').val() != '') {
+            if($("#step1_radio_no_download").is(":checked")) { 
                 activateTab(tab);
                 return;
             }
