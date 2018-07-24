@@ -1115,6 +1115,9 @@ $(document).ready(function() {
             $("#step4_rb6_input").val('');
             $("#step4_rb7_input").val('');
             
+            $('#step4_rb6_input').prop('disabled', true);
+            $('#step4_rb7_input').prop('disabled', true);
+
             $("#step4_rb9").prop("checked", false);
             $("#step4_rb10").prop("checked", false);
         }
