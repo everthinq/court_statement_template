@@ -81,6 +81,8 @@ $(document).ready(function() {
             if(data['status'] == 'ok') {
                 $('#captcha_pdf').attr('src', data['link']);
 
+                $('#step2_down_vipiska').attr('href', data['link']);
+
                 $('.steps__item a').removeClass('active');
                 $('.main .step').hide();
                 $('#step2').fadeIn();
@@ -312,6 +314,8 @@ $(document).ready(function() {
             .done(function(data) {
                 if(data['status'] == 'ok') {
                     $('#captcha_pdf').attr('src', data['link']);
+
+                    $('#step2_down_vipiska').attr('href', data['link']);
 
                     $('.steps__item a').removeClass('active');
                     $('.main .step').hide();
