@@ -267,6 +267,8 @@
 {% endif %}
 {% if precourt_date %}
 <li>Копия требования об уплате неустойки от {{precourt_date|date:"d.m.Y"}} г.</li>
+<li>Почтовая квитанция  от {{precourt_date|date:"d.m.Y"}} г.</li>
+<li>Опись о направлении требования застройщику от {{precourt_date|date:"d.m.Y"}} г.</li>
 {% endif %}
 {% for extra_doc in payment_docs_extra %}
     <li>{{ extra_doc|capfirst }}.</li>
