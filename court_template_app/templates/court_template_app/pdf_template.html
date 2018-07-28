@@ -182,11 +182,11 @@
 <p align="justify"><span class="bold">Размер неустойки, подлежащей уплате ответчиком истцу, составляет {{penalty|floatformat:2}}  рублей
 ({{penalty|price_in_words}}) и определен следующим образом:</span></p>
 <p class="framed centered"><br/>Размер неустойки =<br/> 1/150 x ключевая ставка x цена договора/100 x период просрочки<br/></p>
-<p align="justify">Размер применяемой ключевой ставки = 9%</p>
+<p align="justify">Размер применяемой ключевой ставки = {{kl_stavka}}</p>
 <p align="justify">Цена договора –  {{total_price}} рублей</p>
 <p align="justify">Период просрочки на момент написания искового заявления = {% blocktrans count days=overdue_days %}{{ days }} день{% plural %}{{ days }} дней{% endblocktrans %} (с {{overdue_start_date|date:"d.m.Y"}} по {{overdue_end_date|date:"d.m.Y"}} включительно)</p>
 
-<p align="justify" class="bold centered">1/150 x 9 x {{total_price}}/100 x {{overdue_days}} = {{penalty|floatformat:2}} рублей</p>
+<p align="justify" class="bold centered">1/150 x {{kl_stavka}} x {{total_price}}/100 x {{overdue_days}} = {{penalty|floatformat:2}} рублей</p>
 </li>
 {% endif %}
 {% if ask_rental %}

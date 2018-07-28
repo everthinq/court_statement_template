@@ -123,6 +123,161 @@ $(document).ready(function() {
 
     });
 
+    var kl_stavka = function() { 
+        var transferred = parseInt($("input:radio[name=appartment_given]:checked").val())
+
+        if(transferred == 0) {
+            var current_kl_stavka = 7.25;
+            return current_kl_stavka;
+        }
+
+        if(transferred == 1) {
+            input_DD = $("#act_date").val().split("/")[0]; // DD
+            input_MM = $("#act_date").val().split("/")[1]; // MM
+            input_YY = $("#act_date").val().split("/")[2]; // YYYY
+
+            appended_date = input_YY + '-' + input_MM + '-' + input_DD;
+            full_date = new Date(appended_date);
+            
+            // required dates block start
+// http://www.consultant.ru/document/cons_doc_LAW_12453/886577905315979b26c9032d79cb911cc8fa7e69/
+            march26_2018 = new Date('2018-03-26');
+            febru12_2018 = new Date('2018-02-12');
+            decem18_2017 = new Date('2017-12-18');
+            octob30_2017 = new Date('2017-10-30');
+            septe18_2017 = new Date('2017-09-18');
+            junee19_2017 = new Date('2017-06-19');
+            mayyy02_2017 = new Date('2017-05-02');
+            march27_2017 = new Date('2017-03-27');
+            septe19_2016 = new Date('2016-09-19');
+            junee14_2016 = new Date('2016-06-14');
+            augus03_2015 = new Date('2015-08-03');
+            junee16_2015 = new Date('2015-06-16');
+            mayyy05_2015 = new Date('2015-05-05');
+            march16_2015 = new Date('2015-03-16');
+            febru02_2015 = new Date('2015-02-02');
+            decem16_2014 = new Date('2014-12-16');
+            decem12_2014 = new Date('2014-12-12');
+            novem05_2014 = new Date('2014-11-05');
+            julyy28_2014 = new Date('2014-07-28');
+            april28_2014 = new Date('2014-04-28');
+            march03_2014 = new Date('2014-03-03');
+            septe13_2013 = new Date('2013-09-13');
+            // required dates block end
+
+            if(full_date >= march26_2018) {
+                // с 26 марта 2018 г. -- 7,25
+                return 7.25;
+            }
+
+            if(full_date >= febru12_2018 && full_date < march26_2018) {
+                // с 12 февраля 2018 г. по 25 марта 2018г. -- 7,5
+                return 7.5;
+            }
+
+            if(full_date >= decem18_2017 && full_date < febru12_2018) {
+                // с 18 декабря 2017 г. по 11 февраля 2018 г.-- 7,75
+                return 7.75;
+            }
+
+            if(full_date >= octob30_2017 && full_date < decem18_2017) {
+                // с 30 октября 2017 г. по 17 декабря 2017 г. -- 8,25
+                return 8.25;
+            }
+
+            if(full_date >= septe18_2017 && full_date < octob30_2017) {
+                // с 18 сентября 2017 г. по 29 октября 2017 г. -- 8,5
+                return 8.5;
+            }
+
+            if(full_date >= junee19_2017 && full_date < septe18_2017) {
+                // с 19 июня 2017 г. по 17 сентября 2017 г. -- 9
+                return 9;
+            }
+
+            if(full_date >= mayyy02_2017 && full_date < junee19_2017) {
+                // со 2 мая 2017 г. по 18 июня 2017 г. -- 9,25
+                return 9.25;
+            }
+
+            if(full_date >= march27_2017 && full_date < mayyy02_2017) {
+                // с 27 марта 2017 г. по 1 мая 2017 г. -- 9,75
+                return 9.75;
+            }
+
+            if(full_date >= septe19_2016 && full_date < march27_2017) {
+                // с 19 сентября 2016 г. по 26 марта 2017 г. -- 10,0
+                return 10;
+            }
+
+            if(full_date >= junee14_2016 && full_date < septe19_2016) {
+                // с 14 июня 2016 г. по 18 сентября 2016 г. -- 10,5
+                return 10.5;
+            }
+
+            if(full_date >= augus03_2015 && full_date < junee14_2016) {                
+                // с 3 августа 2015 г. по 13 июня 2016 г. -- 11
+                return 11;
+            }
+
+            if(full_date >= junee16_2015 && full_date < augus03_2015) {                
+                // с 16 июня 2015 г. по 2 августа 2015 г. -- 11,5
+                return 11.5;
+            }
+
+            if(full_date >= mayyy05_2015 && full_date < junee16_2015) {                
+                // с 5 мая 2015 г. по 15 июня 2015 г. -- 12,5
+                return 12.5;
+            }
+
+            if(full_date >= march16_2015 && full_date < mayyy05_2015) {
+                // с 16 марта 2015 г. по 4 мая 2015 г. -- 14
+                return 14;
+            }
+
+            if(full_date >= febru02_2015 && full_date < march16_2015) {
+                // cо 2 февраля 2015 г. по 15 марта 2015 г. -- 15
+                return 15;
+            }
+
+            if(full_date >= decem16_2014 && full_date < febru02_2015) {
+                // c 16 декабря 2014 г. по 1 февраля 2015 г -- 17
+                return 17;
+            }
+
+            if(full_date >= decem12_2014 && full_date < decem16_2014) {                
+                // c 12 декабря 2014 г. по 15 декабря 2014 г. -- 10,5
+                return 10.5;
+            }
+
+            if(full_date >= novem05_2014 && full_date < decem12_2014) {
+                // с 5 ноября 2014 г. по 11 декабря 2014 г.  -- 9,5
+                return 9.5;
+            }
+
+            if(full_date >= julyy28_2014 && full_date < novem05_2014) {                
+                // с 28 июля 2014 г. по 4 ноября 2014 г. -- 8
+                return 8;
+            }
+
+            if(full_date >= april28_2014 && full_date < julyy28_2014) {
+                // с 28 апреля 2014 г. по 27 июля 2014 г. -- 7,5
+                return 7.5;
+            }
+
+            if(full_date >= march03_2014 && full_date < april28_2014) {                
+                // с 3 марта 2014 г. по 27 апреля 2014 г. -- 7
+                return 7;
+            }
+
+            if(full_date >= septe13_2013 && full_date < march03_2014) {                
+                // с 13 сентября 2013 г. по 2 марта 2014 г. -- 5,5
+                return 5.5;
+            }
+        }
+    };
+
+
     var collectData = function() {
         var data = {
             'inn': $("#inn").val(),
@@ -149,6 +304,8 @@ $(document).ready(function() {
             'precourt_letter': parseInt($("input:checkbox[name=precourt_letter]:checked").val()),
             'total_ask': total_ask
         };
+
+        data['kl_stavka'] = kl_stavka();
 
         data['ddu_date'] = $("#date1_1").val();
         data['ddu_num'] = $("#date1_2").val();
@@ -260,7 +417,7 @@ $(document).ready(function() {
             penalty_days = daysDiff(transfer_date, planned_date);
         }
 
-        var penalty = Math.round(9*total_price*penalty_days/150)/100;
+        var penalty = Math.round(kl_stavka()*total_price*penalty_days/150)/100;
         total_ask = penalty;
         if(ask_type.indexOf(2)>=0)
             total_ask += rent_total;
