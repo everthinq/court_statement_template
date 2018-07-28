@@ -120,6 +120,9 @@ def process_captcha(request):
     a = driver.find_element_by_xpath('//*[@id="resultContent"]/table/tbody/tr/td[1]/a')
 
     urllib.request.urlretrieve(a.get_attribute('href'), pdf_filename)
+
+    org_name = driver.find_element_by_xpath('//*[@id="resultContent"]/table/tbody/tr/td[1]/a').text
+    org_address = driver.find_element_by_xpath('//*[@id="resultContent"]/table/tbody/tr/td[2]').text
     ### - post end
 
 
@@ -129,6 +132,8 @@ def process_captcha(request):
     ### - selenium close && quit end
 
     response = {'status': 'ok'}
+    response['org_name'] = org_name
+    response['org_address'] = org_address
     response['link'] = '/' + pdf_filename
 
     return JsonResponse(response)

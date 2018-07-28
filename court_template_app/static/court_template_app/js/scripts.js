@@ -85,6 +85,9 @@ $(document).ready(function() {
 
                 $('#step1_radio_no_download').prop('checked', true);
 
+                $('#nickname').val(data['org_name'])
+                $('#address2').val(data['org_address'])
+
                 $('.steps__item a').removeClass('active');
                 $('.main .step').hide();
                 $('#step2').fadeIn();
