@@ -13,8 +13,8 @@
 
     <header>
         <div class="container">
-            <h1>Lorem ipsum dolor sit amet to</h1>
-            <h2>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed dianonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</h2>
+            <h1>СФОРМИРУЙТЕ СВОЙ ИСК О ВЗЫСКАНИИ НЕУСТОЙКИ С ЗАСТРОЙЩИКА.</h1>
+            <h2>Вам понадобиться всего 10 минут для заполнения и исковое заявление готово. Легко, быстро и просто.</h2>
         </div>
     </header>
 
@@ -44,11 +44,11 @@
                     <form class="step1_center">
                         <p>Укажите ИНН Застройщика</p>
                         <input type="text" id="inn" class="number">
-                        <p class="text_bt">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore.</p>
+                        <p class="text_bt">ИНН застройщика указан в вашем договоре долевого участия (посмотрите в самом конце)</p>
                         
                         <div class="radio_bt_container">
                             <input type="checkbox" id="step1_radio_no_download">
-                            <label for="step1_radio_no_download">Перейти на шаг 2 без скачивания выписки</label>
+                            <label for="step1_radio_no_download">Продолжить без указания ИНН застройщика</label>
                         </div>
                         
                         <a class="step_center step2bt_status">Дальше</a>
@@ -74,13 +74,13 @@
 
                     <!-- Левая часть колонки -->
                     <div class="step_left clearfix">
-                        <label for="fio">Укажите полные ФИО истца
+                        <label for="fio">Укажите полные ФИО истца (дольщика)
                         </label>
                         <input type="text" id="fio">
                         
 
-                        <label for="adress">Укажите адрес истца
-                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                        <label for="adress">Укажите адрес истца (дольщика)
+                            <p class="more_info hint--bottom" aria-label="Укажите адрес постоянной или временной регистрации дольщика. Указанный вами адрес влияет на выбор суда, рассматривающего ваш иск (если вы намерены судиться по своему месту жительства)">
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                                 <span class="left_bd"></span>
                                 <span class="right_bd"></span>
@@ -88,8 +88,8 @@
                         </label>
                         <input type="text" id="address">
 
-                        <label for="nickname">Укажите название застройщика
-                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                        <label for="nickname">Укажите наименование застройщика
+                            <p class="more_info hint--bottom" aria-label="Если наименование застройщика не отобразилось в строке автоматически, введите его вручную. Для этого используйте сведения из Выписки из ЕГРЮЛ ( п/п № 2) или из вашего договора долевого участия">
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                                 <span class="left_bd"></span>
                                 <span class="right_bd"></span>
@@ -98,7 +98,7 @@
                         <input type="text" id="nickname">
 
                         <label for="adress2">Укажите юридический адрес застройщика
-                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                            <p class="more_info hint--bottom" aria-label="Если юридический адрес застройщика не отобразился в строке автоматически, введите его вручную. Для этого используйте сведения из Выписки из ЕГРЮЛ (раздел «Адрес» (место нахождения)) или из вашего договора долевого участия">
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                                 <span class="left_bd"></span>
                                 <span class="right_bd"></span>
@@ -106,8 +106,32 @@
                         </label>
                         <input type="text" id="address2">
 
+                        <!-- Radio button -->
+                        <label>Выберите подсудность:
+                            <p class="more_info hint--bottom" aria-label="Выберите в какой суд вы будете подавать исковое заявление. Вы можете подать иск в суд по месту регистрации дольщика (постоянной или временной), по юридическому адресу застройщика или по договорной подсудности – если в вашем договоре указан конкретный суд">
+                                <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
+                                <span class="left_bd"></span>
+                                <span class="right_bd"></span>
+                            </p>
+                        </label>
+
+                        <div class="radio_bt_container">
+                            <input type="radio" id="step2_rb1" name="court_place" value="1">
+                            <label for="step2_rb1">По юридическому адресу застройщика</label>
+                        </div>
+
+                        <div class="radio_bt_container">
+                            <input type="radio" id="step2_rb2" name="court_place" value="2">
+                            <label for="step2_rb2">По месту регистрации дольщика</label>
+                        </div>
+
+                        <div class="radio_bt_container">
+                            <input type="radio" id="step2_rb3" name="court_place" value="3">
+                            <label for="step2_rb3">Договорная подсудность</label>
+                        </div>
+
                         <label for="sud">Наименование суда
-                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                            <p class="more_info hint--bottom" aria-label="Укажите наименование суда в зависимости от выбранной вами подсудности. Воспользуйтесь поиском чтобы найти свой суд – НАЙТИ (ссылка – https://sudrf.ru/index.php?id=300) и введите его вручную">
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                                 <span class="left_bd"></span>
                                 <span class="right_bd"></span>
@@ -116,35 +140,17 @@
                         <input type="text" id="sud">
 						
                         <label for="address_suda">Адрес суда
-                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                            <p class="more_info hint--bottom" aria-label="Адрес суда должен автоматически отобразиться в строке в течении 10-15 секунд после того, как вы кликнули на нее. Если адрес автоматически не подгружается - воспользуйтесь поиском чтобы найти адрес своего суда – НАЙТИ (ссылка - https://sudrf.ru/index.php?id=300 ) и введите его вручную">
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                                 <span class="left_bd"></span>
                                 <span class="right_bd"></span>
                             </p>
                         </label>
                         <input type="text" id="address_suda">
+
+                        <button type="button" id="step2_find_btn">Искать</button>
+
                         <ul class="list-group" id="result" style="width: 100%; height: 300px; overflow: auto"></ul>
-						
-                        <!-- Radio button -->
-                        <div class="radio_bt_container">
-                            <input type="radio" id="step2_rb1" name="court_place" value="1">
-                            <label for="step2_rb1">По юридическому адресу застройщика</label>
-                        </div>
-
-                        <div class="radio_bt_container">
-                            <input type="radio" id="step2_rb2" name="court_place" value="2">
-                            <label for="step2_rb2">По месту жительства истца</label>
-                        </div>
-
-                        <div class="radio_bt_container">
-                            <input type="radio" id="step2_rb3" name="court_place" value="3">
-                            <label for="step2_rb3">Договорная подсудность</label>
-                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
-                                <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
-                                <span class="left_bd"></span>
-                                <span class="right_bd"></span>
-                            </p>
-                        </div>
                     </div>
 
                     <!-- Правая часть колонки -->
@@ -179,7 +185,7 @@
 
                         <div class="treaty_date">
                                 Укажите дату и номер договора долевого участия <br>(если был договор уступки, то и его тоже )
-                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                            <p class="more_info hint--bottom" aria-label="Если вы приобрели квартиру по уступке (цессии), то укажите данные и договора долевого участия и договора уступки (цессии). Если вы приобрели квартиру по договору долевого участия – только данные договора долевого участия">
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                                 <span class="left_bd"></span>
                                 <span class="right_bd"></span>
@@ -258,7 +264,10 @@
                 <div class="step_box clearfix">
                     <div class="step_left clearfix">
                         <label for="step4_1">Укажите дату, до которой квартира должна была быть <br> вам передана по условиям договора:
-                        <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                        <p class="more_info hint--bottom" aria-label="Указанная дата отображается в договоре и может быть сформулирована по-разному. Например: 
+                        - не позднее 2 квартала 2018 года; 
+                        - до 30 июня 2018 года; 
+                        - не позднее 6 месяцев с момента ввода дома в эксплуатацию">
                             <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                             <span class="left_bd"></span>
                             <span class="right_bd"></span>
@@ -266,10 +275,17 @@
                         </label>
                         <input type="text" id="step4_1" maxlength="10">
 
-                        <label id="step4_payments_docs">Выберите документы подтверждающие оплату <br> по договору ДДУ и их реквизиты:</label>
+                        <label id="step4_payments_docs">Выберите документы, подтверждающие оплату <br> по договору ДДУ и их реквизиты:
+                            <p class="more_info hint--bottom" aria-label="Укажите один или несколько документов, которые вместе составляют цену договора. Если у вас есть акт сверки взаимных расчетов, то достаточно указать только его">
+                                <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
+                                <span class="left_bd"></span>
+                                <span class="right_bd"></span>
+                            </p>
+                        </label>
                         <div class="radio_bt_container">
                             <input type="checkbox" id="step4_rb1" name="payment_doc_type" value="1">
-                            <label for="step4_rb1">Платежное поручение</label>
+                            <label for="step4_rb1">Платежное поручение
+                            </label>
                         </div>
                         <div id="step4_platejnoe_poruchenie" class="input_xs step4_rb1_inputs clearfix">
                             <div>№</div>
@@ -376,7 +392,7 @@
                         <b>Моральный вред:</b>
 
                         <label for="step4_2">Укажите сумму компенсации морального вреда, <br> которую вы хотите взыскать
-                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                            <p class="more_info hint--bottom" aria-label="Вы можете указать любую сумму, которую считаете достойной компенсацией">
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                                 <span class="left_bd"></span>
                                 <span class="right_bd"></span>
@@ -384,8 +400,8 @@
                         </label>
                         <input type="text" class="price" id="step4_2">
 
-                        <label for="step4_3">Перечислить в чем именно заключался моральный вред
-                            <p class="more_info hint--bottom" aria-label="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " >
+                        <label for="step4_3">Перечислить, в чем именно заключался моральный вред
+                            <p class="more_info hint--bottom" aria-label="Укажите в предложном падеже (в чем?) в чем выражается моральный вред – например: в нравственных страданиях, бессонице, плохом самочувствии, ссорах с близкими">
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                                 <span class="left_bd"></span>
                                 <span class="right_bd"></span>

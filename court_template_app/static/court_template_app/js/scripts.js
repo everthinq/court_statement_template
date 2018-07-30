@@ -1332,7 +1332,22 @@ $(document).ready(function() {
 
 
 $.ajaxSetup({ cache: false });
- $('#address_suda').keyup(function(){
+ // $('#address_suda').keyup(function(){
+ //  $('#result').html('');
+ //  $('#state').val('');
+ //  var searchField = $('#address_suda').val();
+ //  var expression = new RegExp(searchField, "i");
+ //  $.getJSON('/static/courts_addresses.json', function(data) {
+ //   $.each(data, function(key, value){
+ //    if (value.court_name.search(expression) != -1 || value.court_address.search(expression) != -1)
+ //    {
+ //     $('#result').append('<li class="list-group-item link-class"><img /> '+value.court_name+' | <span class="text-muted">'+value.court_address+'</span></li>');
+ //    }
+ //   });   
+ //  });
+ // });
+ 
+ $('#step2_find_btn').click(function() {
   $('#result').html('');
   $('#state').val('');
   var searchField = $('#address_suda').val();
@@ -1346,7 +1361,7 @@ $.ajaxSetup({ cache: false });
    });   
   });
  });
- 
+
  $('#result').on('click', 'li', function() {
   var click_text = $(this).text().split('|');
   $('#address_suda').val($.trim(click_text[1]));
