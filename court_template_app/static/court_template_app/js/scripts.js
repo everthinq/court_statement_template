@@ -52,9 +52,12 @@ $(document).ready(function() {
     // Прогресс(статус) бар
     /*input validation start*/
     $('.step2bt_status').click(function(event) {
-        if($("#step1_radio_no_download").is(":checked")) { 
+        if($("#step1_radio_no_download").is(":checked")) {
+            $("#step2_right").attr('style',  'display: none');
             activateTab('#step2');
             return;
+        } else {
+            $("#step2_right").attr('style',  '');
         }
 
         if($("#inn").val().length < 10) {
@@ -82,8 +85,6 @@ $(document).ready(function() {
                 $('#captcha_pdf').attr('src', data['link']);
 
                 $('#step2_down_vipiska').attr('href', data['link']);
-
-                $('#step1_radio_no_download').prop('checked', true);
 
                 $('#nickname').val(data['org_name'])
                 $('#address2').val(data['org_address'])
@@ -454,9 +455,12 @@ $(document).ready(function() {
         }
 
         if(tab == '#step2') {
-            if($("#step1_radio_no_download").is(":checked")) { 
+            if($("#step1_radio_no_download").is(":checked")) {
+                $("#step2_right").attr('style',  'display: none');
                 activateTab(tab);
                 return;
+            } else {
+                $("#step2_right").attr('style',  '');
             }
             
             if($("#inn").val().length < 10) {
@@ -483,8 +487,6 @@ $(document).ready(function() {
                     $('#captcha_pdf').attr('src', data['link']);
 
                     $('#step2_down_vipiska').attr('href', data['link']);
-
-                    $('#step1_radio_no_download').prop('checked', true);
 
                     $('.steps__item a').removeClass('active');
                     $('.main .step').hide();
