@@ -31,6 +31,11 @@ $(document).ready(function() {
         return data;
     };
 
+    $("#step5_email_send_btn").click(function() {
+        $(".js-overlay-campaign").attr('style', 'display: none');
+        $(".feedback_form").attr('style', 'display: none');
+    });
+
     $("#step5_email_form").submit(function(event) {        
         $.post('/app/email/', JSON.stringify(collectEMAIL()))
         .done(function(data) {

@@ -270,7 +270,7 @@ def send_email(request):
 
     return JsonResponse({
         "status": "success",
-        "message": "Сообщение успешно отправлено."
+        "message": "Исковое заявление направлено на указанную электронную почту"
     })
 
 def download_pdf(request, pdf):
