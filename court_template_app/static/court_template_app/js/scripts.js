@@ -368,7 +368,7 @@ $(document).ready(function() {
             data['rent_type'] = parseInt($("input:radio[name=step4_rb_arenda]:checked").val());
             data['rent_date'] = $("#step4_4").val();
             data['rent_price'] = parseFloat($("#step4_5").val().replace(',', '.'));
-            data['rent_total'] = $("#step4_6").val();
+            data['rent_total'] = $("#step4_6").val().trim().replace(',', '.').replace(/\s+/g, '');
         }
         if(data['ask_type'].indexOf(3)>=0) {
             // Моральный ущерб
@@ -435,8 +435,6 @@ $(document).ready(function() {
         total_ask = penalty;
         if(ask_type.indexOf(2)>=0)
             total_ask += rent_total;
-        if(ask_type.indexOf(3)>=0)
-            total_ask += moral_harm_cost;
         $("#total_ask").text(''+total_ask);
     };
 

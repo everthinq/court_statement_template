@@ -82,6 +82,10 @@ def app_type(type_num):
 
 @register.filter
 def currency_spaces_and_2f(value):
-    value = "{:,.2f}".format(value).replace(",", " ").replace(".", ",")
+    value = "{:,.2f}".format(float(value)).replace(",", " ").replace(".", ",")
 
     return value
+
+@register.filter
+def custom_type(value):
+    return type(value)

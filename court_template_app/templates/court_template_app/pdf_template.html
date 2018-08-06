@@ -110,11 +110,11 @@
     <p align="justify"><span class="bold">Ответчик:</span> {{company}}<br/>
     (ИНН {{inn}})<br/>
     Юридический адрес: {{company_address}}</p>
-    <p align="justify"><span class="bold">Цена иска:</span> {{total_ask|floatformat:2}} рублей.</p>
+    <p align="justify"><span class="bold">Цена иска:</span> {{total_ask|currency_spaces_and_2f}} рублей.</p>
     {% if total_ask < 1000000 %}
         <p align="justify"><i>От уплаты госпошлины истец освобожден на основании пп.4 п.2 ст.333.36 НК РФ.</i></p>
     {% else %}
-        <p align="justify"><i>Размер госпошлины {{total_ask|state_fee|floatformat:2}}.</i></p>
+        <p align="justify"><i>Размер госпошлины: {{total_ask|state_fee|currency_spaces_and_2f}}.</i></p>
     {% endif %}
     {% if court_place == 1 %}
         <p align="justify"><i>Подсудность определена на основании ч.7 ст.29 Гражданского процессуального кодекса РФ, п.2 ст.17 Закона РФ «О защите прав потребителей»</i></p>
@@ -138,8 +138,8 @@
 
 <p align="justify">Дольщик, в свою очередь, принял на себя обязательство уплатить застройщику цену договора и принять квартиру по акту приема-передачи.</p>
 
-<p align="justify">Согласно условиям договора цена договора составила {{total_price|floatformat:2}} ({{total_price|price_in_words}}).
-{% if total_price < deal_price %}А в связи с уменьшением площади квартиры окончательная цена договора составила  {{total_price|floatformat:2}} ({{total_price|price_in_words}}).{% endif %}</p>
+<p align="justify">Согласно условиям договора цена договора составила {{total_price|currency_spaces_and_2f}} ({{total_price|price_in_words}}).
+{% if total_price < deal_price %}А в связи с уменьшением площади квартиры окончательная цена договора составила  {{total_price|currency_spaces_and_2f}} ({{total_price|price_in_words}}).{% endif %}</p>
 
 <p align="justify">Обязательства по оплате цены договора исполнены в полном объеме,
 что подтверждается {{payment_docs_ablative}}.</p>
@@ -179,21 +179,21 @@
 исполняться надлежащим образом в соответствии с условиями обязательств и требованиями закона,
 односторонний отказ от исполнения обязательства не допускается.</p>
 
-<p align="justify"><span class="bold">Размер неустойки, подлежащей уплате ответчиком истцу, составляет {{penalty|floatformat:2}}  рублей
+<p align="justify"><span class="bold">Размер неустойки, подлежащей уплате ответчиком истцу, составляет {{penalty|currency_spaces_and_2f}}  рублей
 ({{penalty|price_in_words}}) и определен следующим образом:</span></p>
 <p class="framed centered"><br/>Размер неустойки =<br/> 1/150 x ключевая ставка x цена договора/100 x период просрочки<br/></p>
 <p align="justify">Размер применяемой ключевой ставки = {{kl_stavka}}</p>
 <p align="justify">Цена договора –  {{total_price | currency_spaces_and_2f}} рублей</p>
 <p align="justify">Период просрочки на момент написания искового заявления = {% blocktrans count days=overdue_days %}{{ days }} день{% plural %}{{ days }} дней{% endblocktrans %} (с {{overdue_start_date|date:"d.m.Y"}} по {{overdue_end_date|date:"d.m.Y"}} включительно)</p>
 
-<p align="justify" class="bold centered">1/150 x {{kl_stavka}} x {{total_price}}/100 x {{overdue_days}} = {{penalty|floatformat:2}} рублей</p>
+<p align="justify" class="bold centered">1/150 x {{kl_stavka}} x {{total_price | currency_spaces_and_2f}}/100 x {{overdue_days}} = {{penalty|currency_spaces_and_2f}} рублей</p>
 </li>
 {% endif %}
 {% if ask_rental %}
 <li>
 В результате неисполнения (нарушения) обязательств по договору со стороны ответчика истец был вынужден {% if rent_type == 2 %}нанимать{% else %}арендовать{% endif %} жилье в течении дополнительного времени.
-По договору {% if  rent_type == 2 %}найма{% else %}аренды{% endif %} жилого помещения от {{ rent_date|date:"d.m.Y" }} оплата составляет {{ rent_price|floatformat:2 }} рублей ({{ rent_price|price_in_words }}) в месяц.
-<span class="bold">В общей сложности, истец был вынужден переплатить {{ rent_total|floatformat:2 }} рублей ({{ rent_total|price_in_words }}).</span>
+По договору {% if  rent_type == 2 %}найма{% else %}аренды{% endif %} жилого помещения от {{ rent_date|date:"d.m.Y" }} оплата составляет {{ rent_price|currency_spaces_and_2f }} рублей ({{ rent_price|price_in_words }}) в месяц.
+<span class="bold">В общей сложности, истец был вынужден переплатить {{ rent_total|currency_spaces_and_2f }} рублей ({{ rent_total|price_in_words }}).</span>
 </li>
 {% endif %}
 {% if ask_moral %}
@@ -203,7 +203,7 @@
 <p align="justify">В соответствии со ст.15 Закона РФ «О защите прав потребителей» моральный вред,
 причиненный потребителю, подлежит компенсации причинителем вреда.</p>
 <p align="justify"><span class="bold">Компенсацию морального вреда, причиненного застройщиком в результате нарушения срока передачи квартиры,
-истец оценивает в {{moral_harm_cost|floatformat:2}} рублей ({{moral_harm_cost|price_in_words}}).</span></p>
+истец оценивает в {{moral_harm_cost|currency_spaces_and_2f}} рублей ({{moral_harm_cost|price_in_words}}).</span></p>
 </li>
 {% endif %}
 
@@ -219,7 +219,7 @@
 {% if total_ask < 1000000 %}
     <p align="justify">От уплаты государственной пошлины истец освобожден на основании пп.4 п.2 ст.333.36 НК РФ.</p>
 {% else %}
-    <p align="justify">Размер уплаченной госпошлины составляет {{total_ask|state_fee|floatformat:2}} рублей.</p>
+    <p align="justify">Размер уплаченной госпошлины составляет {{total_ask|state_fee|currency_spaces_and_2f}} рублей.</p>
 {% endif %}
 <p align="justify">На основании вышеизложенного, и руководствуясь ст.ст. 309, 310, 329, ГК РФ, ст. 29, 35, 131-133 ГПК РФ,
 ФЗ «О защите прав потребителей»,
@@ -231,16 +231,16 @@
 <ol class="outside">
 {% if penalty > 0 %}
 <li>Взыскать с ответчика в пользу истца неустойку за нарушение срока передачи квартиры
-в размере {{penalty|floatformat:2}} ({{penalty|int_number_by_words}}) рублей {{penalty|kopecks_by_words}}.</li>
+в размере {{penalty | currency_spaces_and_2f}} ({{penalty|int_number_by_words}}) рублей {{penalty|kopecks_by_words}}.</li>
 {% endif %}
 
 {% if ask_rental %}
-<li>Взыскать с ответчика в пользу истца компенсацию переплаты по {% if rent_type == 2 %}найму{% else %}аренде{% endif %} жилья в размере {{ rent_total|floatformat:2 }} рублей ({{ rent_price|int_number_by_words}}) рублей {{rent_price|kopecks_by_words}}.</li>
+<li>Взыскать с ответчика в пользу истца убытки в виде вынужденных расходов на {% if rent_type == 2 %}найм{% else %}аренду{% endif %} жилого помещения (квартиры) на период просрочки в размере {{ rent_total|currency_spaces_and_2f}} рублей ({{ rent_total|int_number_by_words}}) рублей {{rent_total|kopecks_by_words}}.</li>
 {% endif %}
 
 {% if ask_moral %}
 <li>Взыскать с ответчика в пользу истца компенсацию причиненного морального вреда
-в размере {{moral_harm_cost|floatformat:2}} рублей ({{moral_harm_cost|int_number_by_words}}) рублей {{moral_harm_cost|kopecks_by_words}}.</li>
+в размере {{moral_harm_cost|currency_spaces_and_2f}} рублей ({{moral_harm_cost|int_number_by_words}}) рублей {{moral_harm_cost|kopecks_by_words}}.</li>
 {% endif %}
 
 {% if ask_fine %}
@@ -256,6 +256,7 @@
 <li>Копия договора участия в долевом строительстве жилого дома № {{ddu_num}} от {{ddu_date|date:"d.m.Y"}} года.</li>
 {% if ask_rental %}
 <li>Копия договора {% if rent_type == 2 %}найма{% else %}аренды{% endif %} жилого помещения от {{rent_date|date:"d.m.Y"}} г.</li>
+<li>Документы, подтверждающие оплату по договору {% if rent_type == 2 %}найма{% else %}аренды{% endif %} жилого помещения.</li>
 {% endif %}
 {% if plat_por_num %}
 <li>Копия платежного поручения № {{plat_por_num}} от {{plat_por_date|date:"d.m.Y"}} г.</li>
@@ -264,22 +265,27 @@
 <li>Копия приходного кассового ордера № {{ order_num }} от {{order_date|date:"d.m.Y"}} г.</li>
 {% endif %}
 {% if act_start and act_end %}
-<li>Копия акта сверки взаиморассчётов с {{ act_start|date:"d.m.Y" }} по {{act_end|date:"d.m.Y" }} г.</li>
+<li>Копия акта сверки взаимных расчетов с {{ act_start|date:"d.m.Y" }} по {{act_end|date:"d.m.Y" }} г.</li>
 {% endif %}
 {% if transferred %}
 <li>Копия акта приема-передачи квартиры от {{transfer_act_date|date:"d.m.Y"}} г.</li>
 {% endif %}
-{% if precourt_date %}
+{% if precourt_postbox_date %}
 <li>Копия требования об уплате неустойки от {{precourt_date|date:"d.m.Y"}} г.</li>
 <li>Почтовая квитанция  от {{precourt_date|date:"d.m.Y"}} г.</li>
 <li>Опись о направлении требования застройщику от {{precourt_date|date:"d.m.Y"}} г.</li>
 {% endif %}
+{% if precourt_office_date %}
+<li>Копия требования об уплате неустойки от {{precourt_date|date:"d.m.Y"}} г. с отметкой о вручении застройщику.</li>
+{% endif %}
 {% for extra_doc in payment_docs_extra %}
     <li>{{ extra_doc|capfirst }}.</li>
 {% endfor %}
-
 {% if step4_akkreditivDATE %}
 <li>Копия аккредитива № {{ step4_akkreditivNUM }} от {{step4_akkreditivDATE|date:"d.m.Y"}} г.</li>
+{% endif %}
+{% if total_ask >= 1000000 %}
+<li>Квитанция об оплате государственной пошлины за рассмотрение иска.</li>
 {% endif %}
 
 </ol>

@@ -13,6 +13,7 @@ from django.core.mail import send_mail
 import os
 import random
 from datetime import datetime
+from datetime import timedelta
 
 import simplejson
 from xhtml2pdf import pisa
@@ -64,9 +65,9 @@ def process_captcha(request):
 
     chrome_options.add_argument("--disable-dev-shm-usage")
 
-    chrome_driver = os.getcwd() + "/chromedriver" # uncomment for LINUX chmod 777 chromedriver
+    #chrome_driver = os.getcwd() + "/chromedriver" # uncomment for LINUX chmod 777 chromedriver
 
-    #chrome_driver = os.getcwd() + "\\chromedriver.exe" # uncomment for WINDOWS 
+    chrome_driver = os.getcwd() + "\\chromedriver.exe" # uncomment for WINDOWS 
 
     driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=chrome_driver)
     driver.get("https://egrul.nalog.ru/")
@@ -195,6 +196,7 @@ def process_data(request):
             data['precourt_date'] = data['precourt_postbox_date']
 
     data['overdue_start_date'] = data['planned_transfer_date']
+    data['overdue_start_date'] = data['overdue_start_date'] + timedelta(days=1)
     if data['transferred']:
         data['overdue_end_date'] = data['transfer_act_date']
     else:
