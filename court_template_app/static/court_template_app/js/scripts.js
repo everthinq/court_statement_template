@@ -322,11 +322,11 @@ $(document).ready(function() {
         data['kl_stavka'] = kl_stavka();
 
         data['ddu_date'] = $("#date1_1").val();
-        data['ddu_num'] = $("#date1_2").val();
+        data['ddu_num'] = $("#date1_2").val().trim().replace(',', '.').replace(/\s+/g, '');
         if(data['property_source'] == 2) {
             // Переуступка
             data['prop_transfer_date'] = $("#date2_1").val();
-            data['prop_transfer_num'] = $("#date2_2").val();
+            data['prop_transfer_num'] = $("#date2_2").val().trim().replace(',', '.').replace(/\s+/g, '');
         }
 
         if(data['transferred']) {
@@ -615,14 +615,8 @@ $(document).ready(function() {
                 } else {
                     $("#date1_1").removeClass('empty_field');
                 }
-                if($("#date1_2").val() == '') {
-                    $("#date1_2").addClass('empty_field');
-                } else {
-                    $("#date1_2").removeClass('empty_field');
-                }
             } else {
                 $("#date1_1").removeClass('empty_field');
-                $("#date1_2").removeClass('empty_field');
             }
             if($("input:radio[name=property_source]:checked").val() == '2') {
                 if($("#date1_1").val() == '') {
@@ -630,24 +624,13 @@ $(document).ready(function() {
                 } else {
                     $("#date1_1").removeClass('empty_field');
                 }
-                if($("#date1_2").val() == '') {
-                    $("#date1_2").addClass('empty_field');
-                } else {
-                    $("#date1_2").removeClass('empty_field');
-                }
                 if($("#date2_1").val() == '') {
                     $("#date2_1").addClass('empty_field');
                 } else {
                     $("#date2_1").removeClass('empty_field');
                 }
-                if($("#date2_2").val() == '') {
-                    $("#date2_2").addClass('empty_field');
-                } else {
-                    $("#date2_2").removeClass('empty_field');
-                }
             } else {
                 $("#date2_1").removeClass('empty_field');
-                $("#date2_2").removeClass('empty_field');
             }
             if(isNaN( parseInt($("input:radio[name=step3_appart]:checked").val()) ) == true) {
                 $("#step3_radio_box").addClass('empty_field');
@@ -695,11 +678,6 @@ $(document).ready(function() {
                     $("#date1_1")[0].scrollIntoView();
                     return;
                 }
-                if($("#date1_2").val() == '') {
-                    $('#date1_2').focus();
-                    $("#date1_2")[0].scrollIntoView();
-                    return;
-                }
             }
             if($("input:radio[name=property_source]:checked").val() == '2') {
                 if($("#date1_1").val() == '') {
@@ -707,19 +685,9 @@ $(document).ready(function() {
                     $("#date1_1")[0].scrollIntoView();
                     return;
                 }
-                if($("#date1_2").val() == '') {
-                    $('#date1_2').focus();
-                    $("#date1_2")[0].scrollIntoView();
-                    return;
-                }
                 if($("#date2_1").val() == '') {
                     $('#date2_1').focus();
                     $("#date2_1")[0].scrollIntoView();
-                    return;
-                }
-                if($("#date2_2").val() == '') {
-                    $('#date2_2').focus();
-                    $("#date2_2")[0].scrollIntoView();
                     return;
                 }
             }
