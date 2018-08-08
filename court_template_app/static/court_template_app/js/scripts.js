@@ -94,6 +94,8 @@ $(document).ready(function() {
                 $('#nickname').val(data['org_name'])
                 $('#address2').val(data['org_address'])
 
+                $('#step1_radio_no_download').prop('checked', true);
+
                 $('.steps__item a').removeClass('active');
                 $('.main .step').hide();
                 $('#step2').fadeIn();
@@ -490,6 +492,11 @@ $(document).ready(function() {
                     $('#captcha_pdf').attr('src', data['link']);
 
                     $('#step2_down_vipiska').attr('href', data['link']);
+
+                    $('#nickname').val(data['org_name'])
+                    $('#address2').val(data['org_address'])
+
+                    $('#step1_radio_no_download').prop('checked', true);
 
                     $('.steps__item a').removeClass('active');
                     $('.main .step').hide();
