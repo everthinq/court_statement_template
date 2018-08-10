@@ -437,7 +437,7 @@ $(document).ready(function() {
         total_ask = penalty;
         if(ask_type.indexOf(2)>=0)
             total_ask += rent_total;
-        $("#total_ask").text(''+total_ask);
+        $("#total_ask").text(''+total_ask.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$& ') + ' руб.');
     };
 
     $("#step3_total_price,#step3_price,#step4_1,#step4_2,#step4_6,#act_date,input:checkbox[name=ask_type]").each(function(idx, input) {
