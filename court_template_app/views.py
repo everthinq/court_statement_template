@@ -181,7 +181,7 @@ def process_data(request):
         payment_docs.append("квитанцией к приходному кассовому ордеру №%s от %s" % (data['order_num'], format_date(data['order_date'])))
 
     if 3 in payment_doc_type:
-        payment_docs.append("актом сверки взаиморассчётов с %s по %s" % (format_date(data['act_start']), format_date(data['act_end'])))
+        payment_docs.append("актом сверки взаиморасчётов с %s по %s" % (format_date(data['act_start']), format_date(data['act_end'])))
 
     if 4 in payment_doc_type:
         payment_docs.append("аккредитивом №%s от %s" % (data['step4_akkreditivNUM'], format_date(data['step4_akkreditivDATE'])))

@@ -415,6 +415,7 @@ $(document).ready(function() {
         var planned_date = null;
         try {
             planned_date = str2date($("#step4_1").val());
+            planned_date.setDate(planned_date.getDate() + 1)
         }
         catch(e) {}
 
