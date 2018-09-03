@@ -216,6 +216,7 @@ def process_data(request):
     if data['overdue_days'] > 0:
         penalty = round(data['kl_stavka']*data['total_price']*data['overdue_days']/150)/100
         data['penalty'] = penalty
+        data['penalty_and_rent'] = penalty + float(data['rent_total'])
 
     fio_parts = data['fio'].split(' ')
     data['fio_short'] = ' '.join([

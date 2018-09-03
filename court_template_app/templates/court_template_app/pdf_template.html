@@ -110,7 +110,7 @@
     <p align="justify"><span class="bold">Ответчик:</span> {{company}}<br/>
     (ИНН {{inn}})<br/>
     Юридический адрес: {{company_address}}</p>
-    <p align="justify"><span class="bold">Цена иска:</span> {{total_ask|currency_spaces_and_2f}} рублей.</p>
+    <p align="justify"><span class="bold">Цена иска:</span> {{penalty_and_rent|currency_spaces_and_2f}} рублей.</p>
     {% if total_ask < 1000000 %}
         <p align="justify"><i>От уплаты госпошлины истец освобожден на основании пп.4 п.2 ст.333.36 НК РФ.</i></p>
     {% else %}

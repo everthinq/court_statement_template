@@ -322,6 +322,7 @@ $(document).ready(function() {
         };
 
         data['kl_stavka'] = kl_stavka();
+        data['rent_total'] = parseFloat($("#step4_6").val().trim().replace(',', '.').replace(/\s+/g, '') || '0');
 
         data['ddu_date'] = $("#date1_1").val();
         data['ddu_num'] = $("#date1_2").val().trim().replace(',', '.').replace(/\s+/g, '');
