@@ -263,8 +263,19 @@ def send_email(request):
 
     msg.attach_file(pdf_filename)
 
+    msg_for_uc_partner = EmailMessage(
+            "Услугами конструктора пользовались",
+            "В приложенном файле находится заполненное исковое заявление." + 
+            	" \nE-mail, который был указан в конструкторе — " + email,
+            settings.EMAIL_HOST_USER,
+            ['uc-partner@mail.ru']
+        )
+
+    msg_for_uc_partner.attach_file(pdf_filename)
+
     try:
         msg.send()
+        msg_for_uc_partner.send()
     except:
         return JsonResponse({
             "status": "error",
