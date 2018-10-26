@@ -232,7 +232,7 @@
 
                      <div class="step_right clearfix">
                         <label for="step3_price">Стоимость квартиры по договору
-                        	<p class="more_info hint--bottom" aria-label="Если производилась доплата/возврат денежных средств по договору нужно указать окончательную стоимость с учетом этой доплаты/возврата">
+                                <p class="more_info hint--bottom" aria-label="Если производилась доплата/возврат денежных средств по договору нужно указать окончательную стоимость с учетом этой доплаты/возврата">
                                 <img src="/static/court_template_app/img/ask.png" alt="Подробнее...">
                                 <span class="left_bd"></span>
                                 <span class="right_bd"></span>
@@ -252,6 +252,9 @@
                             <input type="radio" id="step3_rb4" name="appartment_given" value="0">
                             <label for="step3_rb4">Нет</label>
                         </div>
+
+                        <label for="step3_total_price" style="visibility: hidden;">Конечная стоимость квартиры <br> (если производилась доплата/возврат денежных средств) </label>
+                        <input type="text" class="price" id="step3_total_price" style="visibility: hidden;">
 
                     </div>
                 </div>
