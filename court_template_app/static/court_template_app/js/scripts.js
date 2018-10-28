@@ -1338,7 +1338,7 @@ $.ajaxSetup({ cache: false });
  $('#step2_find_btn').click(function() {
   $('#result').html('');
   $('#state').val('');
-  var searchField = $('#address_suda').val();
+  var searchField = $('#sud').val();
   var expression = new RegExp(searchField, "i");
   $.getJSON('/static/courts_addresses.json', function(data) {
    $.each(data, function(key, value){

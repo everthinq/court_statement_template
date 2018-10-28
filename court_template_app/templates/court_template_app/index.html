@@ -131,24 +131,23 @@
                         </div>
 
                         <label for="sud">Наименование суда
-                            <p class="more_info hint--bottom" aria-label="Укажите наименование суда в зависимости от выбранной вами подсудности.">
+                            <p class="more_info hint--bottom" aria-label="Укажите наименование суда в зависимости от выбранной вами подсудности. После этого нажмите на кнопку «Искать». Система поможет вам найти нужный суд и адрес. Кликните по выбранному суду, чтобы автоматически заполнить строку «Адрес суда».">
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                                 <span class="left_bd"></span>
                                 <span class="right_bd"></span>
                             </p>
                         </label>
                         <input type="text" id="sud">
+                        <button type="button" id="step2_find_btn">Искать адрес суда</button>
 						
                         <label for="address_suda">Адрес суда
-                            <p class="more_info hint--bottom" aria-label="Напишите в строке наименование суда и нажмите на кнопку «Искать». Система поможет вам найти нужный суд и адрес. Кликните по выбранному суду, чтобы автоматически заполнить строку.">
+                            <p class="more_info hint--bottom" aria-label="Данное поле можно заполнить автоматически с помощью комментария выше.">
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
                                 <span class="left_bd"></span>
                                 <span class="right_bd"></span>
                             </p>
                         </label>
                         <input type="text" id="address_suda">
-
-                        <button type="button" id="step2_find_btn">Искать</button>
 
                         <ul class="list-group" id="result" style="width: 100%; height: 300px; overflow: auto"></ul>
                     </div>

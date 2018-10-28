@@ -2002,4 +2002,22 @@ footer {
   margin-left: 27%;
 }
 
+#sud {
+  float: unset;
+  width: 69%;
+  display:inline-block;
+}
+
+#step2_find_btn {
+  background: #20C454 !important;
+  color: #fff !important;
+  font-size: 14px;
+  border: 0px;
+  height: 40px;
+}
+
+#step2_find_btn:hover {
+  cursor: pointer;
+}
+
 }
