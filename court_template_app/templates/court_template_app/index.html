@@ -15,9 +15,9 @@
         <div class="container">
             <h1>СФОРМИРУЙТЕ СВОЙ ИСК О ВЗЫСКАНИИ НЕУСТОЙКИ С ЗАСТРОЙЩИКА.</h1>
             <h2>Вам понадобится всего 10 минут для заполнения и исковое заявление готово. Легко, быстро и просто. <br>
-				Также можно посмотреть <a href="https://www.youtube.com/watch?v=lqb_WjyMjNg" target="_blank">видеоинструкцию</a>
-				или воспользоваться <a href="http://uc-partner.ru/wp-content/uploads/2018/09/Instruktsia_po_iskolzovaniyu_Konstruktora.pdf" download="">текстовой инструкцией</a>
-			</h2>
+                Также можно посмотреть <a href="https://www.youtube.com/watch?v=lqb_WjyMjNg" target="_blank">видеоинструкцию</a>
+                или воспользоваться <a href="http://uc-partner.ru/wp-content/uploads/2018/09/Instruktsia_po_iskolzovaniyu_Konstruktora.pdf" download="">текстовой инструкцией</a>
+            </h2>
         </div>
     </header>
 
@@ -142,7 +142,7 @@
                         </label>
                         <input type="text" id="sud">
                         <button type="button" id="step2_find_btn">Искать адрес суда</button>
-						
+                        
                         <label for="address_suda">Адрес суда
                             <p class="more_info hint--bottom" aria-label="Данное поле можно заполнить автоматически с помощью комментария выше.">
                                 <img src="{% static 'court_template_app/img/ask.png' %}" alt="Подробнее...">
@@ -158,7 +158,7 @@
                     <!-- Правая часть колонки -->
                     <div class="step_right clearfix" id="step2_right">
                         <label for="textarea">Выписка из ЕГРЮЛ</label>
-						<iframe id="captcha_pdf" width="100%" height="720"></iframe>
+                        <iframe id="captcha_pdf" width="100%" height="720"></iframe>
                         <a id="step2_down_vipiska" download="">Скачать выписку из ЕГРЮЛ</a>
                     </div>
                 </div>
@@ -301,7 +301,13 @@
                             <div>от</div>
                             <input type="text" id="step4_rb1_input2" disabled />
                         </div>
-
+                        
+                        <img src="{% static 'court_template_app/img/add.png' %}" alt="" class="add_bt__item" id="add_bt_step4_platejnoe_poruchenie">
+                        
+<!-- внутри этого блока появляются новые платёжные поручения после клика на add_bt__item -->
+                            <div id="new_inputs_step4_platejnoe_poruchenie">
+                            </div>
+<!-- внутри этого блока появляются новые платёжные поручения после клика на add_bt__item -->
 
                         <div class="radio_bt_container">
                             <input type="checkbox" id="step4_rb2" name="payment_doc_type" value="2">
@@ -342,19 +348,6 @@
                             <div>от</div>
                             <input type="text" id="step4_akkreditivDATE" disabled />
                         </div>
-<!--                         <input type="text" id="step4_rb5_input" placeholder="В именительном падеже" disabled />
-                        <input type="text" id="step4_rb5_input_ablative" placeholder="В творительном падеже" disabled /> -->
-
-                        <!-- внутри этого блока появляются формы после клика на add_bt__item -->
-<!--                         <div class="new_inputs">
-
-                        </div> -->
-
-<!--                         <div class="radio_bt_container add_bt">
-                            <img src="{% static 'court_template_app/img/add.png' %}" alt="" class="add_bt__item">
-                            <label class="add_bt__item">Добавить</label>
-                        </div> -->
-
 
                         <label id="step4_customCSSlabel">Что вы планируете взыскать с застройщика, помимо неустойки? </label>
 <!--

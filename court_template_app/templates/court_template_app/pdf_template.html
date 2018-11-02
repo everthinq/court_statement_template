@@ -260,6 +260,9 @@
 {% endif %}
 {% if plat_por_num %}
 <li>Копия платежного поручения № {{plat_por_num}} от {{plat_por_date|date:"d.m.Y"}} г.</li>
+{% for each in pl_poruch_extra_payment_docs %}
+    <li>{{ each }}.</li>
+{% endfor %}
 {% endif %}
 {% if order_num %}
 <li>Копия приходного кассового ордера № {{ order_num }} от {{order_date|date:"d.m.Y"}} г.</li>
@@ -278,9 +281,6 @@
 {% if precourt_office_date %}
 <li>Копия требования об уплате неустойки от {{precourt_date|date:"d.m.Y"}} г. с отметкой о вручении застройщику.</li>
 {% endif %}
-{% for extra_doc in payment_docs_extra %}
-    <li>{{ extra_doc|capfirst }}.</li>
-{% endfor %}
 {% if step4_akkreditivDATE %}
 <li>Копия аккредитива № {{ step4_akkreditivNUM }} от {{step4_akkreditivDATE|date:"d.m.Y"}} г.</li>
 {% endif %}

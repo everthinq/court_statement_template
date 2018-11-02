@@ -346,6 +346,13 @@ $(document).ready(function() {
             // Платежное поручение
             data['plat_por_num'] = $("#plat_por_num").val();
             data['plat_por_date'] = $("#step4_rb1_input2").val();
+
+            //dynamic inputs
+            data['extras_platejnoe_poruchenie'] = additional_fields + 1;
+            for(var i = 0; i < data['extras_platejnoe_poruchenie']; i++) {
+                data['extra_plat_por_num_' + i] = $("#extra_input_" + i + "_plat_por_num").val()
+                data['extra_plat_por_date_' + i] = $("#extra_input_" + i + "_step4_rb1_input2").val()
+            }
         }
         if(data['payment_doc_type'].indexOf(2) >= 0) {
             // Квитанция к приходному кассовому ордеру
@@ -1319,22 +1326,7 @@ $(document).ready(function() {
     });
 
 
-$.ajaxSetup({ cache: false });
- // $('#address_suda').keyup(function(){
- //  $('#result').html('');
- //  $('#state').val('');
- //  var searchField = $('#address_suda').val();
- //  var expression = new RegExp(searchField, "i");
- //  $.getJSON('/static/courts_addresses.json', function(data) {
- //   $.each(data, function(key, value){
- //    if (value.court_name.search(expression) != -1 || value.court_address.search(expression) != -1)
- //    {
- //     $('#result').append('<li class="list-group-item link-class"><img /> '+value.court_name+' | <span class="text-muted">'+value.court_address+'</span></li>');
- //    }
- //   });   
- //  });
- // });
- 
+$.ajaxSetup({ cache: false }); 
  $('#step2_find_btn').click(function() {
   $('#result').html('');
   $('#state').val('');
@@ -1355,5 +1347,35 @@ $.ajaxSetup({ cache: false });
   $('#address_suda').val($.trim(click_text[1]));
   $("#result").html('');
  });
+
+$("#add_bt_step4_platejnoe_poruchenie").click(function() {
+    additional_fields++;
+
+    $('#step4_rb1').prop("checked", true)
+    $('.step4_rb1_inputs input').prop('disabled', false);
+
+
+    $("#new_inputs_step4_platejnoe_poruchenie").append(`
+        <div id="extra_input_step4_platejnoe_poruchenie_` + additional_fields + `">
+            
+            <div class="input_xs step4_rb1_inputs clearfix">
+                <div>№</div>
+                <input type="text" id="extra_input_` + additional_fields + `_plat_por_num" maxlength="8">
+                <div>от</div>
+                <input type="text" id="extra_input_` + additional_fields + `_step4_rb1_input2" class="date_mask">
+            </div>
+            
+            <img src="/static/court_template_app/img/cancel.png" class="img_delete_new_input">
+
+        </div>`);
+
+    $(".img_delete_new_input").on("click", function() {
+        $(this).parent().find(":input").val('');
+        $(this).parent().closest('div').hide();
+    });
+
+    $(".date_mask").mask("99/99/9999");
+});
+
 
 });

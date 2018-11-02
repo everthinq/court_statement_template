@@ -2020,4 +2020,23 @@ footer {
   cursor: pointer;
 }
 
+.add_bt__item {
+  margin-left: 3%;
+  margin-top: 4%;
+  cursor: pointer;
+}
+
+.img_delete_new_input {
+  margin-left: 4.8%;
+  margin-top: 5.5%;
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  margin-bottom: 4%;
+}
+
+#new_inputs_step4_platejnoe_poruchenie{
+  margin-top: 2%;
+}
+
 }

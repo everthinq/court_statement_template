@@ -174,8 +174,19 @@ def process_data(request):
 
     payment_doc_type = data['payment_doc_type']
     payment_docs = []
+
+    pl_poruch_extra_payment_docs = []
     if 1 in payment_doc_type:
         payment_docs.append("платёжным поручением №%s от %s" % (data['plat_por_num'], format_date(data['plat_por_date'])))
+
+        platejnoe_poruchenie_extras_counter = data['extras_platejnoe_poruchenie']
+        for i in range(1, platejnoe_poruchenie_extras_counter):
+            if data['extra_plat_por_num_' + str(i)] != '' and data['extra_plat_por_date_' + str(i)] != '':
+                doc_number = data['extra_plat_por_num_' + str(i)]
+                doc_date = datetime.strptime(data['extra_plat_por_date_' + str(i)], '%d/%m/%Y')
+                doc_date = datetime.strftime(doc_date, '%d.%m.%Y')
+                payment_docs.append("платёжным поручением №%s от %s" % (doc_number, doc_date))
+                pl_poruch_extra_payment_docs.append("Копия платежного поручения №%s от %s" % (doc_number, doc_date))
 
     if 2 in payment_doc_type:
         payment_docs.append("квитанцией к приходному кассовому ордеру №%s от %s" % (data['order_num'], format_date(data['order_date'])))
@@ -187,6 +198,7 @@ def process_data(request):
         payment_docs.append("аккредитивом №%s от %s" % (data['step4_akkreditivNUM'], format_date(data['step4_akkreditivDATE'])))
 
     data['payment_docs_ablative'] = ', '.join(payment_docs)
+    data['pl_poruch_extra_payment_docs'] = pl_poruch_extra_payment_docs
 
     precourt_letter = data.get('precourt_letter', None)
     if precourt_letter:
