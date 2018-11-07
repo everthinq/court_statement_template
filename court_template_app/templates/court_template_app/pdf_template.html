@@ -259,7 +259,7 @@
 <li>Документы, подтверждающие оплату по договору {% if rent_type == 2 %}найма{% else %}аренды{% endif %} жилого помещения.</li>
 {% endif %}
 {% if plat_por_num %}
-<li>Копия платежного поручения № {{plat_por_num}} от {{plat_por_date|date:"d.m.Y"}} г.</li>
+<li>Копия платежного поручения №{{plat_por_num}} от {{plat_por_date|date:"d.m.Y"}} г.</li>
 {% for each in pl_poruch_extra_payment_docs %}
     <li>{{ each }}.</li>
 {% endfor %}

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var additional_fields = 0;
+    var pl_poruch_additional_fields = 0;
     var total_ask = 0;
 
     //Pop-up
@@ -348,7 +348,7 @@ $(document).ready(function() {
             data['plat_por_date'] = $("#step4_rb1_input2").val();
 
             //dynamic inputs
-            data['extras_platejnoe_poruchenie'] = additional_fields + 1;
+            data['extras_platejnoe_poruchenie'] = pl_poruch_additional_fields + 1;
             for(var i = 0; i < data['extras_platejnoe_poruchenie']; i++) {
                 data['extra_plat_por_num_' + i] = $("#extra_input_" + i + "_plat_por_num").val()
                 data['extra_plat_por_date_' + i] = $("#extra_input_" + i + "_step4_rb1_input2").val()
@@ -376,7 +376,7 @@ $(document).ready(function() {
             // Другое
             data['step4_akkreditivNUM'] = $("#step4_akkreditivNUM").val();
             data['step4_akkreditivDATE'] = $("#step4_akkreditivDATE").val();
-            data['payment_extras'] = additional_fields;
+            data['payment_extras'] = pl_poruch_additional_fields;
         }
 
         if(data['ask_type'].indexOf(2)>=0) {
@@ -1349,20 +1349,20 @@ $.ajaxSetup({ cache: false });
  });
 
 $("#add_bt_step4_platejnoe_poruchenie").click(function() {
-    additional_fields++;
+    pl_poruch_additional_fields++;
 
     $('#step4_rb1').prop("checked", true)
     $('.step4_rb1_inputs input').prop('disabled', false);
 
 
     $("#new_inputs_step4_platejnoe_poruchenie").append(`
-        <div id="extra_input_step4_platejnoe_poruchenie_` + additional_fields + `">
+        <div id="extra_input_step4_platejnoe_poruchenie_` + pl_poruch_additional_fields + `">
             
             <div class="input_xs step4_rb1_inputs clearfix">
                 <div>№</div>
-                <input type="text" id="extra_input_` + additional_fields + `_plat_por_num" maxlength="8">
+                <input type="text" id="extra_input_` + pl_poruch_additional_fields + `_plat_por_num" maxlength="8">
                 <div>от</div>
-                <input type="text" id="extra_input_` + additional_fields + `_step4_rb1_input2" class="date_mask">
+                <input type="text" id="extra_input_` + pl_poruch_additional_fields + `_step4_rb1_input2" class="date_mask">
             </div>
             
             <img src="/static/court_template_app/img/cancel.png" class="img_delete_new_input">
