@@ -265,7 +265,10 @@
 {% endfor %}
 {% endif %}
 {% if order_num %}
-<li>Копия приходного кассового ордера № {{ order_num }} от {{order_date|date:"d.m.Y"}} г.</li>
+<li>Копия приходного кассового ордера №{{ order_num }} от {{order_date|date:"d.m.Y"}} г.</li>
+{% for each in kvitanciya_extra_payment_docs %}
+    <li>{{ each }}.</li>
+{% endfor %}
 {% endif %}
 {% if act_start and act_end %}
 <li>Копия акта сверки взаимных расчетов с {{ act_start|date:"d.m.Y" }} по {{act_end|date:"d.m.Y" }} г.</li>

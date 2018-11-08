@@ -1,5 +1,7 @@
 $(document).ready(function() {
     var pl_poruch_additional_fields = 0;
+    var kvitanciya_additional_fields = 0;
+
     var total_ask = 0;
 
     //Pop-up
@@ -358,6 +360,13 @@ $(document).ready(function() {
             // Квитанция к приходному кассовому ордеру
             data['order_num'] = $("#order_num").val();
             data['order_date'] = $("#step4_rb2_input2").val();
+
+            //dynamic inputs
+            data['extras_kvitanciya'] = kvitanciya_additional_fields + 1;
+            for(var i = 0; i < data['extras_kvitanciya']; i++) {
+                data['extra_order_num_' + i] = $("#extra_input_" + i + "_order_num").val()
+                data['extra_step4_rb2_input2_' + i] = $("#extra_input_" + i + "_step4_rb2_input2").val()
+            }
         }
         if(data['payment_doc_type'].indexOf(3) >= 0) {
             // Акт сверки взаиморассчетов
@@ -1377,5 +1386,33 @@ $("#add_bt_step4_platejnoe_poruchenie").click(function() {
     $(".date_mask").mask("99/99/9999");
 });
 
+$("#add_bt_step4_kvitanciya").click(function() {
+    kvitanciya_additional_fields++;
+
+    $('#step4_rb2').prop("checked", true)
+    $('.step4_rb2_inputs input').prop('disabled', false);
+
+
+    $("#new_inputs_step4_kvitanciya").append(`
+        <div id="extra_input_step4_kvitanciya_` + kvitanciya_additional_fields + `">
+            
+            <div class="input_xs step4_rb2_inputs clearfix">
+                <div>№</div>
+                <input type="text" id="extra_input_` + kvitanciya_additional_fields + `_order_num" maxlength="8">
+                <div>от</div>
+                <input type="text" id="extra_input_` + kvitanciya_additional_fields + `_step4_rb2_input2" class="date_mask">
+            </div>
+            
+            <img src="/static/court_template_app/img/cancel.png" class="img_delete_new_input">
+
+        </div>`);
+
+    $(".img_delete_new_input").on("click", function() {
+        $(this).parent().find(":input").val('');
+        $(this).parent().closest('div').hide();
+    });
+
+    $(".date_mask").mask("99/99/9999");
+});
 
 });
