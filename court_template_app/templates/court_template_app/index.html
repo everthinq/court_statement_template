@@ -342,18 +342,34 @@
                             <input type="text" id="step4_rb3_input6" class="number input_md" maxlength="4" disabled />
                             <div>г.</div>
                         </div>
+                        
+                        </br>
+
+                        <img src="{% static 'court_template_app/img/add.png' %}" alt="" class="add_bt__item" id="add_bt_step4_act_sverki">
+                        
+<!-- внутри этого блока появляются новые аккредитивы после клика на add_bt__item -->
+                        <div id="new_inputs_step4_act_sverki">
+                        </div>
+<!---->
 
                         <div class="radio_bt_container">
                             <input type="checkbox" id="step4_rb4_akkreditiv" name="payment_doc_type" value="4">
                             <label for="step4_rb4_akkreditiv">Аккредитив</label>
                         </div>
 
-                        <div id="step4_inputs_akkreditiv" class="input_xs clearfix">
+                        <div id="step4_inputs_akkreditiv" class="input_xs step4_rb4_inputs clearfix">
                             <div>№</div>
                             <input type="text" id="step4_akkreditivNUM" maxlength="8" disabled />
                             <div>от</div>
                             <input type="text" id="step4_akkreditivDATE" disabled />
                         </div>
+
+                        <img src="{% static 'court_template_app/img/add.png' %}" alt="" class="add_bt__item" id="add_bt_step4_akkreditiv">
+                        
+<!-- внутри этого блока появляются новые аккредитивы после клика на add_bt__item -->
+                        <div id="new_inputs_step4_akkreditiv">
+                        </div>
+<!---->
 
                         <label id="step4_customCSSlabel">Что вы планируете взыскать с застройщика, помимо неустойки? </label>
 <!--

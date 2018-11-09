@@ -285,7 +285,10 @@
 <li>Копия требования об уплате неустойки от {{precourt_date|date:"d.m.Y"}} г. с отметкой о вручении застройщику.</li>
 {% endif %}
 {% if step4_akkreditivDATE %}
-<li>Копия аккредитива № {{ step4_akkreditivNUM }} от {{step4_akkreditivDATE|date:"d.m.Y"}} г.</li>
+<li>Копия аккредитива №{{ step4_akkreditivNUM }} от {{step4_akkreditivDATE|date:"d.m.Y"}} г.</li>
+{% for each in akkreditiv_extra_payment_docs %}
+    <li>{{ each }}.</li>
+{% endfor %}
 {% endif %}
 {% if total_ask >= 1000000 %}
 <li>Квитанция об оплате государственной пошлины за рассмотрение иска.</li>

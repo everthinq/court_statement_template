@@ -1,6 +1,7 @@
 $(document).ready(function() {
     var pl_poruch_additional_fields = 0;
     var kvitanciya_additional_fields = 0;
+    var akkreditiv_additional_fields = 0;
 
     var total_ask = 0;
 
@@ -386,6 +387,13 @@ $(document).ready(function() {
             data['step4_akkreditivNUM'] = $("#step4_akkreditivNUM").val();
             data['step4_akkreditivDATE'] = $("#step4_akkreditivDATE").val();
             data['payment_extras'] = pl_poruch_additional_fields;
+
+            //dynamic inputs
+            data['extras_akkreditiv'] = akkreditiv_additional_fields + 1;
+            for(var i = 0; i < data['extras_akkreditiv']; i++) {    
+                data['extra_akkreditivNUM_' + i] = $("#extra_input_" + i + "_step4_akkreditivNUM").val()
+                data['extra_akkreditivDATE_' + i] = $("#extra_input_" + i + "_step4_akkreditivDATE").val()
+            }
         }
 
         if(data['ask_type'].indexOf(2)>=0) {
@@ -1413,6 +1421,31 @@ $("#add_bt_step4_kvitanciya").click(function() {
     });
 
     $(".date_mask").mask("99/99/9999");
+});
+
+$("#add_bt_step4_akkreditiv").click(function() {
+    akkreditiv_additional_fields++;
+
+    $('#step4_rb4_akkreditiv').prop("checked", true)
+    $('.step4_rb4_inputs input').prop('disabled', false);
+
+    $("#new_inputs_step4_akkreditiv").append(`
+        <div id="extra_input_step4_akkreditiv_` + akkreditiv_additional_fields + `">
+            
+            <div class="input_xs step4_rb4_inputs clearfix">
+                <div>№</div>
+                <input type="text" id="extra_input_` + akkreditiv_additional_fields + `_step4_akkreditivNUM" maxlength="8">
+                <div>от</div>
+                <input type="text" id="extra_input_` + akkreditiv_additional_fields + `_step4_akkreditivDATE" class="date_mask">
+            </div>
+            
+            <img src="/static/court_template_app/img/cancel.png" class="img_delete_new_input">
+         </div>`);
+     $(".img_delete_new_input").on("click", function() {
+        $(this).parent().find(":input").val('');
+        $(this).parent().closest('div').hide();
+    });
+     $(".date_mask").mask("99/99/9999");
 });
 
 });
