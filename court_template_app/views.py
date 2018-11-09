@@ -178,6 +178,7 @@ def process_data(request):
     pl_poruch_extra_payment_docs = []
     kvitanciya_extra_payment_docs = []
     akkreditiv_extra_payment_docs = []
+    act_sverki_extra_payment_docs = []
 
     if 1 in payment_doc_type:
         payment_docs.append("платёжным поручением №%s от %s" % (data['plat_por_num'], format_date(data['plat_por_date'])))
@@ -206,6 +207,24 @@ def process_data(request):
     if 3 in payment_doc_type:
         payment_docs.append("актом сверки взаиморасчётов с %s по %s" % (format_date(data['act_start']), format_date(data['act_end'])))
 
+        # data['extra_act_start_1'] = datetime.strptime('/'.join(data['extra_act_start_1']), '%d/%m/%Y')
+        # data['extra_act_end_1'] = datetime.strptime('/'.join(data['extra_act_end_1']), '%d/%m/%Y')
+
+        # payment_docs.append("актом сверки взаиморасчётов с %s по %s" % (format_date(data['extra_act_start_1']), format_date(data['extra_act_end_1'])))
+        # act_sverki_extra_payment_docs.append("Копия акта сверки взаимных расчетов с %s по %s г" % (format_date(data['extra_act_start_1']), format_date(data['extra_act_start_1'])))
+
+        act_sverki_extras_counter = data['extras_act_sverki']
+        for i in range(1, act_sverki_extras_counter):
+            if len(data['extra_act_start_' + str(i)]) == 3 and len(data['extra_act_end_' + str(i)]) == 3:
+                try:
+                    data['extra_act_start_' + str(i)] = datetime.strptime('/'.join(data['extra_act_start_' + str(i)]), '%d/%m/%Y')
+                    data['extra_act_end_' + str(i)] = datetime.strptime('/'.join(data['extra_act_end_' + str(i)]), '%d/%m/%Y')
+
+                    payment_docs.append("актом сверки взаиморасчётов с %s по %s" % (format_date(data['extra_act_start_' + str(i)]), format_date(data['extra_act_end_' + str(i)])))
+                    act_sverki_extra_payment_docs.append("Копия акта сверки взаимных расчетов с %s по %s г" % (format_date(data['extra_act_start_' + str(i)]), format_date(data['extra_act_end_' + str(i)])))
+                except:
+                    pass
+
     if 4 in payment_doc_type:
         payment_docs.append("аккредитивом №%s от %s" % (data['step4_akkreditivNUM'], format_date(data['step4_akkreditivDATE'])))
 
@@ -222,6 +241,7 @@ def process_data(request):
     data['pl_poruch_extra_payment_docs'] = pl_poruch_extra_payment_docs
     data['kvitanciya_extra_payment_docs'] = kvitanciya_extra_payment_docs
     data['akkreditiv_extra_payment_docs'] = akkreditiv_extra_payment_docs
+    data['act_sverki_extra_payment_docs'] = act_sverki_extra_payment_docs
 
     precourt_letter = data.get('precourt_letter', None)
     if precourt_letter:

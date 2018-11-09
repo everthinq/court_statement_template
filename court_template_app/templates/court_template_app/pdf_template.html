@@ -272,6 +272,9 @@
 {% endif %}
 {% if act_start and act_end %}
 <li>Копия акта сверки взаимных расчетов с {{ act_start|date:"d.m.Y" }} по {{act_end|date:"d.m.Y" }} г.</li>
+{% for each in act_sverki_extra_payment_docs %}
+    <li>{{ each }}.</li>
+{% endfor %}
 {% endif %}
 {% if transferred %}
 <li>Копия акта приема-передачи квартиры от {{transfer_act_date|date:"d.m.Y"}} г.</li>

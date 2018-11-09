@@ -2,6 +2,7 @@ $(document).ready(function() {
     var pl_poruch_additional_fields = 0;
     var kvitanciya_additional_fields = 0;
     var akkreditiv_additional_fields = 0;
+    var act_sverki_additional_fields = 0;
 
     var total_ask = 0;
 
@@ -381,6 +382,22 @@ $(document).ready(function() {
                 $("#step4_rb3_input5").val(),
                 $("#step4_rb3_input6").val()
             ];
+
+            //dynamic inputs
+            data['extras_act_sverki'] = act_sverki_additional_fields + 1;
+            for(var i = 0; i < data['extras_act_sverki']; i++) {    
+                data['extra_act_start_' + i] = [
+                    $("#extra_input_" + i + "_step4_rb3_input1").val(),
+                    $("#extra_input_" + i + "_step4_rb3_input2").val(),
+                    $("#extra_input_" + i + "_step4_rb3_input3").val()
+                ];
+
+                data['extra_act_end_' + i] = [
+                    $("#extra_input_" + i + "_step4_rb3_input4").val(),
+                    $("#extra_input_" + i + "_step4_rb3_input5").val(),
+                    $("#extra_input_" + i + "_step4_rb3_input6").val()
+                ];
+            }
         }
         if(data['payment_doc_type'].indexOf(4) >= 0) {
             // Другое
@@ -1444,6 +1461,41 @@ $("#add_bt_step4_akkreditiv").click(function() {
      $(".img_delete_new_input").on("click", function() {
         $(this).parent().find(":input").val('');
         $(this).parent().closest('div').hide();
+    });
+     $(".date_mask").mask("99/99/9999");
+});
+
+$("#add_bt_step4_act_sverki").click(function() {
+    act_sverki_additional_fields++;
+
+    $('#step4_rb3').prop("checked", true)
+    $('.step4_rb3_inputs input').prop('disabled', false);
+
+    $("#new_inputs_step4_act_sverki").append(`
+        <div>
+        
+        <div id="extra_input_step4_act_sverki_` + act_sverki_additional_fields + `" class="input_lg step4_rb3_inputs clearfix">
+            <div>за период с</div>
+            <input type="text" id="extra_input_` + act_sverki_additional_fields + `_step4_rb3_input1" class="number input_lw" maxlength="2">
+            <input type="text" id="extra_input_` + act_sverki_additional_fields + `_step4_rb3_input2" class="number input_big" maxlength="2">
+            <input type="text" id="extra_input_` + act_sverki_additional_fields + `_step4_rb3_input3" class="number input_md" maxlength="4">
+            
+            <div>г. по</div>
+            <input type="text" id="extra_input_` + act_sverki_additional_fields + `_step4_rb3_input4" class="number input_lw" maxlength="2">
+            <input type="text" id="extra_input_` + act_sverki_additional_fields + `_step4_rb3_input5" class="number input_big" maxlength="2">
+            <input type="text" id="extra_input_` + act_sverki_additional_fields + `_step4_rb3_input6" class="number input_md" maxlength="4">
+
+            <div>г.</div>
+         </div>
+
+         <img src="/static/court_template_app/img/cancel.png" class="img_delete_new_input">
+         </br>
+
+         </div>`);
+
+     $(".img_delete_new_input").on("click", function() {
+        $(this).parent().find(":input").val('');
+        $(this).closest('div').hide();
     });
      $(".date_mask").mask("99/99/9999");
 });
