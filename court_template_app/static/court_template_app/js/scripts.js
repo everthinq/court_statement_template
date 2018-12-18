@@ -156,6 +156,7 @@ $(document).ready(function() {
             
             // required dates block start
 // http://www.consultant.ru/document/cons_doc_LAW_12453/886577905315979b26c9032d79cb911cc8fa7e69/
+			decem17_2018 = new Date('2018-12-17');
             septe17_2018 = new Date('2018-09-17');
             march26_2018 = new Date('2018-03-26');
             febru12_2018 = new Date('2018-02-12');
@@ -181,8 +182,13 @@ $(document).ready(function() {
             septe13_2013 = new Date('2013-09-13');
             // required dates block end
 
-            if(full_date >= septe17_2018) {
-                // с 17 сентября 2018г. -- 7,5
+            if(full_date >= decem17_2018) {
+                // с 17 декабря 2018 г. -- 7,5
+                return 7.75;
+            }
+
+            if(full_date >= septe17_2018 && full_date < decem17_2018) {
+                // с 17 сентября 2018г. по 16 декабря 2018г. -- 7,5
                 return 7.5;
             }
 
