@@ -1,3 +1,5 @@
+Работает здесь -- http://uc-partner.ru/court-statement/
+
 Задача была сформировать .pdf документ исходя из данных, которые введёт пользователь. Есть шаблон -- https://github.com/everthinq/court_statement_template/blob/master/court_template_app/templates/court_template_app/pdf_template.html, в котором данные, которые ввёл пользователь, обрабатываются через язык шаблонов Django. На сервер пользовательские данные попадают через POST запрос. Всё это работает через AJAX без перезагрузок страниц.
 
 Также был реализован дополнительный функционал:
