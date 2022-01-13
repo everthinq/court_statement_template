@@ -4,7 +4,7 @@ Django==2.2.13
 docopt==0.6.2
 html5lib==1.0.1
 httplib2==0.18.0
-Pillow==6.2.0
+Pillow==9.0.0
 pymorphy2-dicts==2.4.393442.3710985
 PyPDF2==1.26.0
 pytz==2018.4
