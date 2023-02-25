@@ -90,7 +90,7 @@ def process_captcha(request):
 
     ### - from image to digits start
     from python_anticaptcha import AnticaptchaClient, ImageToTextTask
-    api_key = '4daab0ba499b49cd10cb0c91cefdccd1'
+    api_key = os.environ['PYTHON_ANTICAPTCHA_KEY']
     captcha_fp = open(captcha_filename, 'rb')
     client = AnticaptchaClient(api_key)
     task = ImageToTextTask(captcha_fp)
