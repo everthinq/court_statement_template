@@ -8,7 +8,7 @@ Pillow==6.2.0
 pymorphy2-dicts==2.4.393442.3710985
 PyPDF2==1.26.0
 pytz==2018.4
-reportlab==3.4.0
+reportlab==3.6.13
 simplejson==3.14.0
 six==1.11.0
 webencodings==0.5.1
